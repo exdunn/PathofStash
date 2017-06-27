@@ -1,0 +1,14 @@
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\bin\Debug\PathofStash.exe.config
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\bin\Debug\PathofStash.exe
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\bin\Debug\PathofStash.pdb
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.csprojResolveAssemblyReference.cache
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.exe
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.pdb
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\bin\Debug\Newtonsoft.Json.dll
+c:\users\alexh\documents\visual studio 2017\Projects\PathofStash\PathofStash\bin\Debug\Newtonsoft.Json.xml
+C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.csproj.GenerateResource.Cache
+C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.Form1.resources
+C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.dll
+C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.xml
+C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.csproj.ResolveComReference.cache
