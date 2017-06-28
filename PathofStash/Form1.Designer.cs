@@ -76,6 +76,8 @@ namespace PathofStash
             this.corrComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -397,6 +399,8 @@ namespace PathofStash
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label15);
+            this.panel4.Controls.Add(this.label14);
             this.panel4.Controls.Add(this.label13);
             this.panel4.Controls.Add(this.pictureBox1);
             this.panel4.Location = new System.Drawing.Point(6, 3);
@@ -407,7 +411,7 @@ namespace PathofStash
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(181, 13);
+            this.label13.Location = new System.Drawing.Point(178, 13);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 13);
             this.label13.TabIndex = 2;
@@ -487,6 +491,24 @@ namespace PathofStash
             this.typeComboBox.Size = new System.Drawing.Size(99, 21);
             this.typeComboBox.TabIndex = 44;
             this.typeComboBox.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(178, 46);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "label14";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(178, 83);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "label15";
             // 
             // Form1
             // 
@@ -591,5 +613,7 @@ namespace PathofStash
         private ComboBox corrComboBox;
         private TextBox nameTextBox;
         private ComboBox typeComboBox;
+        private Label label15;
+        private Label label14;
     }
 }

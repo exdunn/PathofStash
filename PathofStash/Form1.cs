@@ -48,20 +48,28 @@ namespace PathofStash
                 var newPanel = new Panel();
                 var newPictureBox = new PictureBox();
                 var newNameLabel = new Label();
+                var newBaseLabel = new Label();
+                var newILvlLabel = new Label();     
 
                 // set size and text for panel elements
                 newPictureBox.Size = pictureBox1.Size;
                 newPictureBox.Load(item.icon);
                 newNameLabel.Text = item.name;
+                newBaseLabel.Text = item.typeLine;
+                newILvlLabel.Text = "iLvl: " + item.iLvl;
                 newPanel.Size = panel4.Size;
 
                 // add elements to new panel
                 newPanel.Controls.Add(newPictureBox);
                 newPanel.Controls.Add(newNameLabel);
+                newPanel.Controls.Add(newBaseLabel);
+                newPanel.Controls.Add(newILvlLabel);
 
                 // set location of new elements
                 newPictureBox.Location = pictureBox1.Location;
                 newNameLabel.Location = label13.Location;
+                newBaseLabel.Location = label14.Location;
+                newILvlLabel.Location = label15.Location;
 
                 // add new panel to item panel
                 panel3.Controls.Add(newPanel);
@@ -127,12 +135,13 @@ namespace PathofStash
 
         private void Snipe_Btn_Click(object sender, EventArgs e)
         {
-            lock (snipeLock)
+            sniper.TestSnipe();
+            /*lock (snipeLock)
             {
                 sniper.sniping = true;
                 Thread thread = new Thread(sniper.StartSniping);
                 thread.Start();
-            }
+            }*/
         }
 
         private void Stop_Btn_Click(object sender, EventArgs e)
@@ -220,71 +229,67 @@ namespace PathofStash
             Query query = new Query();
             if (!string.IsNullOrEmpty(nameTextBox.Text))
             {
-                Console.WriteLine("name: " + nameTextBox.Text);
                 query.name = nameTextBox.Text;
             }
             if (!string.IsNullOrEmpty(typeComboBox.Text))
             {
-                Console.WriteLine("base: " + typeComboBox.Text);
-                query.league = typeComboBox.Text;
+                query.type = typeComboBox.Text;
             }
             if (!string.IsNullOrEmpty(armorMinTextBox.Text))
             {
-                Console.WriteLine("armorMin: " + armorMinTextBox.Text);
-                query.league = armorMinTextBox.Text;
+                query.armorMin = armorMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(armorMaxTextBox.Text))
             {
-                Console.WriteLine("armorMax: " + armorMaxTextBox.Text);
-                query.league = armorMaxTextBox.Text;
+                query.armorMax = armorMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(energyShieldMinTextBox.Text))
             {
-                query.league = energyShieldMinTextBox.Text;
+                query.energyShieldMin = energyShieldMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(energyShieldMaxTextBox.Text))
             {
-                query.league = energyShieldMaxTextBox.Text;
+                query.energyShieldMax = energyShieldMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(evasionMinTextBox.Text))
             {
-                query.league = evasionMinTextBox.Text;
+                query.evasionMin = evasionMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(evasionMaxTextBox.Text))
             {
-                query.league = evasionMaxTextBox.Text;
+                query.evasionMax = evasionMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(socketsMinTextBox.Text))
             {
-                query.league = socketsMinTextBox.Text;
+                query.socketsMin = socketsMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(socketsMaxTextBox.Text))
             {
-                query.league = socketsMaxTextBox.Text;
+                query.socketsMax = socketsMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(levelMinTextBox.Text))
             {
-                query.league = levelMinTextBox.Text;
+                query.levelMin = levelMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(levelMaxTextBox.Text))
             {
-                query.league = levelMaxTextBox.Text;
+                query.levelMax = levelMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(iLvlMinTextBox.Text))
             {
-                query.league = iLvlMinTextBox.Text;
+                query.iLvlMin = iLvlMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(iLvlMaxTextBox.Text))
             {
-                query.league = iLvlMaxTextBox.Text;
+                query.ilvlMax = iLvlMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(qualityMinTextBox.Text))
             {
-                query.league = qualityMinTextBox.Text;
+                query.qualityMin = qualityMinTextBox.Text;
             }
             if (!string.IsNullOrEmpty(qualityMaxTextBox.Text))
             {
-                query.league = qualityMaxTextBox.Text;
+                query.qualityMax = qualityMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(corrComboBox.Text))
             {
@@ -294,6 +299,7 @@ namespace PathofStash
             {
                 query.league = leagueComboBox.Text;
             }
+            sniper.AddQuery(query);
 
             // remove all controls in affix panel except button
             affixPanel.Controls.Remove(addAffixButton);

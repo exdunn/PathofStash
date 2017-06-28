@@ -63,8 +63,29 @@ namespace PathofStash
             StartSniping();
         }
 
+        public void TestSnipe() {
+            Console.WriteLine("TEST SNIPE");
+            MyWebRequest req = new MyWebRequest("http://www.pathofexile.com/api/public-stash-tabs", "GET");
+            Parser parser = new Parser(req.GetResponse());
+            nextIndex = parser.nextIndex;
+
+            foreach (Query query in queries) {
+                Console.WriteLine(query.name);
+                foreach (Stash stash in parser.stashes) {
+                    foreach (Item item in stash.items) {
+                        item.ParseProperties();
+                        if (query.Match(item)) {
+                            Console.WriteLine("MATCH FOUND FOR: " + item.name);
+                            form.AddMatch(item);
+                        }
+                    }
+                }
+            }
+        }
+
         public void AddQuery(Query query)
         {
+            query.Print();
             queries.Add(query);
         }
 

@@ -9,43 +9,47 @@ using System.Text.RegularExpressions;
 
 namespace PathofStash
 {
-    public class Item
-    {
-        public int iLvl { get; set; }
+    public class Item {
         public string id { get; set; }
         public string icon { get; set; }
         private string Name;
-        public string name
-        {
-            get
-            {
-                return this.Name;
-            }
-            set
-            {
-                string newValue = Regex.Replace(value, @"<<.*>>", string.Empty);
-                Name = newValue;
-            }
-        }
         public string league { get; set; }
         public string typeLine { get; set; }
         public bool identified { get; set; }
         public bool corrupted { get; set; }
         public string note { get; set; }
         public string enchantMod { get; set; }
-        public List<Property> properties { get; set; }
+        public string iLvl { get; set; }
+        public string evasion { get; set; }
+        public string armor { get; set; }
+        public string energyShield { get; set; }
+        public string tier { get; set; }
+        public string level { get; set; }
+        public string quality { get; set; }
         public List<Property> requirements { get; set; }
         public List<Modifier> explicitMods { get; set; }
-        public List<Modifier> implicitMods { get; set; } 
+        public List<Modifier> implicitMods { get; set; }
         public List<Modifier> craftedMods { get; set; }
+        [JsonProperty("properties")]
+        public List<Property> properties { get; set;}
+
+        public string name {
+            get {
+                return this.Name;
+            }
+            set {
+                string newValue = Regex.Replace(value, @"<<.*>>", string.Empty);
+                Name = newValue;
+            }
+        }
 
         public Item()
         {
-            properties = new List<Property>();
             requirements = new List<Property>();
             explicitMods = new List<Modifier>();
             implicitMods = new List<Modifier>();
             craftedMods = new List<Modifier>();
+            properties = new List<Property>();
         }
 
         public string ToString(int indentSize)
@@ -71,29 +75,27 @@ namespace PathofStash
             return str;
         }
 
-        public void AddProperty(Property value)
-        {
-            properties.Add(value);
-        }
-
-        public void AddRequirement(Property value)
-        {
-            requirements.Add(value);
-        }
-
-        public void AddExplicitMod(Modifier value)
-        {
-            explicitMods.Add(value);
-        }
-
-        public void AddImplicitMod(Modifier value)
-        {
-            implicitMods.Add(value);
-        }
-
-        public void AddCraftedMods(Modifier value)
-        {
-            craftedMods.Add(value);
+       public void ParseProperties() {
+            foreach (Property prop in properties) {
+                if(prop.name.Equals("Armour", StringComparison.CurrentCultureIgnoreCase)) {
+                    armor = Regex.Match(prop.values[0][0], @"\d+").Value;
+                }
+                else if (prop.name.Equals("Energy Shield", StringComparison.CurrentCultureIgnoreCase)) {
+                    energyShield = Regex.Match(prop.values[0][0], @"\d+").Value;
+                } 
+                else if (prop.name.Equals("Evasion Rating", StringComparison.CurrentCultureIgnoreCase)) {
+                    evasion = Regex.Match(prop.values[0][0], @"\d+").Value;
+                } 
+                else if (prop.name.Equals("Map Tier", StringComparison.CurrentCultureIgnoreCase)) {
+                    tier = Regex.Match(prop.values[0][0], @"\d+").Value;
+                } 
+                else if (prop.name.Equals("Level", StringComparison.CurrentCultureIgnoreCase)) {
+                    level = Regex.Match(prop.values[0][0], @"\d+").Value;
+                } 
+                else if (prop.name.Equals("Quality", StringComparison.CurrentCultureIgnoreCase)) {
+                    quality = Regex.Match(prop.values[0][0],@"\d+").Value;
+                }
+            }
         }
     }
 }
