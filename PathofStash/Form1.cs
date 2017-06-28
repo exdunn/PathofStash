@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PathofStash.Data_Beans;
 using System.Threading;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace PathofStash
 {
@@ -18,11 +20,12 @@ namespace PathofStash
         int itemCount;
         bool isResetting;
         Sniper sniper;
+        string[] bases;
         object snipeLock = new Object();
         Query query = new Query();
 
         public Form1()
-        { 
+        {
             InitializeComponent();
             affixCount = 1;
             itemCount = 0;
@@ -32,7 +35,8 @@ namespace PathofStash
         {
             panel4.Visible = false;
             sniper = new Sniper(this);
-            DropDownListInit();
+            bases = Utilities.DeserializeJson("../../Resources/bases.json");
+            DropDownListInit();            
         }
 
         #region public methods
@@ -78,6 +82,42 @@ namespace PathofStash
             {
                 comboBox1.Items.Add(league);
             }
+            comboBox2.Items.Add("Corrupted");
+            comboBox2.Items.Add("Uncorrupted");
+        }
+
+        private static void ClearComboBox(ComboBox cb)
+        {
+            if (cb.Items.Count <= 0)
+            {
+                return;
+            }
+           foreach (var item in new System.Collections.ArrayList(cb.Items))
+            {
+                try
+                {
+                    cb.Items.Remove(item);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.ToString());
+                }
+            }
+        }
+
+        // returns list of strings based on input for autocomplete functionality of bases TextBox
+        private List<string> SuggestBases(string input)
+        {
+            List<string> matches = new List<string>();
+            foreach (string item in bases)
+            {
+                Match match = Regex.Match(item, "(?i)" + input);
+                if (match.Success)
+                {
+                    matches.Add(item);
+                }
+            }
+            return matches;
         }
 
         #endregion
@@ -86,7 +126,7 @@ namespace PathofStash
 
         private void Snipe_Btn_Click(object sender, EventArgs e)
         {
-            lock(snipeLock)
+            lock (snipeLock)
             {
                 sniper.sniping = true;
                 Thread thread = new Thread(sniper.StartSniping);
@@ -117,7 +157,7 @@ namespace PathofStash
             var newValueLabel = new Label();
             var newMinText = new TextBox();
             var newMaxText = new TextBox();
-            
+
             // set labels
             newModLabel.Text = "Explicit Mod";
             newValueLabel.Text = "Value";
@@ -140,14 +180,14 @@ namespace PathofStash
             newModText.Location = textBox16.Location;
             newValueLabel.Location = label12.Location;
             newMinText.Location = textBox17.Location;
-            newMaxText.Location = textBox18.Location;  
+            newMaxText.Location = textBox18.Location;
 
             // add new panel to panel1
             panel1.Controls.Add(newPanel);
             newPanel.Location = new Point(24, newPanel.Size.Height * (affixCount - 1));
 
             // move button down
-            Add_Affix_Btn.Location = new Point(Add_Affix_Btn.Location.X, + Add_Affix_Btn.Location.Y + newPanel.Size.Height);
+            Add_Affix_Btn.Location = new Point(Add_Affix_Btn.Location.X, +Add_Affix_Btn.Location.Y + newPanel.Size.Height);
         }
 
         private void Add_Item_Btn_Click(object sender, EventArgs e)
@@ -167,13 +207,13 @@ namespace PathofStash
                     {
                         item.Dispose();
                     }
-                }   
+                }
             }
 
             // reset textboxes
-            foreach(Control item in this.Controls)
+            foreach (Control item in this.Controls)
             {
-                if(item is TextBox)
+                if (item is TextBox)
                 {
                     //item.Text = "";
                 }
@@ -234,12 +274,7 @@ namespace PathofStash
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.type = text.Text;
+
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
@@ -448,6 +483,35 @@ namespace PathofStash
             query.league = combo.Text;
         }
 
-        #endregion
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox combo = sender as ComboBox;
+            query.type = combo.Text;
+        }
+
+        private void comboBox3_TextUpdate(object sender, EventArgs e)
+        {
+            ComboBox combo = sender as ComboBox;
+            ClearComboBox(combo);
+
+            if (combo.Text.Length >= 3)
+            {
+                List<string> matches = SuggestBases(combo.Text);
+                foreach (string match in matches)
+                {
+                    combo.Items.Add(match);
+                }
+            }
+            query.type = combo.Text;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox combo = sender as ComboBox;
+            query.corrupted = combo.Text.Equals("Corrupted");
+          
+        }
     }
+
+    #endregion
 }

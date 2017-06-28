@@ -76,6 +76,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Resources\bases.json" />
     <None Include="Resources\mods.json" />
   </ItemGroup>
   <ItemGroup>

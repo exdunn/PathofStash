@@ -21,6 +21,7 @@ namespace PathofStash
 
     public static class Utilities
     {
+
         // loads html from url and selects the HtmlNodes at xPath and writes the results to outFile
         // func defines rules on how to parse the HtmlNodes
         public static void SerializeHtmlNodes(string url, string xPath, string outFile, Action<HtmlNode[], string> func)
@@ -31,8 +32,16 @@ namespace PathofStash
             func(nodes, outFile);    
         }
 
+        // returns tokens extracted by deserializing json at path
+        public static string[] DeserializeJson(string path)
+        {
+            StreamReader reader = new StreamReader(path);
+            string json = reader.ReadToEnd();
+            return JsonConvert.DeserializeObject<String[]>(json);
+        }
+
         // parse nodes for item mods and serialize as json
-        public static void GetMods(HtmlNode[] nodes, string outFile)
+        private static void GetMods(HtmlNode[] nodes, string outFile)
         {
             List<JsonMod> tokens = new List<JsonMod>();
             foreach (HtmlNode item in nodes)
