@@ -11,7 +11,7 @@ namespace PathofStash
 {
     public class Item
     {
-        public int ilvl { get; set; }
+        public int iLvl { get; set; }
         public string id { get; set; }
         public string icon { get; set; }
         private string Name;
@@ -51,7 +51,7 @@ namespace PathofStash
         public string ToString(int indentSize)
         {
             string str = new string(' ', 4 * indentSize) + "name: " + name;
-            str += "\n" + new string(' ', 4 * indentSize) + "ilvl: " + ilvl.ToString();
+            str += "\n" + new string(' ', 4 * indentSize) + "ilvl: " + iLvl.ToString();
             str += "\n" + new string(' ', 4 * indentSize) + "id: " + id;
             str += "\n" + new string(' ', 4 * indentSize) + "league: " + league;
             str += "\n" + new string(' ', 4 * indentSize) + "typeLine: " + typeLine;

@@ -22,7 +22,6 @@ namespace PathofStash
         Sniper sniper;
         string[] bases;
         object snipeLock = new Object();
-        Query query = new Query();
 
         public Form1()
         {
@@ -80,10 +79,12 @@ namespace PathofStash
         {
             foreach (string league in Globals.LEAGUES)
             {
-                comboBox1.Items.Add(league);
+                leagueComboBox.Items.Add(league);
             }
-            comboBox2.Items.Add("Corrupted");
-            comboBox2.Items.Add("Uncorrupted");
+            leagueComboBox.SelectedIndex = 0;
+
+            corrComboBox.Items.Add("Corrupted");
+            corrComboBox.Items.Add("Uncorrupted");
         }
 
         private static void ClearComboBox(ComboBox cb)
@@ -163,10 +164,10 @@ namespace PathofStash
             newValueLabel.Text = "Value";
 
             // set size of text
-            newPanel.Size = panel2.Size;
-            newModText.Size = textBox16.Size;
-            newMinText.Size = textBox17.Size;
-            newMaxText.Size = textBox18.Size;
+            newPanel.Size = modPanel1.Size;
+            newModText.Size = explicitMod1TextBox.Size;
+            newMinText.Size = value1MinTextBox.Size;
+            newMaxText.Size = value1MaxTextBox.Size;
 
             // add elements to the new panel
             newPanel.Controls.Add(newModText);
@@ -177,38 +178,129 @@ namespace PathofStash
 
             // set location of new elements
             newModLabel.Location = label11.Location;
-            newModText.Location = textBox16.Location;
+            newModText.Location = explicitMod1TextBox.Location;
             newValueLabel.Location = label12.Location;
-            newMinText.Location = textBox17.Location;
-            newMaxText.Location = textBox18.Location;
+            newMinText.Location = value1MinTextBox.Location;
+            newMaxText.Location = value1MaxTextBox.Location;
 
             // add new panel to panel1
-            panel1.Controls.Add(newPanel);
-            newPanel.Location = new Point(24, newPanel.Size.Height * (affixCount - 1));
+            affixPanel.Controls.Add(newPanel);
+            newPanel.Location = new Point(modPanel1.Location.X, newPanel.Size.Height * (affixCount - 1));
 
             // move button down
-            Add_Affix_Btn.Location = new Point(Add_Affix_Btn.Location.X, +Add_Affix_Btn.Location.Y + newPanel.Size.Height);
+            addAffixButton.Location = new Point(addAffixButton.Location.X, +addAffixButton.Location.Y + newPanel.Size.Height);
         }
 
         private void Add_Item_Btn_Click(object sender, EventArgs e)
         {
-            // add query to sniper
-            if (!query.Equals(null))
+            // if user hasn't added any parameters then ignore query
+            bool empty = true;
+            foreach (Control control in Controls)
             {
-                sniper.AddQuery(query);
-            }
-
-            // remove affix elements in affix panel
-            foreach (Control item in panel1.Controls)
-            {
-                if (!(item is Button))
+                if (control is TextBox)
                 {
-                    if (!item.Name.Equals("panel2"))
+                    if (!string.IsNullOrEmpty(control.Text))
                     {
-                        item.Dispose();
+                        empty = false;
                     }
                 }
             }
+            if(!string.IsNullOrEmpty(typeComboBox.Text))
+            {
+                empty = false;
+            }
+            if (empty)
+            {
+
+                MessageBox.Show("Your search is empty.  Add requirements before adding a query.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            // if form isn't empty then add a new query
+            Query query = new Query();
+            if (!string.IsNullOrEmpty(nameTextBox.Text))
+            {
+                Console.WriteLine("name: " + nameTextBox.Text);
+                query.name = nameTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(typeComboBox.Text))
+            {
+                Console.WriteLine("base: " + typeComboBox.Text);
+                query.league = typeComboBox.Text;
+            }
+            if (!string.IsNullOrEmpty(armorMinTextBox.Text))
+            {
+                Console.WriteLine("armorMin: " + armorMinTextBox.Text);
+                query.league = armorMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(armorMaxTextBox.Text))
+            {
+                Console.WriteLine("armorMax: " + armorMaxTextBox.Text);
+                query.league = armorMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(energyShieldMinTextBox.Text))
+            {
+                query.league = energyShieldMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(energyShieldMaxTextBox.Text))
+            {
+                query.league = energyShieldMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(evasionMinTextBox.Text))
+            {
+                query.league = evasionMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(evasionMaxTextBox.Text))
+            {
+                query.league = evasionMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(socketsMinTextBox.Text))
+            {
+                query.league = socketsMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(socketsMaxTextBox.Text))
+            {
+                query.league = socketsMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(levelMinTextBox.Text))
+            {
+                query.league = levelMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(levelMaxTextBox.Text))
+            {
+                query.league = levelMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(iLvlMinTextBox.Text))
+            {
+                query.league = iLvlMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(iLvlMaxTextBox.Text))
+            {
+                query.league = iLvlMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(qualityMinTextBox.Text))
+            {
+                query.league = qualityMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(qualityMaxTextBox.Text))
+            {
+                query.league = qualityMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(corrComboBox.Text))
+            {
+                query.corrupted = corrComboBox.Text;
+            }
+            if (!string.IsNullOrEmpty(leagueComboBox.Text))
+            {
+                query.league = leagueComboBox.Text;
+            }
+
+            // remove all controls in affix panel except button
+            affixPanel.Controls.Remove(addAffixButton);
+            affixPanel.Controls.Remove(modPanel1);
+            affixPanel.Controls.Clear();
+            affixPanel.Controls.Add(addAffixButton);
+            affixPanel.Controls.Add(modPanel1);
 
             // reset textboxes
             foreach (Control item in this.Controls)
@@ -220,8 +312,7 @@ namespace PathofStash
             }
 
             affixCount = 1;
-            Add_Affix_Btn.Location = new Point(242, 73);
-            query = new Query();
+            addAffixButton.Location = new Point(242, 73);
         }
 
         #endregion
@@ -262,197 +353,6 @@ namespace PathofStash
 
         #region textbox callbacks
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.name = text.Text;
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
-        private void textBox16_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
-        private void textBox20_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.armorMin = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox21_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.armorMax = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.energyShieldMin = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox19_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.energyShieldMax = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.evasionMin = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.evasionMax = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.levelMin = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox11_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.levelMax = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox12_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.iLvlMin = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox13_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.IlvlMax = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox14_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.qualityMin = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox15_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-            TextBox text = sender as TextBox;
-            query.qualityMax = Convert.ToInt32(text.Text);
-        }
-
-        private void textBox17_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
-        private void textBox18_TextChanged(object sender, EventArgs e)
-        {
-            if (isResetting)
-            {
-                return;
-            }
-        }
-
         #endregion
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -477,18 +377,6 @@ namespace PathofStash
 
         #region combobox callbacks
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox combo = sender as ComboBox;
-            query.league = combo.Text;
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox combo = sender as ComboBox;
-            query.type = combo.Text;
-        }
-
         private void comboBox3_TextUpdate(object sender, EventArgs e)
         {
             ComboBox combo = sender as ComboBox;
@@ -502,14 +390,6 @@ namespace PathofStash
                     combo.Items.Add(match);
                 }
             }
-            query.type = combo.Text;
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox combo = sender as ComboBox;
-            query.corrupted = combo.Text.Equals("Corrupted");
-          
         }
     }
 

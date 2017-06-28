@@ -18,19 +18,19 @@ namespace PathofStash.Data_Beans
         public string name { get; set; }
         public string type { get; set; }
         public string league { get; set; }
-        public bool corrupted { get; set; }
-        public int levelMin { get; set; }
-        public int levelMax { get; set; }
-        public int iLvlMin { get; set; }
-        public int IlvlMax { get; set; }
-        public int qualityMin { get; set; }
-        public int qualityMax { get; set; }
-        public int armorMin { get; set; }
-        public int armorMax { get; set; }
-        public int energyShieldMin { get; set; }
-        public int energyShieldMax { get; set; }
-        public int evasionMin { get; set; }
-        public int evasionMax { get; set; }
+        public string corrupted { get; set; }
+        public string levelMin { get; set; }
+        public string levelMax { get; set; }
+        public string iLvlMin { get; set; }
+        public string IlvlMax { get; set; }
+        public string qualityMin { get; set; }
+        public string qualityMax { get; set; }
+        public string armorMin { get; set; }
+        public string armorMax { get; set; }
+        public string energyShieldMin { get; set; }
+        public string energyShieldMax { get; set; }
+        public string evasionMin { get; set; }
+        public string evasionMax { get; set; }
         public List<QueryModifier> explicitMods { get; set;}
 
         public Query()
@@ -40,10 +40,28 @@ namespace PathofStash.Data_Beans
 
         public bool Match(Item item)
         {
-            if(name.Equals(item.name, StringComparison.InvariantCultureIgnoreCase)) {
-                return true;
+            bool isMatch = true;
+            if(!string.IsNullOrEmpty(name) && !name.Equals(item.name, StringComparison.InvariantCultureIgnoreCase)) {
+                isMatch = false ;
             }
-            return false;
+            if (!string.IsNullOrEmpty(type) && !type.Equals(item.typeLine, StringComparison.InvariantCultureIgnoreCase)) {
+                isMatch = false;
+            }
+            if (!string.IsNullOrEmpty(league) && !league.Equals(item.league, StringComparison.InvariantCultureIgnoreCase)) {
+                isMatch = false;
+            }
+            // add level/tier here
+            if (!string.IsNullOrEmpty(iLvlMin) && Convert.ToInt32(iLvlMin) > item.iLvl) {
+                isMatch = false;
+            }
+            if (!string.IsNullOrEmpty(IlvlMax) && Convert.ToInt32(IlvlMax) < item.iLvl) {
+                isMatch = false;
+            }
+            // add quality here
+            // add armor here
+            // add energy shield here
+            // add evasion here
+            return isMatch;
         }
     }
 }
