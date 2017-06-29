@@ -9,7 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace PathofStash
 {
+    public struct Socket {
+
+        public int groupid { get; set; }
+        public string attribute { get; set; }
+
+        public void Print() {
+            Console.WriteLine("Groud ID: " + groupid);
+            Console.WriteLine("Color: " + attribute);
+        }
+    }
+
     public class Item {
+
         public string seller { get; set; }
         public string id { get; set; }
         public string icon { get; set; }
@@ -29,11 +41,11 @@ namespace PathofStash
         public string tier { get; set; }
         public string level { get; set; }
         public string quality { get; set; }
+        public List<Socket> sockets { get; set; }
         public List<Property> requirements { get; set; }
         public List<Modifier> explicitMods { get; set; }
         public List<Modifier> implicitMods { get; set; }
         public List<Modifier> craftedMods { get; set; }
-        [JsonProperty("properties")]
         public List<Property> properties { get; set;}
 
         public string name {
@@ -104,7 +116,7 @@ namespace PathofStash
         }
 
        public void ParseProperties() {
-            foreach (Property prop in properties) {
+            foreach (Property prop in properties) {        
                 if(prop.name.Equals("Armour", StringComparison.CurrentCultureIgnoreCase)) {
                     armor = Regex.Match(prop.values[0][0], @"\d+").Value;
                 }

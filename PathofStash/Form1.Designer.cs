@@ -67,6 +67,10 @@ namespace PathofStash
             this.armorMaxTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.priceLabel = new System.Windows.Forms.Label();
+            this.sellerLabel = new System.Windows.Forms.Label();
+            this.modsLabel = new System.Windows.Forms.Label();
+            this.ilvlLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
             this.baseLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -78,10 +82,6 @@ namespace PathofStash
             this.corrComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
-            this.ilvlLabel = new System.Windows.Forms.Label();
-            this.modsLabel = new System.Windows.Forms.Label();
-            this.sellerLabel = new System.Windows.Forms.Label();
-            this.priceLabel = new System.Windows.Forms.Label();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -410,6 +410,42 @@ namespace PathofStash
             this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
             // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(528, 33);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(31, 13);
+            this.priceLabel.TabIndex = 8;
+            this.priceLabel.Text = "Price";
+            // 
+            // sellerLabel
+            // 
+            this.sellerLabel.AutoSize = true;
+            this.sellerLabel.Location = new System.Drawing.Point(528, 10);
+            this.sellerLabel.Name = "sellerLabel";
+            this.sellerLabel.Size = new System.Drawing.Size(33, 13);
+            this.sellerLabel.TabIndex = 7;
+            this.sellerLabel.Text = "Seller";
+            // 
+            // modsLabel
+            // 
+            this.modsLabel.AutoSize = true;
+            this.modsLabel.Location = new System.Drawing.Point(326, 10);
+            this.modsLabel.Name = "modsLabel";
+            this.modsLabel.Size = new System.Drawing.Size(69, 13);
+            this.modsLabel.TabIndex = 6;
+            this.modsLabel.Text = "Explicit Mods";
+            // 
+            // ilvlLabel
+            // 
+            this.ilvlLabel.AutoSize = true;
+            this.ilvlLabel.Location = new System.Drawing.Point(155, 79);
+            this.ilvlLabel.Name = "ilvlLabel";
+            this.ilvlLabel.Size = new System.Drawing.Size(20, 13);
+            this.ilvlLabel.TabIndex = 5;
+            this.ilvlLabel.Text = "Ilvl";
+            // 
             // levelLabel
             // 
             this.levelLabel.AutoSize = true;
@@ -510,42 +546,6 @@ namespace PathofStash
             this.typeComboBox.Size = new System.Drawing.Size(99, 21);
             this.typeComboBox.TabIndex = 44;
             this.typeComboBox.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
-            // 
-            // ilvlLabel
-            // 
-            this.ilvlLabel.AutoSize = true;
-            this.ilvlLabel.Location = new System.Drawing.Point(281, 56);
-            this.ilvlLabel.Name = "ilvlLabel";
-            this.ilvlLabel.Size = new System.Drawing.Size(20, 13);
-            this.ilvlLabel.TabIndex = 5;
-            this.ilvlLabel.Text = "Ilvl";
-            // 
-            // modsLabel
-            // 
-            this.modsLabel.AutoSize = true;
-            this.modsLabel.Location = new System.Drawing.Point(155, 79);
-            this.modsLabel.Name = "modsLabel";
-            this.modsLabel.Size = new System.Drawing.Size(69, 13);
-            this.modsLabel.TabIndex = 6;
-            this.modsLabel.Text = "Explicit Mods";
-            // 
-            // sellerLabel
-            // 
-            this.sellerLabel.AutoSize = true;
-            this.sellerLabel.Location = new System.Drawing.Point(528, 10);
-            this.sellerLabel.Name = "sellerLabel";
-            this.sellerLabel.Size = new System.Drawing.Size(33, 13);
-            this.sellerLabel.TabIndex = 7;
-            this.sellerLabel.Text = "Seller";
-            // 
-            // priceLabel
-            // 
-            this.priceLabel.AutoSize = true;
-            this.priceLabel.Location = new System.Drawing.Point(528, 33);
-            this.priceLabel.Name = "priceLabel";
-            this.priceLabel.Size = new System.Drawing.Size(31, 13);
-            this.priceLabel.TabIndex = 8;
-            this.priceLabel.Text = "Price";
             // 
             // Form1
             // 

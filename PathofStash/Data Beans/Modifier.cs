@@ -7,30 +7,29 @@ using System.Threading.Tasks;
 
 namespace PathofStash.Data_Beans
 {
-    public class Modifier
-    {
+    public class Modifier {
+
         public string mod { get; set; }
         public double value { get; set; }
 
-        public Modifier(string input)
-        {
+        public Modifier(string input) {
             value = 0;
             ParseString(input);
         }
 
-        public static implicit operator Modifier(string input)
-        {
+        public static implicit operator Modifier(string input) {
             return new Modifier(input);
         }
 
-        public string ToString(int indentSize)
-        {
-            String str = new string(' ', 4 * indentSize) + @"""" + mod + @"""" + ": " + value;
-            return str;
+        public string ToString(int indentSize) {
+            return Regex.Replace(mod, @"#", value.ToString());
         }
 
-        private void ParseString(string input)
-        {
+        public override string ToString() {
+            return Regex.Replace(mod, @"#", value.ToString());
+        }
+
+        private void ParseString(string input) {
             // extract all the integer values from the input
             string pattern = @"\d+";
             Regex reg = new Regex(pattern);

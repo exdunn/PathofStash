@@ -33,8 +33,10 @@ namespace PathofStash {
 
             foreach (Stash stash in parser.stashes) {
                 foreach (Item item in stash.items) {
+                    stash.SetItemsSeller();
                     if (query.Match(item)) {
-                        Console.WriteLine("MATCH FOUND FOR: " + item.name);
+                        item.ParseProperties();
+                        Console.WriteLine("MATCH: " + item.ToString(1));
                         form.AddMatch(item);
                     }
                 }
@@ -63,7 +65,7 @@ namespace PathofStash {
                 foreach (Item item in stash.items) {
                     item.ParseProperties();
                     if (query.Match(item)) {
-                        Console.WriteLine("MATCH FOUND FOR: " + item.name);
+                        Console.WriteLine("MATCH: " + item.ToString(1));
                         form.AddMatch(item);
                     }
                 }

@@ -86,6 +86,18 @@ namespace PathofStash
                 newSellerLabel.Location = sellerLabel.Location;
                 newPriceLabel.Location = priceLabel.Location;
 
+                // add explicit mods Labels
+                int i = 0;
+                foreach(Modifier mod in item.explicitMods) {
+                    var newModLabel = new Label();
+                    newModLabel.AutoSize = true;
+                    newModLabel.Text = mod.ToString();
+                    newPanel.Controls.Add(newModLabel);
+                    newModLabel.Location = new Point(modsLabel.Location.X, 
+                        modsLabel.Location.Y + 30 * i++);
+
+                }
+
                 // add new panel to item panel
                 panel3.Controls.Add(newPanel);
 
@@ -318,12 +330,14 @@ namespace PathofStash
             var newMinText = new TextBox();
             var newMaxText = new TextBox();
 
+            // set panel
+            newPanel.Size = modPanel1.Size;
+
             // set labels
             newModLabel.Text = "Explicit Mod";
             newValueLabel.Text = "Value";
 
-            // set TextBoxes
-            newPanel.Size = modPanel1.Size;
+            // set TextBoxes    
             newModText.Name = "modTextBox" + affixCount.ToString();
             newMinText.Name = "modMinTextBox" + affixCount.ToString();
             newMaxText.Name = "modMaxTextBox" + affixCount.ToString();
