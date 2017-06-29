@@ -51,27 +51,40 @@ namespace PathofStash
                 var newPictureBox = new PictureBox();
                 var newNameLabel = new Label();
                 var newBaseLabel = new Label();
-                var newILvlLabel = new Label();     
+                var newLevelLabel = new Label();
+                var newILvlLabel = new Label();
+                var newSellerLabel = new Label();
+                var newPriceLabel = new Label();
+                List<Label> explicitModLabels = new List<Label>();
 
                 // set size and text for panel elements
                 newPictureBox.Size = pictureBox1.Size;
                 newPictureBox.Load(item.icon);
                 newNameLabel.Text = item.name;
                 newBaseLabel.Text = item.typeLine;
-                newILvlLabel.Text = "iLvl: " + item.iLvl;
+                newLevelLabel.Text = "Level: " + item.level;
+                newILvlLabel.Text = "ilvl: " + item.iLvl;
+                newSellerLabel.Text = "Seller: " + item.seller;
+                newPriceLabel.Text = "Price: " + item.price;
                 newPanel.Size = panel4.Size;
 
                 // add elements to new panel
                 newPanel.Controls.Add(newPictureBox);
                 newPanel.Controls.Add(newNameLabel);
                 newPanel.Controls.Add(newBaseLabel);
+                newPanel.Controls.Add(newLevelLabel);
                 newPanel.Controls.Add(newILvlLabel);
+                newPanel.Controls.Add(newSellerLabel);
+                newPanel.Controls.Add(newPriceLabel);
 
                 // set location of new elements
                 newPictureBox.Location = pictureBox1.Location;
-                newNameLabel.Location = label13.Location;
-                newBaseLabel.Location = label14.Location;
-                newILvlLabel.Location = label15.Location;
+                newNameLabel.Location = nameLabel.Location;
+                newBaseLabel.Location = baseLabel.Location;
+                newILvlLabel.Location = ilvlLabel.Location;
+                newLevelLabel.Location = levelLabel.Location;
+                newSellerLabel.Location = sellerLabel.Location;
+                newPriceLabel.Location = priceLabel.Location;
 
                 // add new panel to item panel
                 panel3.Controls.Add(newPanel);
@@ -116,6 +129,26 @@ namespace PathofStash
             }
         }
 
+        private void ResetForm() {
+
+            // remove all controls in affix panel except button
+            affixPanel.Controls.Remove(addAffixButton);
+            affixPanel.Controls.Remove(modPanel1);
+            affixPanel.Controls.Clear();
+            affixPanel.Controls.Add(addAffixButton);
+            affixPanel.Controls.Add(modPanel1);
+
+            // reset textboxes
+            foreach (Control item in this.Controls) {
+                if (item is TextBox) {
+                    item.Text = "";
+                }
+            }
+
+            affixCount = 1;
+            addAffixButton.Location = new Point(242, 73);
+        }
+
         // returns list of strings based on input for autocomplete functionality of bases TextBox
         private List<string> SuggestBases(string input)
         {
@@ -152,6 +185,103 @@ namespace PathofStash
 
         private void Snipe_Btn_Click(object sender, EventArgs e)
         {
+            // if user hasn't added any parameters then ignore query
+            bool empty = true;
+            foreach (Control control in Controls) {
+                if (control is TextBox) {
+                    if (!string.IsNullOrEmpty(control.Text)) {
+                        empty = false;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(typeComboBox.Text)) {
+                empty = false;
+            }
+
+            if (empty) {
+                MessageBox.Show("Your search is empty.  Add requirements before adding a query.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            // if form isn't empty then add a new query
+            Query query = new Query();
+            if (!string.IsNullOrEmpty(nameTextBox.Text)) {
+                query.name = nameTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(typeComboBox.Text)) {
+                query.type = typeComboBox.Text;
+            }
+            if (!string.IsNullOrEmpty(armorMinTextBox.Text)) {
+                query.armorMin = armorMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(armorMaxTextBox.Text)) {
+                query.armorMax = armorMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(energyShieldMinTextBox.Text)) {
+                query.energyShieldMin = energyShieldMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(energyShieldMaxTextBox.Text)) {
+                query.energyShieldMax = energyShieldMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(evasionMinTextBox.Text)) {
+                query.evasionMin = evasionMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(evasionMaxTextBox.Text)) {
+                query.evasionMax = evasionMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(socketsMinTextBox.Text)) {
+                query.socketsMin = socketsMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(socketsMaxTextBox.Text)) {
+                query.socketsMax = socketsMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(levelMinTextBox.Text)) {
+                query.levelMin = levelMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(levelMaxTextBox.Text)) {
+                query.levelMax = levelMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(iLvlMinTextBox.Text)) {
+                query.iLvlMin = iLvlMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(iLvlMaxTextBox.Text)) {
+                query.ilvlMax = iLvlMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(qualityMinTextBox.Text)) {
+                query.qualityMin = qualityMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(qualityMaxTextBox.Text)) {
+                query.qualityMax = qualityMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(corrComboBox.Text)) {
+                query.corrupted = corrComboBox.Text;
+            }
+            if (!string.IsNullOrEmpty(leagueComboBox.Text)) {
+                query.league = leagueComboBox.Text;
+            }
+            for (int i = 1; i < affixCount + 1; i++) {
+                string mod = FindControlRecursive(affixPanel, "modTextBox" + i.ToString()).Text;
+                string min = FindControlRecursive(affixPanel, "modMinTextBox" + i.ToString()).Text;
+                string max = FindControlRecursive(affixPanel, "modMaxTextBox" + i.ToString()).Text;
+
+                if (!string.IsNullOrEmpty(mod)) {
+                    QueryModifier queryMod = new QueryModifier();
+                    queryMod.mod = mod;
+                    if (!string.IsNullOrEmpty(min) || !string.IsNullOrEmpty(max)) {
+                        if (!string.IsNullOrEmpty(min)) {
+                            queryMod.min = Convert.ToDouble(min);
+                        }
+                        if (!string.IsNullOrEmpty(max)) {
+                            queryMod.max = Convert.ToDouble(max);
+                        }
+                        query.AddExplicitMod(queryMod);
+                    }
+                }
+            }
+            query.Print();
+            sniper.query = query;
+
             sniper.TestSnipe();
             /*lock (snipeLock)
             {
@@ -159,6 +289,8 @@ namespace PathofStash
                 Thread thread = new Thread(sniper.StartSniping);
                 thread.Start();
             }*/
+
+            ResetForm();
         }
 
         private void Stop_Btn_Click(object sender, EventArgs e)
@@ -221,125 +353,9 @@ namespace PathofStash
             addAffixButton.Location = new Point(addAffixButton.Location.X, +addAffixButton.Location.Y + newPanel.Size.Height);
         }
 
-        private void Add_Item_Btn_Click(object sender, EventArgs e)
+        private void clearButton_Click(object sender, EventArgs e)
         {
-            // if user hasn't added any parameters then ignore query
-            bool empty = true;
-            foreach (Control control in Controls) {
-                if (control is TextBox) {
-                    if (!string.IsNullOrEmpty(control.Text)) {
-                        empty = false;
-                    }
-                }
-            }
-
-            if(!string.IsNullOrEmpty(typeComboBox.Text)) {
-                empty = false;
-            }
-
-            if (empty) {
-                MessageBox.Show("Your search is empty.  Add requirements before adding a query.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            // if form isn't empty then add a new query
-            Query query = new Query();
-            if (!string.IsNullOrEmpty(nameTextBox.Text)) {
-                query.name = nameTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(typeComboBox.Text)) {
-                query.type = typeComboBox.Text;
-            }
-            if (!string.IsNullOrEmpty(armorMinTextBox.Text)) {
-                query.armorMin = armorMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(armorMaxTextBox.Text)) {
-                query.armorMax = armorMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(energyShieldMinTextBox.Text)) {
-                query.energyShieldMin = energyShieldMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(energyShieldMaxTextBox.Text)) {
-                query.energyShieldMax = energyShieldMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(evasionMinTextBox.Text)) {
-                query.evasionMin = evasionMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(evasionMaxTextBox.Text)) {
-                query.evasionMax = evasionMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(socketsMinTextBox.Text)) {
-                query.socketsMin = socketsMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(socketsMaxTextBox.Text)) {
-                query.socketsMax = socketsMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(levelMinTextBox.Text)) {
-                query.levelMin = levelMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(levelMaxTextBox.Text)) {
-                query.levelMax = levelMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(iLvlMinTextBox.Text)) {
-                query.iLvlMin = iLvlMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(iLvlMaxTextBox.Text)) {
-                query.ilvlMax = iLvlMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(qualityMinTextBox.Text))
-            {
-                query.qualityMin = qualityMinTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(qualityMaxTextBox.Text)) {
-                query.qualityMax = qualityMaxTextBox.Text;
-            }
-            if (!string.IsNullOrEmpty(corrComboBox.Text)) {
-                query.corrupted = corrComboBox.Text;
-            }
-            if (!string.IsNullOrEmpty(leagueComboBox.Text)) {
-                query.league = leagueComboBox.Text;
-            }
-            for(int i = 1; i < affixCount + 1; i++) {
-                string mod = FindControlRecursive(affixPanel, "modTextBox" + i.ToString()).Text;
-                string min = FindControlRecursive(affixPanel, "modMinTextBox" + i.ToString()).Text;
-                string max = FindControlRecursive(affixPanel, "modMaxTextBox" + i.ToString()).Text;
-
-                if (!string.IsNullOrEmpty(mod)) {
-                    QueryModifier queryMod = new QueryModifier();
-                    queryMod.mod = mod;
-                    if (!string.IsNullOrEmpty(min) || !string.IsNullOrEmpty(max)) {
-                        if(!string.IsNullOrEmpty(min)) {
-                            queryMod.min = Convert.ToDouble(min);
-                        }
-                        if(!string.IsNullOrEmpty(max)) {
-                            queryMod.max = Convert.ToDouble(max);
-                        }
-                        query.AddExplicitMod(queryMod);
-                    }
-                }
-            }
-
-            query.Print();
-            sniper.query = query;
-
-            // remove all controls in affix panel except button
-            affixPanel.Controls.Remove(addAffixButton);
-            affixPanel.Controls.Remove(modPanel1);
-            affixPanel.Controls.Clear();
-            affixPanel.Controls.Add(addAffixButton);
-            affixPanel.Controls.Add(modPanel1);
-
-            // reset textboxes
-            foreach (Control item in this.Controls)
-            {
-                if (item is TextBox)
-                {
-                    //item.Text = "";
-                }
-            }
-
-            affixCount = 1;
-            addAffixButton.Location = new Point(242, 73);
+            ResetForm();
         }
 
         #endregion

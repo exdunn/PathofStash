@@ -51,5 +51,12 @@ namespace PathofStash
         {
             items.Remove(item);
         }
+
+        public void SetItemsSeller() {
+            foreach (Item item in items) {
+                //Console.WriteLine(lastCharacterName);
+                item.seller = accountName;
+            }
+        }
     }
 }

@@ -59,6 +59,7 @@ namespace PathofStash {
 
             Console.WriteLine(query.name);
             foreach (Stash stash in parser.stashes) {
+                stash.SetItemsSeller();
                 foreach (Item item in stash.items) {
                     item.ParseProperties();
                     if (query.Match(item)) {

@@ -67,17 +67,21 @@ namespace PathofStash
             this.armorMaxTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.levelLabel = new System.Windows.Forms.Label();
+            this.baseLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.addItemButton = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.leagueComboBox = new System.Windows.Forms.ComboBox();
             this.corrComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.ilvlLabel = new System.Windows.Forms.Label();
+            this.modsLabel = new System.Windows.Forms.Label();
+            this.sellerLabel = new System.Windows.Forms.Label();
+            this.priceLabel = new System.Windows.Forms.Label();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -88,7 +92,7 @@ namespace PathofStash
             // snipeButton
             // 
             this.snipeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.snipeButton.Location = new System.Drawing.Point(832, 360);
+            this.snipeButton.Location = new System.Drawing.Point(811, 155);
             this.snipeButton.Name = "snipeButton";
             this.snipeButton.Size = new System.Drawing.Size(116, 36);
             this.snipeButton.TabIndex = 0;
@@ -386,54 +390,58 @@ namespace PathofStash
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(39, 511);
+            this.panel3.Location = new System.Drawing.Point(39, 327);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(928, 183);
+            this.panel3.Size = new System.Drawing.Size(928, 367);
             this.panel3.TabIndex = 39;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.label14);
-            this.panel4.Controls.Add(this.label13);
+            this.panel4.Controls.Add(this.priceLabel);
+            this.panel4.Controls.Add(this.sellerLabel);
+            this.panel4.Controls.Add(this.modsLabel);
+            this.panel4.Controls.Add(this.ilvlLabel);
+            this.panel4.Controls.Add(this.levelLabel);
+            this.panel4.Controls.Add(this.baseLabel);
+            this.panel4.Controls.Add(this.nameLabel);
             this.panel4.Controls.Add(this.pictureBox1);
             this.panel4.Location = new System.Drawing.Point(6, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(915, 116);
+            this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
             // 
-            // label15
+            // levelLabel
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(178, 83);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 13);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "label15";
+            this.levelLabel.AutoSize = true;
+            this.levelLabel.Location = new System.Drawing.Point(155, 56);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(33, 13);
+            this.levelLabel.TabIndex = 4;
+            this.levelLabel.Text = "Level";
             // 
-            // label14
+            // baseLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(178, 46);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "label14";
+            this.baseLabel.AutoSize = true;
+            this.baseLabel.Location = new System.Drawing.Point(155, 33);
+            this.baseLabel.Name = "baseLabel";
+            this.baseLabel.Size = new System.Drawing.Size(31, 13);
+            this.baseLabel.TabIndex = 3;
+            this.baseLabel.Text = "Base";
             // 
-            // label13
+            // nameLabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(178, 13);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "label13";
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(155, 10);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 2;
+            this.nameLabel.Text = "Name";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(20, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(20, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(129, 110);
+            this.pictureBox1.Size = new System.Drawing.Size(129, 188);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -446,21 +454,21 @@ namespace PathofStash
             this.label1.TabIndex = 1;
             this.label1.Text = "Name";
             // 
-            // addItemButton
+            // clearButton
             // 
-            this.addItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addItemButton.Location = new System.Drawing.Point(832, 306);
-            this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(116, 36);
-            this.addItemButton.TabIndex = 40;
-            this.addItemButton.Text = "Add Item";
-            this.addItemButton.UseVisualStyleBackColor = true;
-            this.addItemButton.Click += new System.EventHandler(this.Add_Item_Btn_Click);
+            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.Location = new System.Drawing.Point(811, 209);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(116, 36);
+            this.clearButton.TabIndex = 40;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // stopButton
             // 
             this.stopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stopButton.Location = new System.Drawing.Point(832, 410);
+            this.stopButton.Location = new System.Drawing.Point(811, 263);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(116, 36);
             this.stopButton.TabIndex = 41;
@@ -503,6 +511,42 @@ namespace PathofStash
             this.typeComboBox.TabIndex = 44;
             this.typeComboBox.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
             // 
+            // ilvlLabel
+            // 
+            this.ilvlLabel.AutoSize = true;
+            this.ilvlLabel.Location = new System.Drawing.Point(281, 56);
+            this.ilvlLabel.Name = "ilvlLabel";
+            this.ilvlLabel.Size = new System.Drawing.Size(20, 13);
+            this.ilvlLabel.TabIndex = 5;
+            this.ilvlLabel.Text = "Ilvl";
+            // 
+            // modsLabel
+            // 
+            this.modsLabel.AutoSize = true;
+            this.modsLabel.Location = new System.Drawing.Point(155, 79);
+            this.modsLabel.Name = "modsLabel";
+            this.modsLabel.Size = new System.Drawing.Size(69, 13);
+            this.modsLabel.TabIndex = 6;
+            this.modsLabel.Text = "Explicit Mods";
+            // 
+            // sellerLabel
+            // 
+            this.sellerLabel.AutoSize = true;
+            this.sellerLabel.Location = new System.Drawing.Point(528, 10);
+            this.sellerLabel.Name = "sellerLabel";
+            this.sellerLabel.Size = new System.Drawing.Size(33, 13);
+            this.sellerLabel.TabIndex = 7;
+            this.sellerLabel.Text = "Seller";
+            // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(528, 33);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(31, 13);
+            this.priceLabel.TabIndex = 8;
+            this.priceLabel.Text = "Price";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,7 +556,7 @@ namespace PathofStash
             this.Controls.Add(this.corrComboBox);
             this.Controls.Add(this.leagueComboBox);
             this.Controls.Add(this.stopButton);
-            this.Controls.Add(this.addItemButton);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.evasionMinTextBox);
@@ -599,14 +643,18 @@ namespace PathofStash
         private Panel panel4;
         private Label label1;
         private PictureBox pictureBox1;
-        private Label label13;
-        private Button addItemButton;
+        private Label nameLabel;
+        private Button clearButton;
         private Button stopButton;
         private ComboBox leagueComboBox;
         private ComboBox corrComboBox;
         private TextBox nameTextBox;
         private ComboBox typeComboBox;
-        private Label label15;
-        private Label label14;
+        private Label levelLabel;
+        private Label baseLabel;
+        private Label priceLabel;
+        private Label sellerLabel;
+        private Label modsLabel;
+        private Label ilvlLabel;
     }
 }

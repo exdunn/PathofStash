@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 namespace PathofStash
 {
     public class Item {
+        public string seller { get; set; }
         public string id { get; set; }
         public string icon { get; set; }
         private string Name;
@@ -17,7 +18,8 @@ namespace PathofStash
         public string typeLine { get; set; }
         public bool identified { get; set; }
         public bool corrupted { get; set; }
-        public string note { get; set; }
+        private string Note;
+        public string price { get; set; }
         public string enchantMod { get; set; }
         [JsonProperty("ilvl")]
         public string iLvl { get; set; }
@@ -41,6 +43,19 @@ namespace PathofStash
             set {
                 string newValue = Regex.Replace(value, @"<<.*>>", string.Empty);
                 Name = newValue;
+            }
+        }
+
+        public string note {
+            get {
+                return Note;
+            }
+            set {
+                Match match = Regex.Match(value, @"~(b\/o|price)");
+                if (match.Success) {
+                    price = value;
+                }
+                Note = value;
             }
         }
 
