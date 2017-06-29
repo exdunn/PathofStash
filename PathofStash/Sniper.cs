@@ -8,27 +8,21 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace PathofStash
-{
-    class Sniper
-    {
+namespace PathofStash {
+    class Sniper {
         public string nextIndex;
         public bool sniping { get; set; }
-        public List<Query> queries { get; set; }
+        public Query query { get; set; }
         public List<Item> matches { get; set; }
         public Form1 form { get; set; }
 
-        public Sniper(Form1 form)
-        {
+        public Sniper(Form1 form) {
             this.form = form;
-            queries = new List<Query>();
             matches = new List<Item>();
         }
 
-        public void StartSniping()
-        {
-            if (!sniping)
-            {
+        public void StartSniping() {
+            if (!sniping) {
                 return;
             }
             string curIndex = String.IsNullOrEmpty(nextIndex) ? CurStashIndex() : nextIndex;
@@ -37,25 +31,19 @@ namespace PathofStash
             Parser parser = new Parser(req.GetResponse());
             nextIndex = parser.nextIndex;
 
-            foreach (Query query in queries)
-            {
-                foreach (Stash stash in parser.stashes)
-                {
-                    foreach (Item item in stash.items)
-                    {
-                        if (query.Match(item))
-                        {
-                            Console.WriteLine("MATCH FOUND FOR: " + item.name);
-                            form.AddMatch(item);  
-                        }
+            foreach (Stash stash in parser.stashes) {
+                foreach (Item item in stash.items) {
+                    if (query.Match(item)) {
+                        Console.WriteLine("MATCH FOUND FOR: " + item.name);
+                        form.AddMatch(item);
                     }
                 }
             }
+
             Console.WriteLine("current index:" + curIndex);
             Console.WriteLine("next index: " + parser.nextIndex);
 
-            if(curIndex != parser.nextIndex)
-            {
+            if (curIndex != parser.nextIndex) {
                 int ms = 500;
                 Console.WriteLine("At top of stream, waiting " + ms + "ms...");
                 Thread.Sleep(ms);
@@ -69,29 +57,20 @@ namespace PathofStash
             Parser parser = new Parser(req.GetResponse());
             nextIndex = parser.nextIndex;
 
-            foreach (Query query in queries) {
-                Console.WriteLine(query.name);
-                foreach (Stash stash in parser.stashes) {
-                    foreach (Item item in stash.items) {
-                        item.ParseProperties();
-                        if (query.Match(item)) {
-                            Console.WriteLine("MATCH FOUND FOR: " + item.name);
-                            form.AddMatch(item);
-                        }
+            Console.WriteLine(query.name);
+            foreach (Stash stash in parser.stashes) {
+                foreach (Item item in stash.items) {
+                    item.ParseProperties();
+                    if (query.Match(item)) {
+                        Console.WriteLine("MATCH FOUND FOR: " + item.name);
+                        form.AddMatch(item);
                     }
                 }
             }
         }
 
-        public void AddQuery(Query query)
-        {
-            query.Print();
-            queries.Add(query);
-        }
-
         // fetch current stash index from http://poe-rates.com/actions/getLastChangeId.php
-        private string CurStashIndex()
-        {
+        private string CurStashIndex() {
             MyWebRequest req = new MyWebRequest(Globals.CURINDEXURL, "GET");
             return Regex.Match(req.GetResponse(), @"((\d+)-){4}\d+").ToString();
         }

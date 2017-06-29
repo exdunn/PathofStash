@@ -18,9 +18,10 @@ namespace PathofStash
     {
         int affixCount;
         int itemCount;
-        bool isResetting;
         Sniper sniper;
         string[] bases;
+        JsonMod[] explicitMods;
+        List<QueryModifier> queryMods = new List<QueryModifier>();
         object snipeLock = new Object();
 
         public Form1()
@@ -34,7 +35,8 @@ namespace PathofStash
         {
             panel4.Visible = false;
             sniper = new Sniper(this);
-            bases = Utilities.DeserializeJson("../../Resources/bases.json");
+            bases = Utilities.DeserializeJson<string>("../../Resources/bases.json");
+            explicitMods = Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json");
             DropDownListInit();            
         }
 
@@ -129,6 +131,21 @@ namespace PathofStash
             return matches;
         }
 
+        private Control FindControlRecursive(Control root, string name) {
+            if (root.Name == name) {
+                return root;
+            }
+
+            foreach (Control c in root.Controls) {
+                Control t = FindControlRecursive(c, name);
+                if (t != null) {
+                    return t;
+                }
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region button callbacks
@@ -155,10 +172,11 @@ namespace PathofStash
 
         private void Add_Affix_Btn_Click(object sender, EventArgs e)
         {
-            if (++affixCount > 6)
+            if (affixCount >= 6)
             {
                 return;
             }
+            affixCount++;
 
             // create panel and elements for the new mod
             var newPanel = new Panel();
@@ -172,11 +190,14 @@ namespace PathofStash
             newModLabel.Text = "Explicit Mod";
             newValueLabel.Text = "Value";
 
-            // set size of text
+            // set TextBoxes
             newPanel.Size = modPanel1.Size;
-            newModText.Size = explicitMod1TextBox.Size;
-            newMinText.Size = value1MinTextBox.Size;
-            newMaxText.Size = value1MaxTextBox.Size;
+            newModText.Name = "modTextBox" + affixCount.ToString();
+            newMinText.Name = "modMinTextBox" + affixCount.ToString();
+            newMaxText.Name = "modMaxTextBox" + affixCount.ToString();
+            newModText.Size = modTextBox1.Size;
+            newMinText.Size = modMinTextBox1.Size;
+            newMaxText.Size = modMaxTextBox1.Size;
 
             // add elements to the new panel
             newPanel.Controls.Add(newModText);
@@ -187,10 +208,10 @@ namespace PathofStash
 
             // set location of new elements
             newModLabel.Location = label11.Location;
-            newModText.Location = explicitMod1TextBox.Location;
+            newModText.Location = modTextBox1.Location;
             newValueLabel.Location = label12.Location;
-            newMinText.Location = value1MinTextBox.Location;
-            newMaxText.Location = value1MaxTextBox.Location;
+            newMinText.Location = modMinTextBox1.Location;
+            newMaxText.Location = modMaxTextBox1.Location;
 
             // add new panel to panel1
             affixPanel.Controls.Add(newPanel);
@@ -204,102 +225,102 @@ namespace PathofStash
         {
             // if user hasn't added any parameters then ignore query
             bool empty = true;
-            foreach (Control control in Controls)
-            {
-                if (control is TextBox)
-                {
-                    if (!string.IsNullOrEmpty(control.Text))
-                    {
+            foreach (Control control in Controls) {
+                if (control is TextBox) {
+                    if (!string.IsNullOrEmpty(control.Text)) {
                         empty = false;
                     }
                 }
             }
-            if(!string.IsNullOrEmpty(typeComboBox.Text))
-            {
+
+            if(!string.IsNullOrEmpty(typeComboBox.Text)) {
                 empty = false;
             }
-            if (empty)
-            {
 
+            if (empty) {
                 MessageBox.Show("Your search is empty.  Add requirements before adding a query.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             // if form isn't empty then add a new query
             Query query = new Query();
-            if (!string.IsNullOrEmpty(nameTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(nameTextBox.Text)) {
                 query.name = nameTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(typeComboBox.Text))
-            {
+            if (!string.IsNullOrEmpty(typeComboBox.Text)) {
                 query.type = typeComboBox.Text;
             }
-            if (!string.IsNullOrEmpty(armorMinTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(armorMinTextBox.Text)) {
                 query.armorMin = armorMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(armorMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(armorMaxTextBox.Text)) {
                 query.armorMax = armorMaxTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(energyShieldMinTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(energyShieldMinTextBox.Text)) {
                 query.energyShieldMin = energyShieldMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(energyShieldMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(energyShieldMaxTextBox.Text)) {
                 query.energyShieldMax = energyShieldMaxTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(evasionMinTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(evasionMinTextBox.Text)) {
                 query.evasionMin = evasionMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(evasionMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(evasionMaxTextBox.Text)) {
                 query.evasionMax = evasionMaxTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(socketsMinTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(socketsMinTextBox.Text)) {
                 query.socketsMin = socketsMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(socketsMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(socketsMaxTextBox.Text)) {
                 query.socketsMax = socketsMaxTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(levelMinTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(levelMinTextBox.Text)) {
                 query.levelMin = levelMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(levelMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(levelMaxTextBox.Text)) {
                 query.levelMax = levelMaxTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(iLvlMinTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(iLvlMinTextBox.Text)) {
                 query.iLvlMin = iLvlMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(iLvlMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(iLvlMaxTextBox.Text)) {
                 query.ilvlMax = iLvlMaxTextBox.Text;
             }
             if (!string.IsNullOrEmpty(qualityMinTextBox.Text))
             {
                 query.qualityMin = qualityMinTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(qualityMaxTextBox.Text))
-            {
+            if (!string.IsNullOrEmpty(qualityMaxTextBox.Text)) {
                 query.qualityMax = qualityMaxTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(corrComboBox.Text))
-            {
+            if (!string.IsNullOrEmpty(corrComboBox.Text)) {
                 query.corrupted = corrComboBox.Text;
             }
-            if (!string.IsNullOrEmpty(leagueComboBox.Text))
-            {
+            if (!string.IsNullOrEmpty(leagueComboBox.Text)) {
                 query.league = leagueComboBox.Text;
             }
-            sniper.AddQuery(query);
+            for(int i = 1; i < affixCount + 1; i++) {
+                string mod = FindControlRecursive(affixPanel, "modTextBox" + i.ToString()).Text;
+                string min = FindControlRecursive(affixPanel, "modMinTextBox" + i.ToString()).Text;
+                string max = FindControlRecursive(affixPanel, "modMaxTextBox" + i.ToString()).Text;
+
+                if (!string.IsNullOrEmpty(mod)) {
+                    QueryModifier queryMod = new QueryModifier();
+                    queryMod.mod = mod;
+                    if (!string.IsNullOrEmpty(min) || !string.IsNullOrEmpty(max)) {
+                        if(!string.IsNullOrEmpty(min)) {
+                            queryMod.min = Convert.ToDouble(min);
+                        }
+                        if(!string.IsNullOrEmpty(max)) {
+                            queryMod.max = Convert.ToDouble(max);
+                        }
+                        query.AddExplicitMod(queryMod);
+                    }
+                }
+            }
+
+            query.Print();
+            sniper.query = query;
 
             // remove all controls in affix panel except button
             affixPanel.Controls.Remove(addAffixButton);
@@ -323,63 +344,9 @@ namespace PathofStash
 
         #endregion
 
-        #region label callbacks
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        #endregion
-
         #region textbox callbacks
 
         #endregion
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         #region combobox callbacks
 

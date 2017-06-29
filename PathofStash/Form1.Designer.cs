@@ -52,11 +52,11 @@ namespace PathofStash
             this.qualityMaxTextBox = new System.Windows.Forms.TextBox();
             this.addAffixButton = new System.Windows.Forms.Button();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.explicitMod1TextBox = new System.Windows.Forms.TextBox();
+            this.modTextBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.value1MinTextBox = new System.Windows.Forms.TextBox();
-            this.value1MaxTextBox = new System.Windows.Forms.TextBox();
+            this.modMinTextBox1 = new System.Windows.Forms.TextBox();
+            this.modMaxTextBox1 = new System.Windows.Forms.TextBox();
             this.affixPanel = new System.Windows.Forms.Panel();
             this.modPanel1 = new System.Windows.Forms.Panel();
             this.evasionMinTextBox = new System.Windows.Forms.TextBox();
@@ -67,6 +67,8 @@ namespace PathofStash
             this.armorMaxTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,8 +78,6 @@ namespace PathofStash
             this.corrComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -104,7 +104,6 @@ namespace PathofStash
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Type";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -191,7 +190,6 @@ namespace PathofStash
             this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 19;
             this.label8.Text = "Level/Tier";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // levelMinTextBox
             // 
@@ -270,13 +268,13 @@ namespace PathofStash
             this.addAffixButton.UseVisualStyleBackColor = true;
             this.addAffixButton.Click += new System.EventHandler(this.Add_Affix_Btn_Click);
             // 
-            // explicitMod1TextBox
+            // modTextBox1
             // 
-            this.explicitMod1TextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.explicitMod1TextBox.Location = new System.Drawing.Point(87, 3);
-            this.explicitMod1TextBox.Name = "explicitMod1TextBox";
-            this.explicitMod1TextBox.Size = new System.Drawing.Size(264, 20);
-            this.explicitMod1TextBox.TabIndex = 27;
+            this.modTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modTextBox1.Location = new System.Drawing.Point(87, 3);
+            this.modTextBox1.Name = "modTextBox1";
+            this.modTextBox1.Size = new System.Drawing.Size(264, 20);
+            this.modTextBox1.TabIndex = 27;
             // 
             // label11
             // 
@@ -286,7 +284,6 @@ namespace PathofStash
             this.label11.Size = new System.Drawing.Size(64, 13);
             this.label11.TabIndex = 28;
             this.label11.Text = "Explicit Mod";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label12
             // 
@@ -297,21 +294,21 @@ namespace PathofStash
             this.label12.TabIndex = 31;
             this.label12.Text = "Value";
             // 
-            // value1MinTextBox
+            // modMinTextBox1
             // 
-            this.value1MinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.value1MinTextBox.Location = new System.Drawing.Point(87, 29);
-            this.value1MinTextBox.Name = "value1MinTextBox";
-            this.value1MinTextBox.Size = new System.Drawing.Size(38, 20);
-            this.value1MinTextBox.TabIndex = 30;
+            this.modMinTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modMinTextBox1.Location = new System.Drawing.Point(87, 29);
+            this.modMinTextBox1.Name = "modMinTextBox1";
+            this.modMinTextBox1.Size = new System.Drawing.Size(38, 20);
+            this.modMinTextBox1.TabIndex = 30;
             // 
-            // value1MaxTextBox
+            // modMaxTextBox1
             // 
-            this.value1MaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.value1MaxTextBox.Location = new System.Drawing.Point(131, 29);
-            this.value1MaxTextBox.Name = "value1MaxTextBox";
-            this.value1MaxTextBox.Size = new System.Drawing.Size(38, 20);
-            this.value1MaxTextBox.TabIndex = 29;
+            this.modMaxTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modMaxTextBox1.Location = new System.Drawing.Point(131, 29);
+            this.modMaxTextBox1.Name = "modMaxTextBox1";
+            this.modMaxTextBox1.Size = new System.Drawing.Size(38, 20);
+            this.modMaxTextBox1.TabIndex = 29;
             // 
             // affixPanel
             // 
@@ -322,20 +319,18 @@ namespace PathofStash
             this.affixPanel.Name = "affixPanel";
             this.affixPanel.Size = new System.Drawing.Size(373, 121);
             this.affixPanel.TabIndex = 32;
-            this.affixPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // modPanel1
             // 
-            this.modPanel1.Controls.Add(this.explicitMod1TextBox);
+            this.modPanel1.Controls.Add(this.modTextBox1);
             this.modPanel1.Controls.Add(this.label12);
-            this.modPanel1.Controls.Add(this.value1MaxTextBox);
-            this.modPanel1.Controls.Add(this.value1MinTextBox);
+            this.modPanel1.Controls.Add(this.modMaxTextBox1);
+            this.modPanel1.Controls.Add(this.modMinTextBox1);
             this.modPanel1.Controls.Add(this.label11);
             this.modPanel1.Location = new System.Drawing.Point(3, 3);
             this.modPanel1.Name = "modPanel1";
             this.modPanel1.Size = new System.Drawing.Size(367, 59);
             this.modPanel1.TabIndex = 33;
-            this.modPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // evasionMinTextBox
             // 
@@ -395,7 +390,6 @@ namespace PathofStash
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(928, 183);
             this.panel3.TabIndex = 39;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint_1);
             // 
             // panel4
             // 
@@ -407,6 +401,24 @@ namespace PathofStash
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(915, 116);
             this.panel4.TabIndex = 0;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(178, 83);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "label15";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(178, 46);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "label14";
             // 
             // label13
             // 
@@ -433,7 +445,6 @@ namespace PathofStash
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Name";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // addItemButton
             // 
@@ -491,24 +502,6 @@ namespace PathofStash
             this.typeComboBox.Size = new System.Drawing.Size(99, 21);
             this.typeComboBox.TabIndex = 44;
             this.typeComboBox.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(178, 46);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "label14";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(178, 83);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 13);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "label15";
             // 
             // Form1
             // 
@@ -589,11 +582,11 @@ namespace PathofStash
         private TextBox qualityMaxTextBox;
         private Button addAffixButton;
         private System.ServiceProcess.ServiceController serviceController1;
-        private TextBox explicitMod1TextBox;
+        private TextBox modTextBox1;
         private Label label11;
         private Label label12;
-        private TextBox value1MinTextBox;
-        private TextBox value1MaxTextBox;
+        private TextBox modMinTextBox1;
+        private TextBox modMaxTextBox1;
         private Panel affixPanel;
         private Panel modPanel1;
         private TextBox evasionMinTextBox;

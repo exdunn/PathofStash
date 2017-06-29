@@ -19,6 +19,7 @@ namespace PathofStash
         public bool corrupted { get; set; }
         public string note { get; set; }
         public string enchantMod { get; set; }
+        [JsonProperty("ilvl")]
         public string iLvl { get; set; }
         public string evasion { get; set; }
         public string armor { get; set; }
@@ -50,6 +51,18 @@ namespace PathofStash
             implicitMods = new List<Modifier>();
             craftedMods = new List<Modifier>();
             properties = new List<Property>();
+        }
+
+        // search for Modifier with mod == input and return its value
+        // return Double.NaN if not found
+        public double GetMod(string input) {
+            foreach (Modifier mod in explicitMods) {
+                if (mod.mod.Equals(input, StringComparison.CurrentCultureIgnoreCase)) {
+                    Console.WriteLine("item mod: " + mod.mod);
+                    return mod.value;
+                }
+            }
+            return Double.NaN;
         }
 
         public string ToString(int indentSize)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,16 @@ namespace PathofStash.Data_Beans
 {
     struct QueryModifier
     {
-        string mod { get; set; }
-        int min { get; set; }
-        int max { get; set; }
+        public string mod { get; set; }
+        [DefaultValue(null)]
+        public double? min { get; set; }
+        [DefaultValue(null)]
+        public double? max { get; set; }
+
+        public void Print() {
+
+            Console.WriteLine(mod + ": " + min + "-" + max);
+        }
     }
 
     class Query
@@ -40,9 +48,23 @@ namespace PathofStash.Data_Beans
             explicitMods = new List<QueryModifier>();
         }
 
+        public void AddExplicitMod(QueryModifier mod) {
+            explicitMods.Add(mod);
+        }
+
         public bool Match(Item item)
         {
-            if(!string.IsNullOrEmpty(name) 
+            foreach (QueryModifier mod in explicitMods) {
+                double value = item.GetMod(mod.mod);
+                if (Double.IsNaN(value)) {
+                    return false;
+                } else {
+                    if (mod.min > value || mod.max < value) {
+                        return false;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(name) 
                 && !name.Equals(item.name, StringComparison.InvariantCultureIgnoreCase)) {
                 return false;
             }
@@ -119,10 +141,12 @@ namespace PathofStash.Data_Beans
                 || (corrupted.Equals("Uncorrupted") && item.corrupted))) {
                 return false;
             }
+            
             return true;
         }
 
-        public void Print() {
+        public void Print() 
+        {
             if (!string.IsNullOrEmpty(name)) {
                 Console.WriteLine("Name: " + name);
             }
@@ -170,6 +194,9 @@ namespace PathofStash.Data_Beans
             }
             if (!string.IsNullOrEmpty(evasionMax)) {
                 Console.WriteLine("evasionMax: " + evasionMax);
+            }
+            foreach(QueryModifier mod in explicitMods) {
+                mod.Print();
             }
             Console.WriteLine("***************************************************");
         }

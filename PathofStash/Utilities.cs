@@ -33,27 +33,25 @@ namespace PathofStash
         }
 
         // returns tokens extracted by deserializing json at path
-        public static string[] DeserializeJson(string path)
-        {
+        public static T[] DeserializeJson<T>(string path) {
             StreamReader reader = new StreamReader(path);
             string json = reader.ReadToEnd();
-            return JsonConvert.DeserializeObject<String[]>(json);
+            return JsonConvert.DeserializeObject<T[]>(json);
         }
 
         // parse nodes for item mods and serialize as json
         private static void GetMods(HtmlNode[] nodes, string outFile)
         {
             List<JsonMod> tokens = new List<JsonMod>();
-            foreach (HtmlNode item in nodes)
-            {
+
+            foreach (HtmlNode item in nodes) {
                 JsonMod mod = new JsonMod();
                 Match match = Regex.Match(item.InnerHtml, @"(?i)implicit|crafted|enchanted|(prophecy)|(leaguestone)");
-                if (match.Success)
-                {
+
+                if (match.Success) {
                     mod.type = match.Value;
                 }
-                else
-                {
+                else {
                     mod.type = "explicit";
                 }
 
