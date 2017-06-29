@@ -27,7 +27,7 @@ namespace PathofStash
         public string icon { get; set; }
         private string Name;
         public string league { get; set; }
-        public string typeLine { get; set; }
+        private string TypeLine;
         public bool identified { get; set; }
         public bool corrupted { get; set; }
         private string Note;
@@ -41,6 +41,8 @@ namespace PathofStash
         public string tier { get; set; }
         public string level { get; set; }
         public string quality { get; set; }
+        public string type { get; set; }
+        public int frameType { get; set; }
         public List<Socket> sockets { get; set; }
         public List<Property> requirements { get; set; }
         public List<Modifier> explicitMods { get; set; }
@@ -50,11 +52,27 @@ namespace PathofStash
 
         public string name {
             get {
-                return this.Name;
+                if (string.IsNullOrEmpty(Name)) {
+                    return typeLine;
+                } 
+                else {
+                    return Name;
+                }  
             }
             set {
                 string newValue = Regex.Replace(value, @"<<.*>>", string.Empty);
                 Name = newValue;
+            }
+        }
+
+        public string typeLine {
+            get {
+                return TypeLine;
+            }
+
+            set {
+                string newValue = Regex.Replace(value, @"<<.*>>", string.Empty);
+                TypeLine = newValue;
             }
         }
 
@@ -80,6 +98,31 @@ namespace PathofStash
             properties = new List<Property>();
         }
 
+        // return size of item's longest link
+        public int LongestLinkCount() {
+            int longest = 0;
+            int cur = 0;
+            int group = 0;
+            foreach (Socket socket in sockets) {
+                if (socket.groupid == group) {
+                    if(++cur > longest) {
+                        longest = cur;
+                    }
+                }
+                else {
+                    group = socket.groupid;
+                    cur = 1;
+                }
+            }
+            return longest;
+        }
+
+        public List<List<Socket>> GetLinks() {
+            List<List<Socket>> links = new List<List<Socket>>();
+
+            return links;
+        }
+
         // search for Modifier with mod == input and return its value
         // return Double.NaN if not found
         public double GetMod(string input) {
@@ -98,6 +141,8 @@ namespace PathofStash
             str += "\n" + new string(' ', 4 * indentSize) + "ilvl: " + iLvl.ToString();
             str += "\n" + new string(' ', 4 * indentSize) + "id: " + id;
             str += "\n" + new string(' ', 4 * indentSize) + "league: " + league;
+            str += "\n" + new string(' ', 4 * indentSize) + "sockets: " + sockets.Count;
+            str += "\n" + new string(' ', 4 * indentSize) + "links: " + LongestLinkCount();
             str += "\n" + new string(' ', 4 * indentSize) + "typeLine: " + typeLine;
             str += "\n" + new string(' ', 4 * indentSize) + "identified: " + identified;
             str += "\n" + new string(' ', 4 * indentSize) + "corrupted: " + corrupted;

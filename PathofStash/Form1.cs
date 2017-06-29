@@ -18,6 +18,8 @@ namespace PathofStash
     {
         int affixCount;
         int itemCount;
+        Font labelFont1;
+        Font labelFont2;
         Sniper sniper;
         string[] bases;
         JsonMod[] explicitMods;
@@ -35,6 +37,8 @@ namespace PathofStash
         {
             panel4.Visible = false;
             sniper = new Sniper(this);
+            labelFont1 = new Font("Microsoft Sans Serifs", 10);
+            labelFont2 = new Font("Microsoft Sans Serifs", 12);
             bases = Utilities.DeserializeJson<string>("../../Resources/bases.json");
             explicitMods = Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json");
             DropDownListInit();            
@@ -58,6 +62,9 @@ namespace PathofStash
                 List<Label> explicitModLabels = new List<Label>();
 
                 // set size and text for panel elements
+                newNameLabel.AutoSize = true;
+                newNameLabel.Font = labelFont2;
+                newNameLabel.ForeColor = GetItemColor(item.frameType);
                 newPictureBox.Size = pictureBox1.Size;
                 newPictureBox.Load(item.icon);
                 newNameLabel.Text = item.name;
@@ -109,6 +116,32 @@ namespace PathofStash
         #endregion
 
         #region private methods
+
+        private Color GetItemColor(int input) {
+            switch(input) {
+                case 0:
+                    return Color.FromArgb(255, 200, 200, 200);
+                case 1:
+                    return Color.FromArgb(255, 136, 136, 255);
+                case 2:
+                    return Color.FromArgb(255, 255, 255, 119);
+                case 3:
+                    return Color.FromArgb(255, 175, 96, 37);
+                case 4:
+                    return Color.FromArgb(255, 27, 162, 155);
+                case 5:
+                    return Color.FromArgb(255, 170, 158, 130);
+                case 6:
+                    return Color.FromArgb(255, 14, 186, 255);
+                case 8:
+                    return Color.FromArgb(255, 208, 32, 144);
+                case 9:
+                    return Color.FromArgb(255, 50, 230, 100);
+                default:
+                    return Color.FromArgb(255, 200, 200, 200);
+
+            }
+        }
 
         private void DropDownListInit()
         {
@@ -272,6 +305,18 @@ namespace PathofStash
             if (!string.IsNullOrEmpty(leagueComboBox.Text)) {
                 query.league = leagueComboBox.Text;
             }
+            if (!string.IsNullOrEmpty(socketsMinTextBox.Text)) {
+                query.socketsMin = socketsMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(socketsMaxTextBox.Text)) {
+                query.socketsMax = socketsMaxTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(linksMinTextBox.Text)) {
+                query.linksMin = linksMinTextBox.Text;
+            }
+            if (!string.IsNullOrEmpty(linksMaxTextBox.Text)) {
+                query.linksMax = linksMaxTextBox.Text;
+            }
             for (int i = 1; i < affixCount + 1; i++) {
                 string mod = FindControlRecursive(affixPanel, "modTextBox" + i.ToString()).Text;
                 string min = FindControlRecursive(affixPanel, "modMinTextBox" + i.ToString()).Text;
@@ -393,6 +438,10 @@ namespace PathofStash
                     combo.Items.Add(match);
                 }
             }
+        }
+
+        private void panel4_MouseEnter(object sender, EventArgs e) {
+
         }
     }
 

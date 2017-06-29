@@ -405,71 +405,79 @@ namespace PathofStash
             this.panel4.Controls.Add(this.baseLabel);
             this.panel4.Controls.Add(this.nameLabel);
             this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Location = new System.Drawing.Point(6, 3);
+            this.panel4.Location = new System.Drawing.Point(6, 18);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
+            this.panel4.MouseEnter += new System.EventHandler(this.panel4_MouseEnter);
             // 
             // priceLabel
             // 
             this.priceLabel.AutoSize = true;
-            this.priceLabel.Location = new System.Drawing.Point(528, 33);
+            this.priceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.priceLabel.Location = new System.Drawing.Point(752, 33);
             this.priceLabel.Name = "priceLabel";
-            this.priceLabel.Size = new System.Drawing.Size(31, 13);
+            this.priceLabel.Size = new System.Drawing.Size(39, 16);
             this.priceLabel.TabIndex = 8;
             this.priceLabel.Text = "Price";
             // 
             // sellerLabel
             // 
             this.sellerLabel.AutoSize = true;
-            this.sellerLabel.Location = new System.Drawing.Point(528, 10);
+            this.sellerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sellerLabel.Location = new System.Drawing.Point(752, 10);
             this.sellerLabel.Name = "sellerLabel";
-            this.sellerLabel.Size = new System.Drawing.Size(33, 13);
+            this.sellerLabel.Size = new System.Drawing.Size(43, 16);
             this.sellerLabel.TabIndex = 7;
             this.sellerLabel.Text = "Seller";
             // 
             // modsLabel
             // 
             this.modsLabel.AutoSize = true;
-            this.modsLabel.Location = new System.Drawing.Point(326, 10);
+            this.modsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modsLabel.Location = new System.Drawing.Point(398, 10);
             this.modsLabel.Name = "modsLabel";
-            this.modsLabel.Size = new System.Drawing.Size(69, 13);
+            this.modsLabel.Size = new System.Drawing.Size(87, 16);
             this.modsLabel.TabIndex = 6;
             this.modsLabel.Text = "Explicit Mods";
             // 
             // ilvlLabel
             // 
             this.ilvlLabel.AutoSize = true;
+            this.ilvlLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ilvlLabel.Location = new System.Drawing.Point(155, 79);
             this.ilvlLabel.Name = "ilvlLabel";
-            this.ilvlLabel.Size = new System.Drawing.Size(20, 13);
+            this.ilvlLabel.Size = new System.Drawing.Size(24, 16);
             this.ilvlLabel.TabIndex = 5;
             this.ilvlLabel.Text = "Ilvl";
             // 
             // levelLabel
             // 
             this.levelLabel.AutoSize = true;
+            this.levelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelLabel.Location = new System.Drawing.Point(155, 56);
             this.levelLabel.Name = "levelLabel";
-            this.levelLabel.Size = new System.Drawing.Size(33, 13);
+            this.levelLabel.Size = new System.Drawing.Size(41, 16);
             this.levelLabel.TabIndex = 4;
             this.levelLabel.Text = "Level";
             // 
             // baseLabel
             // 
             this.baseLabel.AutoSize = true;
+            this.baseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.baseLabel.Location = new System.Drawing.Point(155, 33);
             this.baseLabel.Name = "baseLabel";
-            this.baseLabel.Size = new System.Drawing.Size(31, 13);
+            this.baseLabel.Size = new System.Drawing.Size(40, 16);
             this.baseLabel.TabIndex = 3;
             this.baseLabel.Text = "Base";
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(155, 10);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.Size = new System.Drawing.Size(45, 16);
             this.nameLabel.TabIndex = 2;
             this.nameLabel.Text = "Name";
             // 

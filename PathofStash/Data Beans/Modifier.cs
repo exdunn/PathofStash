@@ -22,7 +22,8 @@ namespace PathofStash.Data_Beans
         }
 
         public string ToString(int indentSize) {
-            return Regex.Replace(mod, @"#", value.ToString());
+            return new string(' ', 4 * indentSize) 
+                + Regex.Replace(mod, @"#", value.ToString());
         }
 
         public override string ToString() {

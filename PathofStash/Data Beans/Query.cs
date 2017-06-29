@@ -41,6 +41,8 @@ namespace PathofStash.Data_Beans
         public string evasionMax { get; set; }
         public string socketsMin { get; set; }
         public string socketsMax { get; set; }
+        public string linksMin { get; set; }
+        public string linksMax { get; set; }
         public List<QueryModifier> explicitMods { get; set;}
 
         public Query()
@@ -136,12 +138,31 @@ namespace PathofStash.Data_Beans
                 && Convert.ToInt32(evasionMax) < Convert.ToInt32(item.evasion)) {
                 return false;
             }
+            if (!string.IsNullOrEmpty(socketsMin)) {
+                if (Convert.ToInt32(socketsMin) > item.sockets.Count) {
+                    return false;
+                }
+            }
+            if (!string.IsNullOrEmpty(socketsMax)) {
+                if (Convert.ToInt32(socketsMax) < item.sockets.Count) {
+                    return false;
+                }
+            }
+            if (!string.IsNullOrEmpty(linksMin)) {
+                if (Convert.ToInt32(linksMin) > item.LongestLinkCount()) {
+                    return false;
+                }
+            }
+            if (!string.IsNullOrEmpty(linksMax)) {
+                if (Convert.ToInt32(linksMax) < item.LongestLinkCount()) {
+                    return false;
+                }
+            }
             if (!string.IsNullOrEmpty(corrupted) 
                 && ((corrupted.Equals("Corrupted") && !item.corrupted)
                 || (corrupted.Equals("Uncorrupted") && item.corrupted))) {
                 return false;
             }
-            
             return true;
         }
 
@@ -195,7 +216,19 @@ namespace PathofStash.Data_Beans
             if (!string.IsNullOrEmpty(evasionMax)) {
                 Console.WriteLine("evasionMax: " + evasionMax);
             }
-            foreach(QueryModifier mod in explicitMods) {
+            if (!string.IsNullOrEmpty(socketsMin)) {
+                Console.WriteLine("socketsMin: " + socketsMin);
+            }
+            if (!string.IsNullOrEmpty(socketsMax)) {
+                Console.WriteLine("socketsMax: " + socketsMax);
+            }
+            if (!string.IsNullOrEmpty(linksMin)) {
+                Console.WriteLine("linksMin: " + linksMin);
+            }
+            if (!string.IsNullOrEmpty(linksMax)) {
+                Console.WriteLine("linksMax: " + linksMax);
+            }
+            foreach (QueryModifier mod in explicitMods) {
                 mod.Print();
             }
             Console.WriteLine("***************************************************");
