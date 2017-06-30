@@ -19,6 +19,10 @@ namespace PathofStash.Data_Beans
 
             Console.WriteLine(mod + ": " + min + "-" + max);
         }
+
+        public override string ToString() {
+            return mod;
+        }
     }
 
     class Query

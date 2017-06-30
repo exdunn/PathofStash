@@ -52,13 +52,13 @@ namespace PathofStash
             this.qualityMaxTextBox = new System.Windows.Forms.TextBox();
             this.addAffixButton = new System.Windows.Forms.Button();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.modTextBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.modMinTextBox1 = new System.Windows.Forms.TextBox();
             this.modMaxTextBox1 = new System.Windows.Forms.TextBox();
             this.affixPanel = new System.Windows.Forms.Panel();
             this.modPanel1 = new System.Windows.Forms.Panel();
+            this.modComboBox1 = new System.Windows.Forms.ComboBox();
             this.evasionMinTextBox = new System.Windows.Forms.TextBox();
             this.evasionMaxTextBox = new System.Windows.Forms.TextBox();
             this.energyShieldMinTextBox = new System.Windows.Forms.TextBox();
@@ -81,7 +81,7 @@ namespace PathofStash
             this.leagueComboBox = new System.Windows.Forms.ComboBox();
             this.corrComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.baseComboBox = new System.Windows.Forms.ComboBox();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -272,14 +272,6 @@ namespace PathofStash
             this.addAffixButton.UseVisualStyleBackColor = true;
             this.addAffixButton.Click += new System.EventHandler(this.Add_Affix_Btn_Click);
             // 
-            // modTextBox1
-            // 
-            this.modTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.modTextBox1.Location = new System.Drawing.Point(87, 3);
-            this.modTextBox1.Name = "modTextBox1";
-            this.modTextBox1.Size = new System.Drawing.Size(264, 20);
-            this.modTextBox1.TabIndex = 27;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -326,7 +318,7 @@ namespace PathofStash
             // 
             // modPanel1
             // 
-            this.modPanel1.Controls.Add(this.modTextBox1);
+            this.modPanel1.Controls.Add(this.modComboBox1);
             this.modPanel1.Controls.Add(this.label12);
             this.modPanel1.Controls.Add(this.modMaxTextBox1);
             this.modPanel1.Controls.Add(this.modMinTextBox1);
@@ -335,6 +327,14 @@ namespace PathofStash
             this.modPanel1.Name = "modPanel1";
             this.modPanel1.Size = new System.Drawing.Size(367, 59);
             this.modPanel1.TabIndex = 33;
+            // 
+            // modComboBox1
+            // 
+            this.modComboBox1.FormattingEnabled = true;
+            this.modComboBox1.Location = new System.Drawing.Point(87, 3);
+            this.modComboBox1.Name = "modComboBox1";
+            this.modComboBox1.Size = new System.Drawing.Size(277, 21);
+            this.modComboBox1.TabIndex = 45;
             // 
             // evasionMinTextBox
             // 
@@ -409,7 +409,6 @@ namespace PathofStash
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
-            this.panel4.MouseEnter += new System.EventHandler(this.panel4_MouseEnter);
             // 
             // priceLabel
             // 
@@ -546,21 +545,21 @@ namespace PathofStash
             this.nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.nameTextBox.TabIndex = 1;
             // 
-            // typeComboBox
+            // baseComboBox
             // 
-            this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Location = new System.Drawing.Point(97, 75);
-            this.typeComboBox.Name = "typeComboBox";
-            this.typeComboBox.Size = new System.Drawing.Size(99, 21);
-            this.typeComboBox.TabIndex = 44;
-            this.typeComboBox.TextUpdate += new System.EventHandler(this.comboBox3_TextUpdate);
+            this.baseComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.baseComboBox.FormattingEnabled = true;
+            this.baseComboBox.Location = new System.Drawing.Point(97, 75);
+            this.baseComboBox.Name = "baseComboBox";
+            this.baseComboBox.Size = new System.Drawing.Size(99, 21);
+            this.baseComboBox.TabIndex = 44;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 706);
-            this.Controls.Add(this.typeComboBox);
+            this.Controls.Add(this.baseComboBox);
             this.Controls.Add(this.corrComboBox);
             this.Controls.Add(this.leagueComboBox);
             this.Controls.Add(this.stopButton);
@@ -634,7 +633,6 @@ namespace PathofStash
         private TextBox qualityMaxTextBox;
         private Button addAffixButton;
         private System.ServiceProcess.ServiceController serviceController1;
-        private TextBox modTextBox1;
         private Label label11;
         private Label label12;
         private TextBox modMinTextBox1;
@@ -657,12 +655,13 @@ namespace PathofStash
         private ComboBox leagueComboBox;
         private ComboBox corrComboBox;
         private TextBox nameTextBox;
-        private ComboBox typeComboBox;
+        private ComboBox baseComboBox;
         private Label levelLabel;
         private Label baseLabel;
         private Label priceLabel;
         private Label sellerLabel;
         private Label modsLabel;
         private Label ilvlLabel;
+        private ComboBox modComboBox1;
     }
 }

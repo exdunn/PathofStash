@@ -12,10 +12,8 @@ using System.Threading;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace PathofStash
-{
-    public partial class Form1 : Form
-    {
+namespace PathofStash {
+    public partial class Form1 : Form {
         int affixCount;
         int itemCount;
         Font labelFont1;
@@ -26,30 +24,26 @@ namespace PathofStash
         List<QueryModifier> queryMods = new List<QueryModifier>();
         object snipeLock = new Object();
 
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
             affixCount = 1;
             itemCount = 0;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void Form1_Load(object sender, EventArgs e) {
             panel4.Visible = false;
             sniper = new Sniper(this);
             labelFont1 = new Font("Microsoft Sans Serifs", 10);
             labelFont2 = new Font("Microsoft Sans Serifs", 12);
             bases = Utilities.DeserializeJson<string>("../../Resources/bases.json");
             explicitMods = Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json");
-            DropDownListInit();            
+            DropDownListInit();
         }
 
         #region public methods
 
-        public void AddMatch(Item item)
-        {
-            Invoke((MethodInvoker)delegate
-            {
+        public void AddMatch(Item item) {
+            Invoke((MethodInvoker)delegate {
                 //create new elements for item panel
                 var newPanel = new Panel();
                 var newPictureBox = new PictureBox();
@@ -95,12 +89,12 @@ namespace PathofStash
 
                 // add explicit mods Labels
                 int i = 0;
-                foreach(Modifier mod in item.explicitMods) {
+                foreach (Modifier mod in item.explicitMods) {
                     var newModLabel = new Label();
                     newModLabel.AutoSize = true;
                     newModLabel.Text = mod.ToString();
                     newPanel.Controls.Add(newModLabel);
-                    newModLabel.Location = new Point(modsLabel.Location.X, 
+                    newModLabel.Location = new Point(modsLabel.Location.X,
                         modsLabel.Location.Y + 30 * i++);
 
                 }
@@ -118,7 +112,7 @@ namespace PathofStash
         #region private methods
 
         private Color GetItemColor(int input) {
-            switch(input) {
+            switch (input) {
                 case 0:
                     return Color.FromArgb(255, 200, 200, 200);
                 case 1:
@@ -143,32 +137,24 @@ namespace PathofStash
             }
         }
 
-        private void DropDownListInit()
-        {
-            foreach (string league in Globals.LEAGUES)
-            {
-                leagueComboBox.Items.Add(league);
-            }
-            leagueComboBox.SelectedIndex = 0;
-
+        private void DropDownListInit() {
+            leagueComboBox.DataSource = Globals.LEAGUES;
+            baseComboBox.DataSource = bases;
+            baseComboBox.SelectedIndex = -1;
+            modComboBox1.DataSource = Array.ConvertAll(explicitMods, x => x.mod);
+            modComboBox1.SelectedIndex = -1;
             corrComboBox.Items.Add("Corrupted");
             corrComboBox.Items.Add("Uncorrupted");
         }
 
-        private static void ClearComboBox(ComboBox cb)
-        {
-            if (cb.Items.Count <= 0)
-            {
+        private static void ClearComboBox(ComboBox cb) {
+            if (cb.Items.Count <= 0) {
                 return;
             }
-           foreach (var item in new System.Collections.ArrayList(cb.Items))
-            {
-                try
-                {
+            foreach (var item in new System.Collections.ArrayList(cb.Items)) {
+                try {
                     cb.Items.Remove(item);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     Console.WriteLine("Error: " + e.ToString());
                 }
             }
@@ -182,6 +168,7 @@ namespace PathofStash
             affixPanel.Controls.Clear();
             affixPanel.Controls.Add(addAffixButton);
             affixPanel.Controls.Add(modPanel1);
+            modComboBox1.SelectedIndex = -1;
 
             // reset textboxes
             foreach (Control item in this.Controls) {
@@ -192,21 +179,6 @@ namespace PathofStash
 
             affixCount = 1;
             addAffixButton.Location = new Point(242, 73);
-        }
-
-        // returns list of strings based on input for autocomplete functionality of bases TextBox
-        private List<string> SuggestBases(string input)
-        {
-            List<string> matches = new List<string>();
-            foreach (string item in bases)
-            {
-                Match match = Regex.Match(item, "(?i)" + input);
-                if (match.Success)
-                {
-                    matches.Add(item);
-                }
-            }
-            return matches;
         }
 
         private Control FindControlRecursive(Control root, string name) {
@@ -228,8 +200,7 @@ namespace PathofStash
 
         #region button callbacks
 
-        private void Snipe_Btn_Click(object sender, EventArgs e)
-        {
+        private void Snipe_Btn_Click(object sender, EventArgs e) {
             // if user hasn't added any parameters then ignore query
             bool empty = true;
             foreach (Control control in Controls) {
@@ -240,7 +211,7 @@ namespace PathofStash
                 }
             }
 
-            if (!string.IsNullOrEmpty(typeComboBox.Text)) {
+            if (!string.IsNullOrEmpty(baseComboBox.Text)) {
                 empty = false;
             }
 
@@ -254,8 +225,8 @@ namespace PathofStash
             if (!string.IsNullOrEmpty(nameTextBox.Text)) {
                 query.name = nameTextBox.Text;
             }
-            if (!string.IsNullOrEmpty(typeComboBox.Text)) {
-                query.type = typeComboBox.Text;
+            if (!string.IsNullOrEmpty(baseComboBox.Text)) {
+                query.type = baseComboBox.Text;
             }
             if (!string.IsNullOrEmpty(armorMinTextBox.Text)) {
                 query.armorMin = armorMinTextBox.Text;
@@ -318,7 +289,7 @@ namespace PathofStash
                 query.linksMax = linksMaxTextBox.Text;
             }
             for (int i = 1; i < affixCount + 1; i++) {
-                string mod = FindControlRecursive(affixPanel, "modTextBox" + i.ToString()).Text;
+                string mod = FindControlRecursive(affixPanel, "modComboBox" + i.ToString()).Text;
                 string min = FindControlRecursive(affixPanel, "modMinTextBox" + i.ToString()).Text;
                 string max = FindControlRecursive(affixPanel, "modMaxTextBox" + i.ToString()).Text;
 
@@ -339,30 +310,28 @@ namespace PathofStash
             query.Print();
             sniper.query = query;
 
-            sniper.TestSnipe();
-            /*lock (snipeLock)
-            {
-                sniper.sniping = true;
-                Thread thread = new Thread(sniper.StartSniping);
-                thread.Start();
-            }*/
+            if (Globals.TESTMODE) {
+                sniper.TestSnipe();
+            } else {
+                lock (snipeLock) {
+                    sniper.sniping = true;
+                    Thread thread = new Thread(sniper.StartSniping);
+                    thread.Start();
+                }
 
+            }
             ResetForm();
         }
 
-        private void Stop_Btn_Click(object sender, EventArgs e)
-        {
-            lock (snipeLock)
-            {
+        private void Stop_Btn_Click(object sender, EventArgs e) {
+            lock (snipeLock) {
                 sniper.sniping = false;
                 Console.WriteLine("Stopping sniper...");
             }
         }
 
-        private void Add_Affix_Btn_Click(object sender, EventArgs e)
-        {
-            if (affixCount >= 6)
-            {
+        private void Add_Affix_Btn_Click(object sender, EventArgs e) {
+            if (affixCount >= 6) {
                 return;
             }
             affixCount++;
@@ -370,28 +339,25 @@ namespace PathofStash
             // create panel and elements for the new mod
             var newPanel = new Panel();
             var newModLabel = new Label();
-            var newModText = new TextBox();
+            var newModComboBox = new ComboBox();
             var newValueLabel = new Label();
             var newMinText = new TextBox();
             var newMaxText = new TextBox();
 
             // set panel
             newPanel.Size = modPanel1.Size;
-
-            // set labels
             newModLabel.Text = "Explicit Mod";
             newValueLabel.Text = "Value";
-
-            // set TextBoxes    
-            newModText.Name = "modTextBox" + affixCount.ToString();
+            newModComboBox.Name = "modComboBox" + affixCount.ToString();
             newMinText.Name = "modMinTextBox" + affixCount.ToString();
             newMaxText.Name = "modMaxTextBox" + affixCount.ToString();
-            newModText.Size = modTextBox1.Size;
+            newModComboBox.Size = modComboBox1.Size;
+            newModComboBox.DataSource = Array.ConvertAll(explicitMods, x => x.mod);
             newMinText.Size = modMinTextBox1.Size;
             newMaxText.Size = modMaxTextBox1.Size;
 
             // add elements to the new panel
-            newPanel.Controls.Add(newModText);
+            newPanel.Controls.Add(newModComboBox);
             newPanel.Controls.Add(newModLabel);
             newPanel.Controls.Add(newMinText);
             newPanel.Controls.Add(newMaxText);
@@ -399,7 +365,7 @@ namespace PathofStash
 
             // set location of new elements
             newModLabel.Location = label11.Location;
-            newModText.Location = modTextBox1.Location;
+            newModComboBox.Location = modComboBox1.Location;
             newValueLabel.Location = label12.Location;
             newMinText.Location = modMinTextBox1.Location;
             newMaxText.Location = modMaxTextBox1.Location;
@@ -408,42 +374,18 @@ namespace PathofStash
             affixPanel.Controls.Add(newPanel);
             newPanel.Location = new Point(modPanel1.Location.X, newPanel.Size.Height * (affixCount - 1));
 
+            // clear mod  ComboBox text
+            newModComboBox.SelectedIndex = -1;
+
             // move button down
             addAffixButton.Location = new Point(addAffixButton.Location.X, +addAffixButton.Location.Y + newPanel.Size.Height);
         }
 
-        private void clearButton_Click(object sender, EventArgs e)
-        {
+        private void clearButton_Click(object sender, EventArgs e) {
             ResetForm();
         }
 
         #endregion
 
-        #region textbox callbacks
-
-        #endregion
-
-        #region combobox callbacks
-
-        private void comboBox3_TextUpdate(object sender, EventArgs e)
-        {
-            ComboBox combo = sender as ComboBox;
-            ClearComboBox(combo);
-
-            if (combo.Text.Length >= 3)
-            {
-                List<string> matches = SuggestBases(combo.Text);
-                foreach (string match in matches)
-                {
-                    combo.Items.Add(match);
-                }
-            }
-        }
-
-        private void panel4_MouseEnter(object sender, EventArgs e) {
-
-        }
     }
-
-    #endregion
 }
