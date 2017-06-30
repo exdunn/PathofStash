@@ -40,13 +40,13 @@ namespace PathofStash
         }
 
         // parse nodes for item mods and serialize as json
-        private static void GetMods(HtmlNode[] nodes, string outFile)
+        public static void GetMods(HtmlNode[] nodes, string outFile)
         {
             List<JsonMod> tokens = new List<JsonMod>();
 
             foreach (HtmlNode item in nodes) {
                 JsonMod mod = new JsonMod();
-                Match match = Regex.Match(item.InnerHtml, @"(?i)implicit|crafted|enchanted|(prophecy)|(leaguestone)");
+                Match match = Regex.Match(item.InnerHtml, @"(?i)implicit|crafted|enchant|(prophecy)|(leaguestone)");
 
                 if (match.Success) {
                     mod.type = match.Value;
@@ -56,7 +56,7 @@ namespace PathofStash
                 }
 
                 // clean up item by removing boiler plate tags and leagin spaces
-                string cleanMod = Regex.Replace(item.InnerHtml, @"(?i)implicit|crafted|enchanted|(prophecy)|(leaguestone)", "");
+                string cleanMod = Regex.Replace(item.InnerHtml, @"(?i)implicit|crafted|enchant|(prophecy)|(leaguestone)", "");
                 cleanMod = Regex.Replace(cleanMod, @"(<span).*(span> )", "");
                 cleanMod = Regex.Replace(cleanMod, @"^ |^\(\) ", "");
                 mod.mod = cleanMod;

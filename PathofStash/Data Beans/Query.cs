@@ -47,6 +47,7 @@ namespace PathofStash.Data_Beans
         public string socketsMax { get; set; }
         public string linksMin { get; set; }
         public string linksMax { get; set; }
+        public QueryModifier enchant { get; set; }
         public List<QueryModifier> explicitMods { get; set;}
 
         public Query()
@@ -68,6 +69,17 @@ namespace PathofStash.Data_Beans
                     if (mod.min > value || mod.max < value) {
                         return false;
                     }
+                }
+            }
+            if (!string.IsNullOrEmpty(enchant.mod)) {
+                if (item.implicitMods.Count > 0) {
+                    double value = item.implicitMods[0].value;
+                    if (enchant.min > value || enchant.max < value) {
+                        return false;
+                    }
+                }
+                else {
+                    return false;
                 }
             }
             if (!string.IsNullOrEmpty(name) 
@@ -231,6 +243,9 @@ namespace PathofStash.Data_Beans
             }
             if (!string.IsNullOrEmpty(linksMax)) {
                 Console.WriteLine("linksMax: " + linksMax);
+            }
+            if (!string.IsNullOrEmpty(enchant.mod)) {
+                enchant.Print();
             }
             foreach (QueryModifier mod in explicitMods) {
                 mod.Print();

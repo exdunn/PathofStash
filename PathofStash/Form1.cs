@@ -21,6 +21,7 @@ namespace PathofStash {
         Sniper sniper;
         string[] bases;
         JsonMod[] explicitMods;
+        JsonMod[] enchants;
         List<QueryModifier> queryMods = new List<QueryModifier>();
         object snipeLock = new Object();
 
@@ -36,7 +37,12 @@ namespace PathofStash {
             labelFont1 = new Font("Microsoft Sans Serifs", 10);
             labelFont2 = new Font("Microsoft Sans Serifs", 12);
             bases = Utilities.DeserializeJson<string>("../../Resources/bases.json");
-            explicitMods = Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json");
+            explicitMods = Array.FindAll(
+                Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json"),
+                x => x.type.Equals("explicit", StringComparison.CurrentCultureIgnoreCase));
+            enchants = Array.FindAll(
+                Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json"),
+                x => x.type.Equals("enchant", StringComparison.CurrentCultureIgnoreCase));
             DropDownListInit();
         }
 
@@ -53,6 +59,7 @@ namespace PathofStash {
                 var newILvlLabel = new Label();
                 var newSellerLabel = new Label();
                 var newPriceLabel = new Label();
+                var explicitModLabel = new Label();
                 List<Label> explicitModLabels = new List<Label>();
 
                 // set size and text for panel elements
@@ -67,6 +74,8 @@ namespace PathofStash {
                 newILvlLabel.Text = "ilvl: " + item.iLvl;
                 newSellerLabel.Text = "Seller: " + item.seller;
                 newPriceLabel.Text = "Price: " + item.price;
+                explicitModLabel.Text = "Explicit Mods";
+                explicitModLabel.Font = labelFont1;
                 newPanel.Size = panel4.Size;
 
                 // add elements to new panel
@@ -77,6 +86,7 @@ namespace PathofStash {
                 newPanel.Controls.Add(newILvlLabel);
                 newPanel.Controls.Add(newSellerLabel);
                 newPanel.Controls.Add(newPriceLabel);
+                newPanel.Controls.Add(explicitModLabel);
 
                 // set location of new elements
                 newPictureBox.Location = pictureBox1.Location;
@@ -86,6 +96,7 @@ namespace PathofStash {
                 newLevelLabel.Location = levelLabel.Location;
                 newSellerLabel.Location = sellerLabel.Location;
                 newPriceLabel.Location = priceLabel.Location;
+                explicitModLabel.Location = explicitModHeaderLabel.Location;
 
                 // add explicit mods Labels
                 int i = 0;
@@ -95,7 +106,7 @@ namespace PathofStash {
                     newModLabel.Text = mod.ToString();
                     newPanel.Controls.Add(newModLabel);
                     newModLabel.Location = new Point(modsLabel.Location.X,
-                        modsLabel.Location.Y + 30 * i++);
+                        modsLabel.Location.Y + 20 * i++);
 
                 }
 
@@ -143,25 +154,14 @@ namespace PathofStash {
             baseComboBox.SelectedIndex = -1;
             modComboBox1.DataSource = Array.ConvertAll(explicitMods, x => x.mod);
             modComboBox1.SelectedIndex = -1;
+            enchantComboBox.DataSource = Array.ConvertAll(enchants, x => x.mod);
+            enchantComboBox.SelectedIndex = -1;
             corrComboBox.Items.Add("Corrupted");
             corrComboBox.Items.Add("Uncorrupted");
         }
 
-        private static void ClearComboBox(ComboBox cb) {
-            if (cb.Items.Count <= 0) {
-                return;
-            }
-            foreach (var item in new System.Collections.ArrayList(cb.Items)) {
-                try {
-                    cb.Items.Remove(item);
-                } catch (Exception e) {
-                    Console.WriteLine("Error: " + e.ToString());
-                }
-            }
-        }
-
+        // clear all TextBox and ComboBox controls
         private void ResetForm() {
-
             // remove all controls in affix panel except button
             affixPanel.Controls.Remove(addAffixButton);
             affixPanel.Controls.Remove(modPanel1);
@@ -169,18 +169,20 @@ namespace PathofStash {
             affixPanel.Controls.Add(addAffixButton);
             affixPanel.Controls.Add(modPanel1);
             modComboBox1.SelectedIndex = -1;
+            enchantComboBox.SelectedIndex = -1;
 
             // reset textboxes
-            foreach (Control item in this.Controls) {
-                if (item is TextBox) {
-                    item.Text = "";
+            FormTraversal(this, x => {
+                if (x is TextBox) {
+                    x.Text = "";
                 }
-            }
+            });
 
             affixCount = 1;
             addAffixButton.Location = new Point(242, 73);
         }
 
+        // recursive method for finding control
         private Control FindControlRecursive(Control root, string name) {
             if (root.Name == name) {
                 return root;
@@ -196,26 +198,41 @@ namespace PathofStash {
             return null;
         }
 
+        // depth first traversal from root
+        // func performs an action on each child of root
+        private bool FormTraversal(Control root, Action<Control> func) {
+            foreach (Control child in root.Controls) {
+                func(child);
+                FormTraversal(child, func);
+            }
+            return false;
+        }
+
+        //checks if form represents a valid query
+        private void IsValidQuery(Control root, ref bool valid) {
+            foreach (Control child in root.Controls) {
+                if (child is TextBox && !string.IsNullOrEmpty(child.Text)) {
+                    Console.WriteLine(child.Text);
+                    valid = true;
+                }
+                IsValidQuery(child, ref valid);
+            }
+        }
+
         #endregion
 
         #region button callbacks
 
         private void Snipe_Btn_Click(object sender, EventArgs e) {
             // if user hasn't added any parameters then ignore query
-            bool empty = true;
-            foreach (Control control in Controls) {
-                if (control is TextBox) {
-                    if (!string.IsNullOrEmpty(control.Text)) {
-                        empty = false;
-                    }
-                }
-            }
+            bool valid = false;
+            IsValidQuery(this, ref valid);
 
             if (!string.IsNullOrEmpty(baseComboBox.Text)) {
-                empty = false;
+                valid = true;
             }
 
-            if (empty) {
+            if (!valid) {
                 MessageBox.Show("Your search is empty.  Add requirements before adding a query.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -288,6 +305,19 @@ namespace PathofStash {
             if (!string.IsNullOrEmpty(linksMaxTextBox.Text)) {
                 query.linksMax = linksMaxTextBox.Text;
             }
+            if (!string.IsNullOrEmpty(enchantComboBox.Text)) {
+                if (!string.IsNullOrEmpty(enchantMinTextBox.Text) || !string.IsNullOrEmpty(enchantMaxTextBox.Text)) {
+                    QueryModifier enchant = new QueryModifier();
+                    enchant.mod = enchantComboBox.Text;
+                    if (!string.IsNullOrEmpty(enchantMinTextBox.Text)) {
+                        enchant.min = Convert.ToDouble(enchantMinTextBox.Text);
+                    }
+                    if (!string.IsNullOrEmpty(enchantMaxTextBox.Text)) {
+                        enchant.max = Convert.ToDouble(enchantMaxTextBox.Text);
+                    }
+                    query.enchant = enchant;
+                }
+            }
             for (int i = 1; i < affixCount + 1; i++) {
                 string mod = FindControlRecursive(affixPanel, "modComboBox" + i.ToString()).Text;
                 string min = FindControlRecursive(affixPanel, "modMinTextBox" + i.ToString()).Text;
@@ -353,6 +383,7 @@ namespace PathofStash {
             newMaxText.Name = "modMaxTextBox" + affixCount.ToString();
             newModComboBox.Size = modComboBox1.Size;
             newModComboBox.DataSource = Array.ConvertAll(explicitMods, x => x.mod);
+            newModComboBox.SelectedIndexChanged += new EventHandler(comboBox_SelectedIndexChanged);
             newMinText.Size = modMinTextBox1.Size;
             newMaxText.Size = modMaxTextBox1.Size;
 
@@ -387,5 +418,21 @@ namespace PathofStash {
 
         #endregion
 
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            var combo = sender as ComboBox;
+            var parent = combo.Parent;
+
+            foreach (Control child in parent.Controls) {
+                if(child is TextBox) {
+                    if (combo.SelectedIndex >= 0) {
+                        child.BackColor = SystemColors.ControlLightLight;
+                        (child as TextBox).ReadOnly = false;
+                    } else {
+                        child.BackColor = SystemColors.ControlDark;
+                        (child as TextBox).ReadOnly = true;
+                    }
+                }
+            }
+        }
     }
 }

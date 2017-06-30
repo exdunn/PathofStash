@@ -152,11 +152,18 @@ namespace PathofStash
             {
                 str += "\n" + prop.ToString(indentSize + 1);
             }
+            str += "\n" + new string(' ', 4 * indentSize) + "}";
             str += "\n" + new string(' ', 4 * indentSize) + "Explicit Mods: {";
             foreach (Modifier mod in explicitMods)
             {
                 str += "\n" + mod.ToString(indentSize + 1);
             }
+            str += "\n" + new string(' ', 4 * indentSize) + "}";
+            str += "\n" + new string(' ', 4 * indentSize) + "Implicit Mods: {";
+            foreach (Modifier mod in implicitMods) {
+                str += "\n" + mod.ToString(indentSize + 1);
+            }
+            str += "\n" + new string(' ', 4 * indentSize) + "}";
             return str;
         }
 

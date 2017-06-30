@@ -9,7 +9,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace PathofStash {
+
     class Sniper {
+
         public string nextIndex;
         public bool sniping { get; set; }
         public Query query { get; set; }

@@ -82,11 +82,19 @@ namespace PathofStash
             this.corrComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.baseComboBox = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.enchantComboBox = new System.Windows.Forms.ComboBox();
+            this.enchantValueLabel = new System.Windows.Forms.Label();
+            this.enchantMaxTextBox = new System.Windows.Forms.TextBox();
+            this.enchantMinTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.explicitModHeaderLabel = new System.Windows.Forms.Label();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // snipeButton
@@ -292,17 +300,19 @@ namespace PathofStash
             // 
             // modMinTextBox1
             // 
-            this.modMinTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modMinTextBox1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.modMinTextBox1.Location = new System.Drawing.Point(87, 29);
             this.modMinTextBox1.Name = "modMinTextBox1";
+            this.modMinTextBox1.ReadOnly = true;
             this.modMinTextBox1.Size = new System.Drawing.Size(38, 20);
             this.modMinTextBox1.TabIndex = 30;
             // 
             // modMaxTextBox1
             // 
-            this.modMaxTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modMaxTextBox1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.modMaxTextBox1.Location = new System.Drawing.Point(131, 29);
             this.modMaxTextBox1.Name = "modMaxTextBox1";
+            this.modMaxTextBox1.ReadOnly = true;
             this.modMaxTextBox1.Size = new System.Drawing.Size(38, 20);
             this.modMaxTextBox1.TabIndex = 29;
             // 
@@ -335,6 +345,7 @@ namespace PathofStash
             this.modComboBox1.Name = "modComboBox1";
             this.modComboBox1.Size = new System.Drawing.Size(277, 21);
             this.modComboBox1.TabIndex = 45;
+            this.modComboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // evasionMinTextBox
             // 
@@ -390,13 +401,14 @@ namespace PathofStash
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(39, 327);
+            this.panel3.Location = new System.Drawing.Point(21, 331);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(928, 367);
             this.panel3.TabIndex = 39;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.explicitModHeaderLabel);
             this.panel4.Controls.Add(this.priceLabel);
             this.panel4.Controls.Add(this.sellerLabel);
             this.panel4.Controls.Add(this.modsLabel);
@@ -434,11 +446,11 @@ namespace PathofStash
             // 
             this.modsLabel.AutoSize = true;
             this.modsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modsLabel.Location = new System.Drawing.Point(398, 10);
+            this.modsLabel.Location = new System.Drawing.Point(397, 33);
             this.modsLabel.Name = "modsLabel";
-            this.modsLabel.Size = new System.Drawing.Size(87, 16);
+            this.modsLabel.Size = new System.Drawing.Size(80, 16);
             this.modsLabel.TabIndex = 6;
-            this.modsLabel.Text = "Explicit Mods";
+            this.modsLabel.Text = "Mod Anchor";
             // 
             // ilvlLabel
             // 
@@ -554,11 +566,79 @@ namespace PathofStash
             this.baseComboBox.Size = new System.Drawing.Size(99, 21);
             this.baseComboBox.TabIndex = 44;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.enchantComboBox);
+            this.panel1.Controls.Add(this.enchantValueLabel);
+            this.panel1.Controls.Add(this.enchantMaxTextBox);
+            this.panel1.Controls.Add(this.enchantMinTextBox);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Location = new System.Drawing.Point(12, 240);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(367, 59);
+            this.panel1.TabIndex = 46;
+            // 
+            // enchantComboBox
+            // 
+            this.enchantComboBox.FormattingEnabled = true;
+            this.enchantComboBox.Location = new System.Drawing.Point(84, 3);
+            this.enchantComboBox.Name = "enchantComboBox";
+            this.enchantComboBox.Size = new System.Drawing.Size(277, 21);
+            this.enchantComboBox.TabIndex = 45;
+            this.enchantComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            // 
+            // enchantValueLabel
+            // 
+            this.enchantValueLabel.AutoSize = true;
+            this.enchantValueLabel.Location = new System.Drawing.Point(44, 32);
+            this.enchantValueLabel.Name = "enchantValueLabel";
+            this.enchantValueLabel.Size = new System.Drawing.Size(34, 13);
+            this.enchantValueLabel.TabIndex = 31;
+            this.enchantValueLabel.Text = "Value";
+            // 
+            // enchantMaxTextBox
+            // 
+            this.enchantMaxTextBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.enchantMaxTextBox.Location = new System.Drawing.Point(128, 29);
+            this.enchantMaxTextBox.Name = "enchantMaxTextBox";
+            this.enchantMaxTextBox.ReadOnly = true;
+            this.enchantMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.enchantMaxTextBox.TabIndex = 29;
+            // 
+            // enchantMinTextBox
+            // 
+            this.enchantMinTextBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.enchantMinTextBox.Location = new System.Drawing.Point(84, 29);
+            this.enchantMinTextBox.Name = "enchantMinTextBox";
+            this.enchantMinTextBox.ReadOnly = true;
+            this.enchantMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.enchantMinTextBox.TabIndex = 30;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(31, 6);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(47, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Enchant";
+            // 
+            // explicitModHeaderLabel
+            // 
+            this.explicitModHeaderLabel.AutoSize = true;
+            this.explicitModHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.explicitModHeaderLabel.Location = new System.Drawing.Point(397, 10);
+            this.explicitModHeaderLabel.Name = "explicitModHeaderLabel";
+            this.explicitModHeaderLabel.Size = new System.Drawing.Size(87, 16);
+            this.explicitModHeaderLabel.TabIndex = 9;
+            this.explicitModHeaderLabel.Text = "Explicit Mods";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 706);
+            this.ClientSize = new System.Drawing.Size(970, 716);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.baseComboBox);
             this.Controls.Add(this.corrComboBox);
             this.Controls.Add(this.leagueComboBox);
@@ -604,6 +684,8 @@ namespace PathofStash
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -663,5 +745,12 @@ namespace PathofStash
         private Label modsLabel;
         private Label ilvlLabel;
         private ComboBox modComboBox1;
+        private Panel panel1;
+        private ComboBox enchantComboBox;
+        private Label enchantValueLabel;
+        private TextBox enchantMaxTextBox;
+        private TextBox enchantMinTextBox;
+        private Label label14;
+        private Label explicitModHeaderLabel;
     }
 }

@@ -14,7 +14,7 @@ namespace PathofStash
         public static string STASHAPIURL = "http://www.pathofexile.com/api/public-stash-tabs";
         public static string POETRADEURL = "http://poe.trade";
         public static String[] LEAGUES = { "2 Week Mayhem (JRE092)", "Legacy", "Standard", "2 Week Mayhem HC (JRE091)", "Hardcore Legacy", "Hardcore" };
-        public static bool TESTMODE = false;
+        public static bool TESTMODE = true;
     }
 
     class Program
@@ -22,9 +22,9 @@ namespace PathofStash
         [STAThread]
         static void Main(string[] args)
         {
-            /*Utilities.SerializeHtmlNodes("../../Resources/mods.txt",
+            Utilities.SerializeHtmlNodes("../../Resources/mods.txt",
                 @"//li[@class=""active-result group-option""]",
-                "../../Resources/mods.json", Utilities.GetMods);*/
+                "../../Resources/mods.json", Utilities.GetMods);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
