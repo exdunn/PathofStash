@@ -19,5 +19,6 @@ Search by:
   
 ### Technology
 Windows Form application written in C#
-Uses the ]Path of Exile Stash API](http://pathofexile.gamepedia.com/Public_stash_tab_API)
+
+Uses the [Path of Exile Stash API](http://pathofexile.gamepedia.com/Public_stash_tab_API)
 
