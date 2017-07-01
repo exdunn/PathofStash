@@ -32,7 +32,6 @@ namespace PathofStash
         public bool corrupted { get; set; }
         private string Note;
         public string price { get; set; }
-        public string enchantMod { get; set; }
         [JsonProperty("ilvl")]
         public string iLvl { get; set; }
         public string evasion { get; set; }
@@ -46,6 +45,7 @@ namespace PathofStash
         public List<Socket> sockets { get; set; }
         public List<Property> requirements { get; set; }
         public List<Modifier> explicitMods { get; set; }
+        public List<Modifier> enchantMods { get; set; }
         public List<Modifier> implicitMods { get; set; }
         public List<Modifier> craftedMods { get; set; }
         public List<Property> properties { get; set;}
@@ -94,6 +94,7 @@ namespace PathofStash
             requirements = new List<Property>();
             explicitMods = new List<Modifier>();
             implicitMods = new List<Modifier>();
+            enchantMods = new List<Modifier>();
             craftedMods = new List<Modifier>();
             properties = new List<Property>();
             price = "n/a";
@@ -165,6 +166,10 @@ namespace PathofStash
                 str += "\n" + mod.ToString(indentSize + 1);
             }
             str += "\n" + new string(' ', 4 * indentSize) + "}";
+            str += "\n" + new string(' ', 4 * indentSize) + "Enchant Mods: {";
+            foreach (Modifier mod in enchantMods) {
+                str += "\n" + mod.ToString(indentSize + 1);
+            }
             return str;
         }
 

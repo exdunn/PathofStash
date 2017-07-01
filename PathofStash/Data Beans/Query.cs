@@ -72,8 +72,8 @@ namespace PathofStash.Data_Beans
                 }
             }
             if (!string.IsNullOrEmpty(enchant.mod)) {
-                if (item.implicitMods.Count > 0) {
-                    double value = item.implicitMods[0].value;
+                if (item.enchantMods.Count > 0) {
+                    double value = item.enchantMods[0].value;
                     if (enchant.min > value || enchant.max < value) {
                         return false;
                     }

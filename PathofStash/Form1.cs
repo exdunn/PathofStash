@@ -36,12 +36,12 @@ namespace PathofStash {
             sniper = new Sniper(this);
             labelFont1 = new Font("Microsoft Sans Serifs", 10);
             labelFont2 = new Font("Microsoft Sans Serifs", 12);
-            bases = Utilities.DeserializeJson<string>("../../Resources/bases.json");
+            bases = Utilities.DeserializeJson<string>("Resources/bases.json");
             explicitMods = Array.FindAll(
-                Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json"),
+                Utilities.DeserializeJson<JsonMod>("Resources/mods.json"),
                 x => x.type.Equals("explicit", StringComparison.CurrentCultureIgnoreCase));
             enchants = Array.FindAll(
-                Utilities.DeserializeJson<JsonMod>("../../Resources/mods.json"),
+                Utilities.DeserializeJson<JsonMod>("Resources/mods.json"),
                 x => x.type.Equals("enchant", StringComparison.CurrentCultureIgnoreCase));
             DropDownListInit();
         }
@@ -70,6 +70,10 @@ namespace PathofStash {
                 newNameLabel.ForeColor = GetItemColor(item.frameType);
                 newPictureBox.Size = pictureBox1.Size;
                 newPictureBox.Load(item.icon);
+                Padding pad = new Padding();
+                pad.Left = (newPictureBox.Width - newPictureBox.Image.Width)/2;
+                pad.Top = (newPictureBox.Height - newPictureBox.Image.Height)/2;
+                newPictureBox.Padding = pad;
                 newPictureBox.BorderStyle = BorderStyle.FixedSingle;
                 newPictureBox.BackColor = SystemColors.AppWorkspace;
                 newNameLabel.Text = item.name;

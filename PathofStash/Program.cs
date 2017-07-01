@@ -22,9 +22,9 @@ namespace PathofStash
         [STAThread]
         static void Main(string[] args)
         {
-            Utilities.SerializeHtmlNodes("../../Resources/mods.txt",
+            /*Utilities.SerializeHtmlNodes("../../Resources/mods.txt",
                 @"//li[@class=""active-result group-option""]",
-                "../../Resources/mods.json", Utilities.GetMods);
+                "../../Resources/mods.json", Utilities.GetMods);*/
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

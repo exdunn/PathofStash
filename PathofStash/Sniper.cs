@@ -48,7 +48,7 @@ namespace PathofStash {
             Console.WriteLine("next index: " + parser.nextIndex);
 
             if (curIndex != parser.nextIndex) {
-                int ms = 500;
+                int ms = 1500;
                 Console.WriteLine("At top of stream, waiting " + ms + "ms...");
                 Thread.Sleep(ms);
             }
@@ -57,7 +57,7 @@ namespace PathofStash {
 
         public void TestSnipe() {
             Console.WriteLine("TEST SNIPE");
-            MyWebRequest req = new MyWebRequest("http://www.pathofexile.com/api/public-stash-tabs", "GET");
+            MyWebRequest req = new MyWebRequest("http://www.pathofexile.com/api/public-stash-tabs?id=71343349-75103688-70275586-81686737-75948888", "GET");
             Parser parser = new Parser(req.GetResponse());
             nextIndex = parser.nextIndex;
 

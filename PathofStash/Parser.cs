@@ -29,7 +29,7 @@ namespace PathofStash
         {
             string cleanJson = Regex.Replace(json, @"{""next_change_id"":""((\d+)-){4}\d+"",""stashes"":\[", "[");
             cleanJson = Regex.Replace(cleanJson, @"]}$", "]");
-            //File.WriteAllText("cleanJson.txt", cleanJson, Encoding.UTF8);
+            File.WriteAllText("cleanJson.txt", cleanJson, Encoding.UTF8);
             stashes = JsonConvert.DeserializeObject<List<Stash>>(cleanJson);
         }
     }
