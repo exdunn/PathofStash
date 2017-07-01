@@ -67,6 +67,7 @@ namespace PathofStash
             this.armorMaxTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.explicitModHeaderLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
             this.sellerLabel = new System.Windows.Forms.Label();
             this.modsLabel = new System.Windows.Forms.Label();
@@ -88,7 +89,6 @@ namespace PathofStash
             this.enchantMaxTextBox = new System.Windows.Forms.TextBox();
             this.enchantMinTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.explicitModHeaderLabel = new System.Windows.Forms.Label();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -408,6 +408,7 @@ namespace PathofStash
             // 
             // panel4
             // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.explicitModHeaderLabel);
             this.panel4.Controls.Add(this.priceLabel);
             this.panel4.Controls.Add(this.sellerLabel);
@@ -421,6 +422,16 @@ namespace PathofStash
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
+            // 
+            // explicitModHeaderLabel
+            // 
+            this.explicitModHeaderLabel.AutoSize = true;
+            this.explicitModHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.explicitModHeaderLabel.Location = new System.Drawing.Point(397, 10);
+            this.explicitModHeaderLabel.Name = "explicitModHeaderLabel";
+            this.explicitModHeaderLabel.Size = new System.Drawing.Size(87, 16);
+            this.explicitModHeaderLabel.TabIndex = 9;
+            this.explicitModHeaderLabel.Text = "Explicit Mods";
             // 
             // priceLabel
             // 
@@ -494,9 +505,11 @@ namespace PathofStash
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(20, 0);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(129, 188);
+            this.pictureBox1.Size = new System.Drawing.Size(149, 188);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -623,16 +636,6 @@ namespace PathofStash
             this.label14.TabIndex = 28;
             this.label14.Text = "Enchant";
             // 
-            // explicitModHeaderLabel
-            // 
-            this.explicitModHeaderLabel.AutoSize = true;
-            this.explicitModHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.explicitModHeaderLabel.Location = new System.Drawing.Point(397, 10);
-            this.explicitModHeaderLabel.Name = "explicitModHeaderLabel";
-            this.explicitModHeaderLabel.Size = new System.Drawing.Size(87, 16);
-            this.explicitModHeaderLabel.TabIndex = 9;
-            this.explicitModHeaderLabel.Text = "Explicit Mods";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,7 +678,7 @@ namespace PathofStash
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.snipeButton);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "PathofStash";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.affixPanel.ResumeLayout(false);
             this.modPanel1.ResumeLayout(false);

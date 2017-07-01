@@ -49,6 +49,8 @@ namespace PathofStash {
         #region public methods
 
         public void AddMatch(Item item) {
+
+            System.Media.SystemSounds.Hand.Play();
             Invoke((MethodInvoker)delegate {
                 //create new elements for item panel
                 var newPanel = new Panel();
@@ -68,6 +70,8 @@ namespace PathofStash {
                 newNameLabel.ForeColor = GetItemColor(item.frameType);
                 newPictureBox.Size = pictureBox1.Size;
                 newPictureBox.Load(item.icon);
+                newPictureBox.BorderStyle = BorderStyle.FixedSingle;
+                newPictureBox.BackColor = SystemColors.AppWorkspace;
                 newNameLabel.Text = item.name;
                 newBaseLabel.Text = item.typeLine;
                 newPriceLabel.AutoSize = true;
@@ -77,6 +81,7 @@ namespace PathofStash {
                 newPriceLabel.Text = "Price: " + item.price;
                 explicitModLabel.Text = "Explicit Mods";
                 explicitModLabel.Font = labelFont1;
+                newPanel.BorderStyle = BorderStyle.FixedSingle;
                 newPanel.Size = panel4.Size;
 
                 // add elements to new panel
@@ -358,7 +363,8 @@ namespace PathofStash {
             }
         }
 
-        private void Add_Affix_Btn_Click(object sender, EventArgs e) {
+        private void Add_Affix_Btn_Click(object sender, EventArgs e) { 
+
             if (affixCount >= 6) {
                 return;
             }

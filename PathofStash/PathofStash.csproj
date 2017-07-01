@@ -64,6 +64,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Data Beans\Item.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="MyWebRequest.cs" />
     <Compile Include="Parser.cs" />
@@ -83,6 +88,10 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="MSHTML">
@@ -97,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\bases.txt" />
+    <Content Include="Resources\notification1.wav" />
     <Content Include="Resources\mods.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,3 +12,4 @@ C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\bin
 C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.xml
 C:\Users\alexh\Documents\Visual Studio 2017\Projects\PathofStash\PathofStash\obj\Debug\PathofStash.csproj.ResolveComReference.cache
+C:\Users\alexh\documents\visual studio 2017\Projects\PathOfStash\PathofStash\obj\Debug\PathofStash.Properties.Resources.resources
