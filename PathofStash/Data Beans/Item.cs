@@ -84,7 +84,7 @@ namespace PathofStash
                 Match match = Regex.Match(value, @"~(b\/o|price)");
                 if (match.Success) {
                     price = value;
-                }
+                } 
                 Note = value;
             }
         }
@@ -96,6 +96,7 @@ namespace PathofStash
             implicitMods = new List<Modifier>();
             craftedMods = new List<Modifier>();
             properties = new List<Property>();
+            price = "n/a";
         }
 
         // return size of item's longest link

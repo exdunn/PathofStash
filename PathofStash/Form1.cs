@@ -70,6 +70,7 @@ namespace PathofStash {
                 newPictureBox.Load(item.icon);
                 newNameLabel.Text = item.name;
                 newBaseLabel.Text = item.typeLine;
+                newPriceLabel.AutoSize = true;
                 newLevelLabel.Text = "Level: " + item.level;
                 newILvlLabel.Text = "ilvl: " + item.iLvl;
                 newSellerLabel.Text = "Seller: " + item.seller;
@@ -171,7 +172,7 @@ namespace PathofStash {
             modComboBox1.SelectedIndex = -1;
             enchantComboBox.SelectedIndex = -1;
 
-            // reset textboxes
+            // clear textboxes
             FormTraversal(this, x => {
                 if (x is TextBox) {
                     x.Text = "";
@@ -187,14 +188,12 @@ namespace PathofStash {
             if (root.Name == name) {
                 return root;
             }
-
             foreach (Control c in root.Controls) {
                 Control t = FindControlRecursive(c, name);
                 if (t != null) {
                     return t;
                 }
             }
-
             return null;
         }
 
@@ -231,7 +230,6 @@ namespace PathofStash {
             if (!string.IsNullOrEmpty(baseComboBox.Text)) {
                 valid = true;
             }
-
             if (!valid) {
                 MessageBox.Show("Your search is empty.  Add requirements before adding a query.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -414,6 +412,10 @@ namespace PathofStash {
 
         private void clearButton_Click(object sender, EventArgs e) {
             ResetForm();
+
+            itemCount = 0;
+            // clear matches panel
+            panel3.Controls.Clear();
         }
 
         #endregion
