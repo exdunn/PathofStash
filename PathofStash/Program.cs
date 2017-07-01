@@ -15,6 +15,14 @@ namespace PathofStash
         public static string POETRADEURL = "http://poe.trade";
         public static String[] LEAGUES = { "2 Week Mayhem (JRE092)", "Legacy", "Standard", "2 Week Mayhem HC (JRE091)", "Hardcore Legacy", "Hardcore" };
         public static bool TESTMODE = true;
+        public static string[] SOCKICONS = {
+            "http://poe.trade/static/sockets/dex.png",
+            "http://poe.trade/static/sockets/int.png",
+            "http://poe.trade/static/sockets/str.png",
+            "http://poe.trade/static/sockets/gen.png" };
+        public static string[] LINKICONS = {
+            "http://poe.trade/static/sockets/Socket_Link_Horizontal.png",
+            "http://poe.trade/static/sockets/Socket_Link_Horizontal.png" };
     }
 
     class Program

@@ -120,9 +120,19 @@ namespace PathofStash
         }
 
         public List<List<Socket>> GetLinks() {
-            List<List<Socket>> links = new List<List<Socket>>();
-
-            return links;
+            List<List<Socket>> chainList = new List<List<Socket>>();
+            int group = 0;
+            List<Socket> chain = new List<Socket>();
+            foreach (Socket sock in sockets) {     
+                if (sock.groupid == group) {
+                    chain.Add(sock);
+                } else {
+                    chainList.Add(chain);
+                    group = sock.groupid;
+                    chain = new List<Socket>();
+                }
+            }
+            return chainList;
         }
 
         // search for Modifier with mod == input and return its value
