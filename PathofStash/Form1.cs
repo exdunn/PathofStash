@@ -18,6 +18,7 @@ namespace PathofStash {
     public partial class Form1 : Form {
         int affixCount;
         int itemCount;
+        Size defaultSize;
         Font labelFont1;
         Font labelFont2;
         Sniper sniper;
@@ -32,13 +33,14 @@ namespace PathofStash {
             InitializeComponent();
             affixCount = 1;
             itemCount = 0;
+            defaultSize = this.Size;
         }
 
         private void Form1_Load(object sender, EventArgs e) {
             panel4.Visible = false;
             sniper = new Sniper(this);
             labelFont1 = new Font("Microsoft Sans Serifs", 10);
-            labelFont2 = new Font("Microsoft Sans Serifs", 12);
+            labelFont2 = new Font("Microsoft Sans Serifs", 12);      
             bases = Utilities.DeserializeJson<string>("Resources/bases.json");
             explicitMods = Array.FindAll(
                 Utilities.DeserializeJson<JsonMod>("Resources/mods.json"),
@@ -65,6 +67,7 @@ namespace PathofStash {
                     var newSellerLabel = new Label();
                     var newPriceLabel = new Label();
                     var explicitModLabel = new Label();
+                    var newWhisperButton = new Button();
                     List<Label> explicitModLabels = new List<Label>();
 
                     // set size and text for panel elements
@@ -90,6 +93,12 @@ namespace PathofStash {
                     explicitModLabel.Font = labelFont1;
                     newPanel.BorderStyle = BorderStyle.FixedSingle;
                     newPanel.Size = panel4.Size;
+                    newWhisperButton.Location = whisperButton.Location;
+                    newWhisperButton.Size = whisperButton.Size;
+                    newWhisperButton.Text = "Whisper";
+                    newWhisperButton.Font = labelFont2;
+                    newWhisperButton.MouseClick += new MouseEventHandler((sender, e) => whisperButton_MouseClick(sender, e, item));
+                    newWhisperButton.Parent = newPanel;
 
                     // add socket PictureBox
                     PictureBox socketPictureBox = new PictureBox();
@@ -517,6 +526,7 @@ namespace PathofStash {
             ResetForm();
             itemCount = 0;
             panel3.Controls.Clear();
+            this.Size = defaultSize;
         }
 
         #endregion
@@ -550,6 +560,10 @@ namespace PathofStash {
 
         private void panel3_MouseClick(object sender, MouseEventArgs e) {
             Console.WriteLine("click position: " + e.Location);
+        }
+
+        private void whisperButton_MouseClick(object sender, EventArgs e, Item item) {
+            Clipboard.SetText("@" + item.seller + " Hi, I would like to buy " + item.name+ " listed for " + item.price + ".");
         }
     }
 }

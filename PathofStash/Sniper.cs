@@ -7,6 +7,7 @@ using PathofStash.Data_Beans;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Media;
 
 namespace PathofStash {
 
@@ -38,7 +39,8 @@ namespace PathofStash {
                 stash.SetItemsSeller();
                 foreach (Item item in stash.items) {         
                     item.ParseProperties();
-                    if (query.Match(item)) { 
+                    if (query.Match(item)) {
+                        SystemSounds.Hand.Play();
                         Console.WriteLine("MATCH: " + item.ToString(1));
                         matches.Add(item);
                     }

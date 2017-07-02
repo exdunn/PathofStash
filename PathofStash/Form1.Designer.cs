@@ -89,6 +89,7 @@ namespace PathofStash
             this.enchantMaxTextBox = new System.Windows.Forms.TextBox();
             this.enchantMinTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.whisperButton = new System.Windows.Forms.Button();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -398,18 +399,21 @@ namespace PathofStash
             // panel3
             // 
             this.panel3.AutoScroll = true;
+            this.panel3.AutoSize = true;
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(21, 331);
+            this.panel3.Location = new System.Drawing.Point(21, 421);
+            this.panel3.MaximumSize = new System.Drawing.Size(928, 450);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(928, 367);
+            this.panel3.Size = new System.Drawing.Size(928, 250);
             this.panel3.TabIndex = 39;
             this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.whisperButton);
             this.panel4.Controls.Add(this.explicitModHeaderLabel);
             this.panel4.Controls.Add(this.priceLabel);
             this.panel4.Controls.Add(this.sellerLabel);
@@ -637,11 +641,22 @@ namespace PathofStash
             this.label14.TabIndex = 28;
             this.label14.Text = "Enchant";
             // 
+            // whisperButton
+            // 
+            this.whisperButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.whisperButton.Location = new System.Drawing.Point(724, 116);
+            this.whisperButton.Name = "whisperButton";
+            this.whisperButton.Size = new System.Drawing.Size(108, 44);
+            this.whisperButton.TabIndex = 10;
+            this.whisperButton.Text = "Whisper";
+            this.whisperButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 716);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(970, 691);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.baseComboBox);
             this.Controls.Add(this.corrComboBox);
@@ -678,6 +693,7 @@ namespace PathofStash
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.snipeButton);
+            this.MaximumSize = new System.Drawing.Size(986, 930);
             this.Name = "Form1";
             this.Text = "PathofStash";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -756,5 +772,6 @@ namespace PathofStash
         private TextBox enchantMinTextBox;
         private Label label14;
         private Label explicitModHeaderLabel;
+        private Button whisperButton;
     }
 }

@@ -138,9 +138,7 @@ namespace PathofStash
         // search for Modifier with mod == input and return its value
         // return Double.NaN if not found
         public double GetMod(string input) {
-            Console.WriteLine("item: " + name);
             foreach (Modifier explicitMod in explicitMods) {
-                Console.WriteLine("    " + explicitMod);
                 if (!explicitMod.Equals(null)
                     && explicitMod.mod.Equals(input, StringComparison.CurrentCultureIgnoreCase)) {
                     return explicitMod.GetAverage();
