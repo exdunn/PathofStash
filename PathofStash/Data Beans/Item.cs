@@ -12,11 +12,11 @@ namespace PathofStash
     public struct Socket {
 
         public int groupid { get; set; }
-        public string attribute { get; set; }
+        public string attr { get; set; }
 
         public void Print() {
             Console.WriteLine("Groud ID: " + groupid);
-            Console.WriteLine("Color: " + attribute);
+            Console.WriteLine("Color: " + attr);
         }
     }
 

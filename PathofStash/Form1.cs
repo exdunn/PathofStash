@@ -11,6 +11,8 @@ using PathofStash.Data_Beans;
 using System.Threading;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.Net;
+using System.IO;
 
 namespace PathofStash {
     public partial class Form1 : Form {
@@ -71,8 +73,8 @@ namespace PathofStash {
                 newPictureBox.Size = pictureBox1.Size;
                 newPictureBox.Load(item.icon);
                 Padding pad = new Padding();
-                pad.Left = (newPictureBox.Width - newPictureBox.Image.Width)/2;
-                pad.Top = (newPictureBox.Height - newPictureBox.Image.Height)/2;
+                pad.Left = (newPictureBox.Width - newPictureBox.Image.Width) / 2;
+                pad.Top = (newPictureBox.Height - newPictureBox.Image.Height) / 2;
                 newPictureBox.Padding = pad;
                 newPictureBox.BorderStyle = BorderStyle.FixedSingle;
                 newPictureBox.BackColor = SystemColors.AppWorkspace;
@@ -87,6 +89,35 @@ namespace PathofStash {
                 explicitModLabel.Font = labelFont1;
                 newPanel.BorderStyle = BorderStyle.FixedSingle;
                 newPanel.Size = panel4.Size;
+
+                // add socket PictureBoxes
+                PictureBox socketPictureBox = new PictureBox();
+                socketPictureBox.BackColor = Color.Transparent;
+                socketPictureBox.Parent = newPictureBox;
+                newPictureBox.MouseEnter += new EventHandler(pictureBox_MouseEnter);
+                socketPictureBox.MouseLeave += new EventHandler(pictureBox_MouseLeave);
+                socketPictureBox.Location = new Point(-200, -200);
+                List<Image> iconList = new List<Image>();
+                List<Image> linksList = new List<Image>();
+                for (int i = 0; i < item.sockets.Count; i++) {
+                    if (item.sockets[i].attr.Equals("s", StringComparison.CurrentCultureIgnoreCase)) {
+                        iconList.Add(Image.FromFile("Resources/str.png"));
+                    } else if (item.sockets[i].attr.Equals("i", StringComparison.CurrentCultureIgnoreCase)) {
+                        iconList.Add(Image.FromFile("Resources/int.png"));
+                    } else if (item.sockets[i].attr.Equals("d", StringComparison.CurrentCultureIgnoreCase)) {
+                        iconList.Add(Image.FromFile("Resources/dex.png"));
+                    }
+                    if (i < item.sockets.Count-1) {
+                        if (i == 0 || i == 2 || i == 4) {
+                            linksList.Add(Image.FromFile("Resources/Socket_Link_Horizontal.png"));
+                        } else {
+                            linksList.Add(Image.FromFile("Resources/Socket_Link_Vertical.png"));
+                        }
+                    }
+                }
+
+                socketPictureBox.Image = CombineSocketsAndLinksImages(iconList, linksList, newPictureBox.Size.Width, newPictureBox.Size.Height);
+                socketPictureBox.Size = socketPictureBox.Image.Size;
 
                 // add elements to new panel
                 newPanel.Controls.Add(newPictureBox);
@@ -109,15 +140,14 @@ namespace PathofStash {
                 explicitModLabel.Location = explicitModHeaderLabel.Location;
 
                 // add explicit mods Labels
-                int i = 0;
+                int j = 0;
                 foreach (Modifier mod in item.explicitMods) {
                     var newModLabel = new Label();
                     newModLabel.AutoSize = true;
                     newModLabel.Text = mod.ToString();
                     newPanel.Controls.Add(newModLabel);
                     newModLabel.Location = new Point(modsLabel.Location.X,
-                        modsLabel.Location.Y + 20 * i++);
-
+                        modsLabel.Location.Y + 20 * j++);
                 }
 
                 // add new panel to item panel
@@ -131,6 +161,63 @@ namespace PathofStash {
         #endregion
 
         #region private methods
+
+        private static Bitmap CombineSocketsAndLinksImages(List<Image> sockets, List<Image> links, int width, int height) {
+            Bitmap result = new Bitmap(width, height);
+
+            //use a graphics object to draw the resized image into the bitmap
+            using (Graphics graphics = Graphics.FromImage(result)) {
+                //set the resize quality modes to high quality
+                graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                // draw the images into the target bitmap
+                for (int i = 0; i < sockets.Count; i++) {
+                    if(i == 2) {
+                        graphics.DrawImage(sockets[i],
+                        sockets[i].Size.Width * (3 % 2),
+                        sockets[i].Size.Height * (3 / 2),
+                        sockets[i].Size.Width,
+                        sockets[i].Size.Height);
+                    } else if (i == 3) {
+                        graphics.DrawImage(sockets[i],
+                        sockets[i].Size.Width * (2 % 2),
+                        sockets[i].Size.Height * (2 / 2),
+                        sockets[i].Size.Width,
+                        sockets[i].Size.Height);
+                    } else {
+                        graphics.DrawImage(sockets[i],
+                        sockets[i].Size.Width * (i % 2),
+                        sockets[i].Size.Height * (i / 2),
+                        sockets[i].Size.Width,
+                        sockets[i].Size.Height);
+                    }    
+                }
+                for (int i = 0; i< links.Count; i++) {
+                    if (i == 0 || i == 2 || i == 4) {
+                        graphics.DrawImage(links[i],
+                        sockets[i].Size.Width / 2 + 5,
+                        sockets[i].Size.Height * (i / 2) + 16,
+                        links[i].Size.Width,
+                        links[i].Size.Height);
+                    } else if (i == 1) {
+                        graphics.DrawImage(links[i],
+                        sockets[i].Size.Width * 1.33f,
+                        sockets[i].Size.Height * 0.62f,
+                        links[i].Size.Width,
+                        links[i].Size.Height);
+                    } else {
+                        graphics.DrawImage(links[i],
+                        sockets[i].Size.Width * 0.33f,
+                        sockets[i].Size.Height * 1.62f,
+                        links[i].Size.Width,
+                        links[i].Size.Height);
+                    }
+                }
+            }
+            return result;
+        }
 
         private Color GetItemColor(int input) {
             switch (input) {
@@ -225,6 +312,13 @@ namespace PathofStash {
                 }
                 IsValidQuery(child, ref valid);
             }
+        }
+
+        // load image from url
+        private Image LoadImage(string url) {
+            WebRequest req = WebRequest.Create(url);
+            Stream stream = req.GetResponse().GetResponseStream();
+            return Image.FromStream(stream);
         }
 
         #endregion
@@ -367,7 +461,7 @@ namespace PathofStash {
             }
         }
 
-        private void Add_Affix_Btn_Click(object sender, EventArgs e) { 
+        private void Add_Affix_Btn_Click(object sender, EventArgs e) {
 
             if (affixCount >= 6) {
                 return;
@@ -435,7 +529,7 @@ namespace PathofStash {
             var parent = combo.Parent;
 
             foreach (Control child in parent.Controls) {
-                if(child is TextBox) {
+                if (child is TextBox) {
                     if (combo.SelectedIndex >= 0) {
                         child.BackColor = SystemColors.ControlLightLight;
                         (child as TextBox).ReadOnly = false;
@@ -445,6 +539,16 @@ namespace PathofStash {
                     }
                 }
             }
+        }
+
+        private void pictureBox_MouseEnter(Object sender, EventArgs e) {
+            var pBox = sender as PictureBox;
+            pBox.Controls[0].Location = pictureBox1.Location;
+        }
+
+        private void pictureBox_MouseLeave(object sender, EventArgs e) {
+            var pBox = sender as PictureBox;
+            pBox.Location = new Point(-200, -200);
         }
     }
 }

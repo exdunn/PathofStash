@@ -22,7 +22,7 @@ namespace PathofStash
             "http://poe.trade/static/sockets/gen.png" };
         public static string[] LINKICONS = {
             "http://poe.trade/static/sockets/Socket_Link_Horizontal.png",
-            "http://poe.trade/static/sockets/Socket_Link_Horizontal.png" };
+            "http://poe.trade/static/sockets/Socket_Link_Vertical.png" };
     }
 
     class Program
