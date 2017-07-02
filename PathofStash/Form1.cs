@@ -88,6 +88,7 @@ namespace PathofStash {
                     newLevelLabel.Text = "Level: " + item.level;
                     newILvlLabel.Text = "ilvl: " + item.iLvl;
                     newSellerLabel.Text = "Seller: " + item.seller;
+                    newSellerLabel.AutoSize = true;
                     newPriceLabel.Text = "Price: " + item.price;
                     explicitModLabel.Text = "Explicit Mods";
                     explicitModLabel.Font = labelFont1;
