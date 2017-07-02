@@ -76,7 +76,7 @@ namespace PathofStash.Data_Beans
                     && enchant.mod.Equals(item.enchantMods[0].mod,
                     StringComparison.CurrentCultureIgnoreCase)) {
 
-                    double value = item.enchantMods[0].value;
+                    double value = item.enchantMods[0].GetAverage();
                     if (enchant.min > value || enchant.max < value) {
                         return false;
                     }
