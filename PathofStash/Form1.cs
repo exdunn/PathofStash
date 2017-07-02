@@ -91,35 +91,14 @@ namespace PathofStash {
                     newPanel.BorderStyle = BorderStyle.FixedSingle;
                     newPanel.Size = panel4.Size;
 
-                    // add socket PictureBoxes
+                    // add socket PictureBox
                     PictureBox socketPictureBox = new PictureBox();
                     socketPictureBox.BackColor = Color.Transparent;
                     socketPictureBox.Parent = newPictureBox;
                     newPictureBox.MouseEnter += new EventHandler(pictureBox_MouseEnter);
                     socketPictureBox.MouseLeave += new EventHandler(pictureBox_MouseLeave);
                     socketPictureBox.Location = new Point(-200, -200);
-                    List<Image> iconList = new List<Image>();
-                    List<Image> linksList = new List<Image>();
-                    for (int i = 0; i < item.sockets.Count; i++) {
-                        if (item.sockets[i].attr.Equals("s", StringComparison.CurrentCultureIgnoreCase)) {
-                            iconList.Add(Image.FromFile("Resources/str.png"));
-                        } else if (item.sockets[i].attr.Equals("i", StringComparison.CurrentCultureIgnoreCase)) {
-                            iconList.Add(Image.FromFile("Resources/int.png"));
-                        } else if (item.sockets[i].attr.Equals("d", StringComparison.CurrentCultureIgnoreCase)) {
-                            iconList.Add(Image.FromFile("Resources/dex.png"));
-                        } else {
-                            iconList.Add(Image.FromFile("Resources/gen.png"));
-                        }
-                        if (i < item.sockets.Count - 1) {
-                            if (i == 0 || i == 2 || i == 4) {
-                                linksList.Add(Image.FromFile("Resources/Socket_Link_Horizontal.png"));
-                            } else {
-                                linksList.Add(Image.FromFile("Resources/Socket_Link_Vertical.png"));
-                            }
-                        }
-                    }
-
-                    socketPictureBox.Image = CombineSocketsAndLinksImages(iconList, linksList, newPictureBox.Size.Width, newPictureBox.Size.Height);
+                    socketPictureBox.Image = CombineSocketsAndLinksImages(item, newPictureBox.Size.Width, newPictureBox.Size.Height);
                     socketPictureBox.Size = socketPictureBox.Image.Size;
 
                     // add elements to new panel
@@ -156,13 +135,9 @@ namespace PathofStash {
                     // add new panel to item panel
                     panel3.Controls.Add(newPanel);
                     int posY = (panel4.Size.Height * itemCount++) + panel3.AutoScrollPosition.Y;
-                    Console.WriteLine("autoscroll: " + panel3.AutoScrollPosition.Y);
-                    Console.WriteLine("item count: " + itemCount);
-                    Console.WriteLine("posY: " + posY);
-                    Console.WriteLine("item: " + item.name);
+
                     // set location of new panel
                     newPanel.Location = new Point(6, posY);
-                    Console.WriteLine("newpanel: " + newPanel.Location);
                 } 
             });
         }
@@ -171,7 +146,7 @@ namespace PathofStash {
 
         #region private methods
 
-        private static Bitmap CombineSocketsAndLinksImages(List<Image> sockets, List<Image> links, int width, int height) {
+        private static Bitmap CombineSocketsAndLinksImages(Item item, int width, int height) {
             Bitmap result = new Bitmap(width, height);
 
             //use a graphics object to draw the resized image into the bitmap
@@ -182,47 +157,63 @@ namespace PathofStash {
                 graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
                 // draw the images into the target bitmap
-                for (int i = 0; i < sockets.Count; i++) {
-                    if(i == 2) {
-                        graphics.DrawImage(sockets[i],
-                        sockets[i].Size.Width * (3 % 2),
-                        sockets[i].Size.Height * (3 / 2),
-                        sockets[i].Size.Width,
-                        sockets[i].Size.Height);
-                    } else if (i == 3) {
-                        graphics.DrawImage(sockets[i],
-                        sockets[i].Size.Width * (2 % 2),
-                        sockets[i].Size.Height * (2 / 2),
-                        sockets[i].Size.Width,
-                        sockets[i].Size.Height);
+                Image sockIcon = Image.FromFile("Resources/str.png");
+                for (int i = 0; i < item.sockets.Count; i++) {
+                    if (item.sockets[i].attr.Equals("s", StringComparison.CurrentCultureIgnoreCase)) {
+                        sockIcon = Image.FromFile("Resources/str.png");
+                    } else if (item.sockets[i].attr.Equals("i", StringComparison.CurrentCultureIgnoreCase)) {
+                        sockIcon = Image.FromFile("Resources/int.png");
+                    } else if (item.sockets[i].attr.Equals("d", StringComparison.CurrentCultureIgnoreCase)) {
+                        sockIcon = Image.FromFile("Resources/dex.png");
                     } else {
-                        graphics.DrawImage(sockets[i],
-                        sockets[i].Size.Width * (i % 2),
-                        sockets[i].Size.Height * (i / 2),
-                        sockets[i].Size.Width,
-                        sockets[i].Size.Height);
+                        sockIcon = Image.FromFile("Resources/gen.png");
+                    }
+                    if (i == 2) {
+                        graphics.DrawImage(sockIcon,
+                        sockIcon.Size.Width * (3 % 2),
+                        sockIcon.Size.Height * (3 / 2),
+                        sockIcon.Size.Width,
+                        sockIcon.Size.Height);
+                    } else if (i == 3) {
+                        graphics.DrawImage(sockIcon,
+                        sockIcon.Size.Width * (2 % 2),
+                        sockIcon.Size.Height * (2 / 2),
+                        sockIcon.Size.Width,
+                        sockIcon.Size.Height);
+                    } else {
+                        graphics.DrawImage(sockIcon,
+                        sockIcon.Size.Width * (i % 2),
+                        sockIcon.Size.Height * (i / 2),
+                        sockIcon.Size.Width,
+                        sockIcon.Size.Height);
                     }    
                 }
-                for (int i = 0; i< links.Count; i++) {
-                    if (i == 0 || i == 2 || i == 4) {
-                        graphics.DrawImage(links[i],
-                        sockets[i].Size.Width / 2 + 5,
-                        sockets[i].Size.Height * (i / 2) + 16,
-                        links[i].Size.Width,
-                        links[i].Size.Height);
-                    } else if (i == 1) {
-                        graphics.DrawImage(links[i],
-                        sockets[i].Size.Width * 1.33f,
-                        sockets[i].Size.Height * 0.62f,
-                        links[i].Size.Width,
-                        links[i].Size.Height);
-                    } else {
-                        graphics.DrawImage(links[i],
-                        sockets[i].Size.Width * 0.33f,
-                        sockets[i].Size.Height * 1.62f,
-                        links[i].Size.Width,
-                        links[i].Size.Height);
-                    }
+                Image linkIcon;
+                for (int i = 0; i < item.sockets.Count-1; i++) {
+                    if(item.sockets[i].group == item.sockets[i+1].group) {
+                        if (i == 0 || i == 2 || i == 4) {
+                            linkIcon = Image.FromFile("Resources/Socket_Link_Horizontal.png");
+                            graphics.DrawImage(linkIcon,
+                            sockIcon.Size.Width / 2 + 5,
+                            sockIcon.Size.Height * (i / 2) + 16,
+                            linkIcon.Size.Width,
+                            linkIcon.Size.Height);
+                        } else if (i == 1) {
+                            linkIcon = Image.FromFile("Resources/Socket_Link_Vertical.png");
+                            graphics.DrawImage(linkIcon,
+                            sockIcon.Size.Width * 1.33f,
+                            sockIcon.Size.Height * 0.62f,
+                            linkIcon.Size.Width,
+                            linkIcon.Size.Height);
+                        } else {
+                            linkIcon = Image.FromFile("Resources/Socket_Link_Vertical.png");
+                            graphics.DrawImage(linkIcon,
+                            sockIcon.Size.Width * 0.33f,
+                            sockIcon.Size.Height * 1.62f,
+                            linkIcon.Size.Width,
+                            linkIcon.Size.Height);
+                        }
+                    } 
                 }
             }
             return result;
@@ -458,7 +449,6 @@ namespace PathofStash {
                     Thread thread = new Thread(sniper.StartSniping);
                     thread.Start();
                 }
-
             }
             ResetForm();
         }
@@ -526,8 +516,6 @@ namespace PathofStash {
         private void clearButton_Click(object sender, EventArgs e) {
             ResetForm();
             itemCount = 0;
-
-            // clear matches panel
             panel3.Controls.Clear();
         }
 

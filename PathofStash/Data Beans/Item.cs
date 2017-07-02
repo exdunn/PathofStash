@@ -11,11 +11,11 @@ namespace PathofStash
 {
     public struct Socket {
 
-        public int groupid { get; set; }
+        public int group { get; set; }
         public string attr { get; set; }
 
         public void Print() {
-            Console.WriteLine("Groud ID: " + groupid);
+            Console.WriteLine("Groud ID: " + group);
             Console.WriteLine("Color: " + attr);
         }
     }
@@ -106,13 +106,13 @@ namespace PathofStash
             int cur = 0;
             int group = 0;
             foreach (Socket socket in sockets) {
-                if (socket.groupid == group) {
+                if (socket.group == group) {
                     if(++cur > longest) {
                         longest = cur;
                     }
                 }
                 else {
-                    group = socket.groupid;
+                    group = socket.group;
                     cur = 1;
                 }
             }
@@ -124,11 +124,11 @@ namespace PathofStash
             int group = 0;
             List<Socket> chain = new List<Socket>();
             foreach (Socket sock in sockets) {     
-                if (sock.groupid == group) {
+                if (sock.group == group) {
                     chain.Add(sock);
                 } else {
                     chainList.Add(chain);
-                    group = sock.groupid;
+                    group = sock.group;
                     chain = new List<Socket>();
                 }
             }
