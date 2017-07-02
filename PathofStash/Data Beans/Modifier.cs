@@ -27,19 +27,19 @@ namespace PathofStash.Data_Beans
         }
 
         public override string ToString() {
-            return Regex.Replace(mod, @"#", value.ToString());
+            return @"""" + mod + @""": " + value.ToString();
         }
 
         private void ParseString(string input) {
+
             // extract all the integer values from the input
-            string pattern = @"\d+";
+            string pattern = @"\d+\.*\d*";
             Regex reg = new Regex(pattern);
             MatchCollection mc = reg.Matches(input);
 
             // set value to the average of ints in input
-            foreach (Match match in mc)
-            {
-                value += Int32.Parse(match.Value);
+            foreach (Match match in mc) {
+                value += Double.Parse(match.Value);
             }
             value /= mc.Count;
 

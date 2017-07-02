@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PathofStash.Data_Beans
 {
-    struct QueryModifier
+    public struct QueryModifier
     {
         public string mod { get; set; }
         [DefaultValue(null)]
@@ -72,7 +72,10 @@ namespace PathofStash.Data_Beans
                 }
             }
             if (!string.IsNullOrEmpty(enchant.mod)) {
-                if (item.enchantMods.Count > 0) {
+                if (item.enchantMods.Count > 0 
+                    && enchant.mod.Equals(item.enchantMods[0].mod,
+                    StringComparison.CurrentCultureIgnoreCase)) {
+
                     double value = item.enchantMods[0].value;
                     if (enchant.min > value || enchant.max < value) {
                         return false;

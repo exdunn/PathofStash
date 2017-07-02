@@ -138,10 +138,10 @@ namespace PathofStash
         // search for Modifier with mod == input and return its value
         // return Double.NaN if not found
         public double GetMod(string input) {
-            foreach (Modifier mod in explicitMods) {
-                if (mod.mod.Equals(input, StringComparison.CurrentCultureIgnoreCase)) {
-                    Console.WriteLine("item mod: " + mod.mod);
-                    return mod.value;
+            foreach (Modifier explicitMod in explicitMods) {
+                if (!explicitMod.Equals(null)
+                    && explicitMod.mod.Equals(input, StringComparison.CurrentCultureIgnoreCase)) {
+                    return explicitMod.value;
                 }
             }
             return Double.NaN;
