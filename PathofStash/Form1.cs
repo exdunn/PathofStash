@@ -26,6 +26,7 @@ namespace PathofStash {
         JsonMod[] enchants;
         List<QueryModifier> queryMods = new List<QueryModifier>();
         object snipeLock = new Object();
+        List<Item> matches = new List<Item>();
 
         public Form1() {
             InitializeComponent();
@@ -50,111 +51,119 @@ namespace PathofStash {
 
         #region public methods
 
-        public void AddMatch(Item item) {
+        public void UpdateMatchPanel(List<Item> matches) {
 
-            System.Media.SystemSounds.Hand.Play();
             Invoke((MethodInvoker)delegate {
-                //create new elements for item panel
-                var newPanel = new Panel();
-                var newPictureBox = new PictureBox();
-                var newNameLabel = new Label();
-                var newBaseLabel = new Label();
-                var newLevelLabel = new Label();
-                var newILvlLabel = new Label();
-                var newSellerLabel = new Label();
-                var newPriceLabel = new Label();
-                var explicitModLabel = new Label();
-                List<Label> explicitModLabels = new List<Label>();
+                foreach (Item item in matches) {
+                    //create new elements for item panel
+                    var newPanel = new Panel();
+                    var newPictureBox = new PictureBox();
+                    var newNameLabel = new Label();
+                    var newBaseLabel = new Label();
+                    var newLevelLabel = new Label();
+                    var newILvlLabel = new Label();
+                    var newSellerLabel = new Label();
+                    var newPriceLabel = new Label();
+                    var explicitModLabel = new Label();
+                    List<Label> explicitModLabels = new List<Label>();
 
-                // set size and text for panel elements
-                newNameLabel.AutoSize = true;
-                newNameLabel.Font = labelFont2;
-                newNameLabel.ForeColor = GetItemColor(item.frameType);
-                newPictureBox.Size = pictureBox1.Size;
-                newPictureBox.Load(item.icon);
-                Padding pad = new Padding();
-                pad.Left = (newPictureBox.Width - newPictureBox.Image.Width) / 2;
-                pad.Top = (newPictureBox.Height - newPictureBox.Image.Height) / 2;
-                newPictureBox.Padding = pad;
-                newPictureBox.BorderStyle = BorderStyle.FixedSingle;
-                newPictureBox.BackColor = SystemColors.AppWorkspace;
-                newNameLabel.Text = item.name;
-                newBaseLabel.Text = item.typeLine;
-                newPriceLabel.AutoSize = true;
-                newLevelLabel.Text = "Level: " + item.level;
-                newILvlLabel.Text = "ilvl: " + item.iLvl;
-                newSellerLabel.Text = "Seller: " + item.seller;
-                newPriceLabel.Text = "Price: " + item.price;
-                explicitModLabel.Text = "Explicit Mods";
-                explicitModLabel.Font = labelFont1;
-                newPanel.BorderStyle = BorderStyle.FixedSingle;
-                newPanel.Size = panel4.Size;
+                    // set size and text for panel elements
+                    newNameLabel.AutoSize = true;
+                    newNameLabel.Font = labelFont2;
+                    newNameLabel.ForeColor = GetItemColor(item.frameType);
+                    newPictureBox.Size = pictureBox1.Size;
+                    newPictureBox.Load(item.icon);
+                    Padding pad = new Padding();
+                    pad.Left = (newPictureBox.Width - newPictureBox.Image.Width) / 2;
+                    pad.Top = (newPictureBox.Height - newPictureBox.Image.Height) / 2;
+                    newPictureBox.Padding = pad;
+                    newPictureBox.BorderStyle = BorderStyle.FixedSingle;
+                    newPictureBox.BackColor = SystemColors.AppWorkspace;
+                    newNameLabel.Text = item.name;
+                    newBaseLabel.Text = item.typeLine;
+                    newPriceLabel.AutoSize = true;
+                    newLevelLabel.Text = "Level: " + item.level;
+                    newILvlLabel.Text = "ilvl: " + item.iLvl;
+                    newSellerLabel.Text = "Seller: " + item.seller;
+                    newPriceLabel.Text = "Price: " + item.price;
+                    explicitModLabel.Text = "Explicit Mods";
+                    explicitModLabel.Font = labelFont1;
+                    newPanel.BorderStyle = BorderStyle.FixedSingle;
+                    newPanel.Size = panel4.Size;
 
-                // add socket PictureBoxes
-                PictureBox socketPictureBox = new PictureBox();
-                socketPictureBox.BackColor = Color.Transparent;
-                socketPictureBox.Parent = newPictureBox;
-                newPictureBox.MouseEnter += new EventHandler(pictureBox_MouseEnter);
-                socketPictureBox.MouseLeave += new EventHandler(pictureBox_MouseLeave);
-                socketPictureBox.Location = new Point(-200, -200);
-                List<Image> iconList = new List<Image>();
-                List<Image> linksList = new List<Image>();
-                for (int i = 0; i < item.sockets.Count; i++) {
-                    if (item.sockets[i].attr.Equals("s", StringComparison.CurrentCultureIgnoreCase)) {
-                        iconList.Add(Image.FromFile("Resources/str.png"));
-                    } else if (item.sockets[i].attr.Equals("i", StringComparison.CurrentCultureIgnoreCase)) {
-                        iconList.Add(Image.FromFile("Resources/int.png"));
-                    } else if (item.sockets[i].attr.Equals("d", StringComparison.CurrentCultureIgnoreCase)) {
-                        iconList.Add(Image.FromFile("Resources/dex.png"));
-                    }
-                    if (i < item.sockets.Count-1) {
-                        if (i == 0 || i == 2 || i == 4) {
-                            linksList.Add(Image.FromFile("Resources/Socket_Link_Horizontal.png"));
+                    // add socket PictureBoxes
+                    PictureBox socketPictureBox = new PictureBox();
+                    socketPictureBox.BackColor = Color.Transparent;
+                    socketPictureBox.Parent = newPictureBox;
+                    newPictureBox.MouseEnter += new EventHandler(pictureBox_MouseEnter);
+                    socketPictureBox.MouseLeave += new EventHandler(pictureBox_MouseLeave);
+                    socketPictureBox.Location = new Point(-200, -200);
+                    List<Image> iconList = new List<Image>();
+                    List<Image> linksList = new List<Image>();
+                    for (int i = 0; i < item.sockets.Count; i++) {
+                        if (item.sockets[i].attr.Equals("s", StringComparison.CurrentCultureIgnoreCase)) {
+                            iconList.Add(Image.FromFile("Resources/str.png"));
+                        } else if (item.sockets[i].attr.Equals("i", StringComparison.CurrentCultureIgnoreCase)) {
+                            iconList.Add(Image.FromFile("Resources/int.png"));
+                        } else if (item.sockets[i].attr.Equals("d", StringComparison.CurrentCultureIgnoreCase)) {
+                            iconList.Add(Image.FromFile("Resources/dex.png"));
                         } else {
-                            linksList.Add(Image.FromFile("Resources/Socket_Link_Vertical.png"));
+                            iconList.Add(Image.FromFile("Resources/gen.png"));
+                        }
+                        if (i < item.sockets.Count - 1) {
+                            if (i == 0 || i == 2 || i == 4) {
+                                linksList.Add(Image.FromFile("Resources/Socket_Link_Horizontal.png"));
+                            } else {
+                                linksList.Add(Image.FromFile("Resources/Socket_Link_Vertical.png"));
+                            }
                         }
                     }
-                }
 
-                socketPictureBox.Image = CombineSocketsAndLinksImages(iconList, linksList, newPictureBox.Size.Width, newPictureBox.Size.Height);
-                socketPictureBox.Size = socketPictureBox.Image.Size;
+                    socketPictureBox.Image = CombineSocketsAndLinksImages(iconList, linksList, newPictureBox.Size.Width, newPictureBox.Size.Height);
+                    socketPictureBox.Size = socketPictureBox.Image.Size;
 
-                // add elements to new panel
-                newPanel.Controls.Add(newPictureBox);
-                newPanel.Controls.Add(newNameLabel);
-                newPanel.Controls.Add(newBaseLabel);
-                newPanel.Controls.Add(newLevelLabel);
-                newPanel.Controls.Add(newILvlLabel);
-                newPanel.Controls.Add(newSellerLabel);
-                newPanel.Controls.Add(newPriceLabel);
-                newPanel.Controls.Add(explicitModLabel);
+                    // add elements to new panel
+                    newPanel.Controls.Add(newPictureBox);
+                    newPanel.Controls.Add(newNameLabel);
+                    newPanel.Controls.Add(newBaseLabel);
+                    newPanel.Controls.Add(newLevelLabel);
+                    newPanel.Controls.Add(newILvlLabel);
+                    newPanel.Controls.Add(newSellerLabel);
+                    newPanel.Controls.Add(newPriceLabel);
+                    newPanel.Controls.Add(explicitModLabel);
 
-                // set location of new elements
-                newPictureBox.Location = pictureBox1.Location;
-                newNameLabel.Location = nameLabel.Location;
-                newBaseLabel.Location = baseLabel.Location;
-                newILvlLabel.Location = ilvlLabel.Location;
-                newLevelLabel.Location = levelLabel.Location;
-                newSellerLabel.Location = sellerLabel.Location;
-                newPriceLabel.Location = priceLabel.Location;
-                explicitModLabel.Location = explicitModHeaderLabel.Location;
+                    // set location of new elements
+                    newPictureBox.Location = pictureBox1.Location;
+                    newNameLabel.Location = nameLabel.Location;
+                    newBaseLabel.Location = baseLabel.Location;
+                    newILvlLabel.Location = ilvlLabel.Location;
+                    newLevelLabel.Location = levelLabel.Location;
+                    newSellerLabel.Location = sellerLabel.Location;
+                    newPriceLabel.Location = priceLabel.Location;
+                    explicitModLabel.Location = explicitModHeaderLabel.Location;
 
-                // add explicit mods Labels
-                int j = 0;
-                foreach (Modifier mod in item.explicitMods) {
-                    var newModLabel = new Label();
-                    newModLabel.AutoSize = true;
-                    newModLabel.Text = mod.ToString();
-                    newPanel.Controls.Add(newModLabel);
-                    newModLabel.Location = new Point(modsLabel.Location.X,
-                        modsLabel.Location.Y + 20 * j++);
-                }
+                    // add explicit mods Labels
+                    int j = 0;
+                    foreach (Modifier mod in item.explicitMods) {
+                        var newModLabel = new Label();
+                        newModLabel.AutoSize = true;
+                        newModLabel.Text = mod.ToString();
+                        newPanel.Controls.Add(newModLabel);
+                        newModLabel.Location = new Point(modsLabel.Location.X,
+                            modsLabel.Location.Y + 20 * j++);
+                    }
 
-                // add new panel to item panel
-                panel3.Controls.Add(newPanel);
-
-                // set location of new panel
-                newPanel.Location = new Point(6, panel4.Size.Height * (itemCount++));
+                    // add new panel to item panel
+                    panel3.Controls.Add(newPanel);
+                    int posY = (panel4.Size.Height * itemCount++) + panel3.AutoScrollPosition.Y;
+                    Console.WriteLine("autoscroll: " + panel3.AutoScrollPosition.Y);
+                    Console.WriteLine("item count: " + itemCount);
+                    Console.WriteLine("posY: " + posY);
+                    Console.WriteLine("item: " + item.name);
+                    // set location of new panel
+                    newPanel.Location = new Point(6, posY);
+                    Console.WriteLine("newpanel: " + newPanel.Location);
+                } 
             });
         }
 
@@ -516,8 +525,8 @@ namespace PathofStash {
 
         private void clearButton_Click(object sender, EventArgs e) {
             ResetForm();
-
             itemCount = 0;
+
             // clear matches panel
             panel3.Controls.Clear();
         }
@@ -549,6 +558,10 @@ namespace PathofStash {
         private void pictureBox_MouseLeave(object sender, EventArgs e) {
             var pBox = sender as PictureBox;
             pBox.Location = new Point(-200, -200);
+        }
+
+        private void panel3_MouseClick(object sender, MouseEventArgs e) {
+            Console.WriteLine("click position: " + e.Location);
         }
     }
 }

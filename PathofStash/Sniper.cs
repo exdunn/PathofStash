@@ -33,16 +33,18 @@ namespace PathofStash {
             Parser parser = new Parser(req.GetResponse());
             nextIndex = parser.nextIndex;
 
+            List<Item> matches = new List<Item>();
             foreach (Stash stash in parser.stashes) {
-                foreach (Item item in stash.items) {
-                    stash.SetItemsSeller();
-                    if (query.Match(item)) {
-                        item.ParseProperties();
+                stash.SetItemsSeller();
+                foreach (Item item in stash.items) {         
+                    item.ParseProperties();
+                    if (query.Match(item)) { 
                         Console.WriteLine("MATCH: " + item.ToString(1));
-                        form.AddMatch(item);
+                        matches.Add(item);
                     }
                 }
             }
+            form.UpdateMatchPanel(matches);
 
             Console.WriteLine("current index:" + curIndex);
             Console.WriteLine("next index: " + parser.nextIndex);
@@ -68,7 +70,6 @@ namespace PathofStash {
                     item.ParseProperties();
                     if (query.Match(item)) {
                         Console.WriteLine("MATCH: " + item.ToString(1));
-                        form.AddMatch(item);
                     }
                 }
             }

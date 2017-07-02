@@ -405,6 +405,7 @@ namespace PathofStash
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(928, 367);
             this.panel3.TabIndex = 39;
+            this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
             // 
             // panel4
             // 

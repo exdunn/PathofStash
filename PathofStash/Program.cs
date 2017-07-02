@@ -14,7 +14,7 @@ namespace PathofStash
         public static string STASHAPIURL = "http://www.pathofexile.com/api/public-stash-tabs";
         public static string POETRADEURL = "http://poe.trade";
         public static String[] LEAGUES = { "2 Week Mayhem (JRE092)", "Legacy", "Standard", "2 Week Mayhem HC (JRE091)", "Hardcore Legacy", "Hardcore" };
-        public static bool TESTMODE = true;
+        public static bool TESTMODE = false;
         public static string[] SOCKICONS = {
             "http://poe.trade/static/sockets/dex.png",
             "http://poe.trade/static/sockets/int.png",
