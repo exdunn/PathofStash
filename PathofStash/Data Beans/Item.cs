@@ -83,7 +83,7 @@ namespace PathofStash
             set {
                 Match match = Regex.Match(value, @"~(b\/o|price)");
                 if (match.Success) {
-                    price = value;
+                    price = Regex.Replace(value, @"~(b\/o|price)", "");
                 } 
                 Note = value;
             }
