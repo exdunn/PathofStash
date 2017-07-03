@@ -48,8 +48,8 @@ namespace PathofStash {
         private void Form1_Load(object sender, EventArgs e) {
             panel4.Visible = false;
             sniper = new Sniper(this);
-            labelFont1 = new Font("Microsoft Sans Serifs", 10);
-            labelFont2 = new Font("Microsoft Sans Serifs", 12);      
+            labelFont1 = new Font("Fontin", 10);
+            labelFont2 = new Font("Fontin", 12);      
             bases = Utilities.DeserializeJson<string>("Resources/bases.json");
             explicitMods = Array.FindAll(
                 Utilities.DeserializeJson<JsonMod>("Resources/mods.json"),
@@ -101,6 +101,8 @@ namespace PathofStash {
                     newPriceLabel.Text = "Price: " + item.price;
                     explicitModLabel.Text = "Explicit Mods";
                     explicitModLabel.Font = labelFont1;
+                    explicitModLabel.MouseEnter += new EventHandler((sender, e) => explicitModLabel_MouseEnter(sender, e, item));
+                    explicitModLabel.MouseLeave += new EventHandler(explicitModLable_MouseLeave);
                     newPanel.BorderStyle = BorderStyle.FixedSingle;
                     newPanel.Size = panel4.Size;
                     newWhisperButton.Location = whisperButton.Location;
@@ -141,14 +143,14 @@ namespace PathofStash {
                     explicitModLabel.Location = explicitModHeaderLabel.Location;
 
                     // add explicit mods Labels
-                    int j = 0;
+                    int i = 0;
                     foreach (Modifier mod in item.explicitMods) {
                         var newModLabel = new Label();
                         newModLabel.AutoSize = true;
                         newModLabel.Text = mod.ToString();
                         newPanel.Controls.Add(newModLabel);
                         newModLabel.Location = new Point(modsLabel.Location.X,
-                            modsLabel.Location.Y + 20 * j++);
+                            modsLabel.Location.Y + 20 * i++);
                     }
 
                     // add new panel to item panel
@@ -588,6 +590,36 @@ namespace PathofStash {
         private void snipingPictureBox_MouseClick(object sender, MouseEventArgs e) {
             int index = iconList.IndexOf(snipingPictureBox.Image);
             snipingPictureBox.Image = iconList[(index + 1) % iconList.Count];
+        }
+
+        private void explicitModLabel_MouseEnter(object sender, EventArgs e, Item item) {
+            Control label = sender as Control;
+            Panel newPanel = new Panel();
+            newPanel.Name = "modsPanel";
+            newPanel.BorderStyle = BorderStyle.FixedSingle;
+            newPanel.AutoSize = true;
+            newPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            newPanel.Location = modsLabel.Location;
+            
+            int i = 0;
+            foreach (Modifier mod in item.explicitMods) {
+                var newModLabel = new Label();
+                newModLabel.AutoSize = true;
+                newModLabel.Text = mod.ToString();
+                newPanel.Controls.Add(newModLabel);
+                newModLabel.Location = new Point(0,
+                    10 + 20 * i++);
+            }
+
+            newPanel.Parent = label.Parent;
+            newPanel.BringToFront();
+        }
+
+        private void explicitModLable_MouseLeave(object sender, EventArgs e) {
+            Control parent = (sender as Control).Parent;
+            if (parent.Controls.Find("modsPanel", true).Length > 0) {
+                parent.Controls.Find("modsPanel", true)[0].Dispose();
+            }
         }
     }
 }

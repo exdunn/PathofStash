@@ -76,6 +76,7 @@ namespace PathofStash
             this.levelLabel = new System.Windows.Forms.Label();
             this.baseLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
@@ -90,19 +91,18 @@ namespace PathofStash
             this.enchantMinTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.snipingPictureBox = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snipingPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // snipeButton
             // 
-            this.snipeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.snipeButton.Font = new System.Drawing.Font("Fontin", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.snipeButton.Location = new System.Drawing.Point(811, 155);
             this.snipeButton.Name = "snipeButton";
             this.snipeButton.Size = new System.Drawing.Size(116, 36);
@@ -114,167 +114,186 @@ namespace PathofStash
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label2.Location = new System.Drawing.Point(55, 78);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.Size = new System.Drawing.Size(32, 14);
             this.label2.TabIndex = 6;
             this.label2.Text = "Type";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label3.Location = new System.Drawing.Point(55, 115);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.Size = new System.Drawing.Size(42, 14);
             this.label3.TabIndex = 7;
             this.label3.Text = "Armor";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label4.Location = new System.Drawing.Point(18, 155);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 13);
+            this.label4.Size = new System.Drawing.Size(79, 14);
             this.label4.TabIndex = 8;
             this.label4.Text = "Energy Shield";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label5.Location = new System.Drawing.Point(44, 195);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 13);
+            this.label5.Size = new System.Drawing.Size(47, 14);
             this.label5.TabIndex = 10;
             this.label5.Text = "Evasion";
             // 
             // socketsMaxTextBox
             // 
             this.socketsMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.socketsMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.socketsMaxTextBox.Location = new System.Drawing.Point(331, 39);
             this.socketsMaxTextBox.Name = "socketsMaxTextBox";
-            this.socketsMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.socketsMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.socketsMaxTextBox.TabIndex = 11;
             // 
             // socketsMinTextBox
             // 
             this.socketsMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.socketsMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.socketsMinTextBox.Location = new System.Drawing.Point(287, 39);
             this.socketsMinTextBox.Name = "socketsMinTextBox";
-            this.socketsMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.socketsMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.socketsMinTextBox.TabIndex = 12;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label6.Location = new System.Drawing.Point(235, 42);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.Size = new System.Drawing.Size(48, 14);
             this.label6.TabIndex = 13;
             this.label6.Text = "Sockets";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label7.Location = new System.Drawing.Point(249, 78);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.Size = new System.Drawing.Size(34, 14);
             this.label7.TabIndex = 16;
             this.label7.Text = "Links";
             // 
             // linksMinTextBox
             // 
             this.linksMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.linksMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.linksMinTextBox.Location = new System.Drawing.Point(287, 75);
             this.linksMinTextBox.Name = "linksMinTextBox";
-            this.linksMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.linksMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.linksMinTextBox.TabIndex = 15;
             // 
             // linksMaxTextBox
             // 
             this.linksMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.linksMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.linksMaxTextBox.Location = new System.Drawing.Point(331, 75);
             this.linksMaxTextBox.Name = "linksMaxTextBox";
-            this.linksMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.linksMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.linksMaxTextBox.TabIndex = 14;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label8.Location = new System.Drawing.Point(225, 115);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.Size = new System.Drawing.Size(57, 14);
             this.label8.TabIndex = 19;
             this.label8.Text = "Level/Tier";
             // 
             // levelMinTextBox
             // 
             this.levelMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.levelMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.levelMinTextBox.Location = new System.Drawing.Point(287, 112);
             this.levelMinTextBox.Name = "levelMinTextBox";
-            this.levelMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.levelMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.levelMinTextBox.TabIndex = 18;
             // 
             // levelMaxTextBox
             // 
             this.levelMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.levelMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.levelMaxTextBox.Location = new System.Drawing.Point(331, 112);
             this.levelMaxTextBox.Name = "levelMaxTextBox";
-            this.levelMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.levelMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.levelMaxTextBox.TabIndex = 17;
             // 
             // iLvlMaxTextBox
             // 
             this.iLvlMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.iLvlMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.iLvlMaxTextBox.Location = new System.Drawing.Point(331, 152);
             this.iLvlMaxTextBox.Name = "iLvlMaxTextBox";
-            this.iLvlMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.iLvlMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.iLvlMaxTextBox.TabIndex = 20;
             // 
             // iLvlMinTextBox
             // 
             this.iLvlMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.iLvlMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.iLvlMinTextBox.Location = new System.Drawing.Point(287, 152);
             this.iLvlMinTextBox.Name = "iLvlMinTextBox";
-            this.iLvlMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.iLvlMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.iLvlMinTextBox.TabIndex = 21;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label9.Location = new System.Drawing.Point(228, 155);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 13);
+            this.label9.Size = new System.Drawing.Size(60, 14);
             this.label9.TabIndex = 22;
             this.label9.Text = "ItemLevel";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label10.Location = new System.Drawing.Point(242, 195);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 13);
+            this.label10.Size = new System.Drawing.Size(45, 14);
             this.label10.TabIndex = 25;
             this.label10.Text = "Quality";
             // 
             // qualityMinTextBox
             // 
             this.qualityMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.qualityMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.qualityMinTextBox.Location = new System.Drawing.Point(287, 192);
             this.qualityMinTextBox.Name = "qualityMinTextBox";
-            this.qualityMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.qualityMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.qualityMinTextBox.TabIndex = 24;
             // 
             // qualityMaxTextBox
             // 
             this.qualityMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.qualityMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.qualityMaxTextBox.Location = new System.Drawing.Point(331, 192);
             this.qualityMaxTextBox.Name = "qualityMaxTextBox";
-            this.qualityMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.qualityMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.qualityMaxTextBox.TabIndex = 23;
             // 
             // addAffixButton
             // 
-            this.addAffixButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addAffixButton.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.addAffixButton.Location = new System.Drawing.Point(242, 73);
             this.addAffixButton.Name = "addAffixButton";
             this.addAffixButton.Size = new System.Drawing.Size(101, 26);
@@ -286,37 +305,41 @@ namespace PathofStash
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(17, 6);
+            this.label11.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.label11.Location = new System.Drawing.Point(9, 6);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 13);
+            this.label11.Size = new System.Drawing.Size(75, 14);
             this.label11.TabIndex = 28;
             this.label11.Text = "Explicit Mod";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label12.Location = new System.Drawing.Point(47, 33);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.Size = new System.Drawing.Size(37, 14);
             this.label12.TabIndex = 31;
             this.label12.Text = "Value";
             // 
             // modMinTextBox1
             // 
             this.modMinTextBox1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.modMinTextBox1.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.modMinTextBox1.Location = new System.Drawing.Point(87, 29);
             this.modMinTextBox1.Name = "modMinTextBox1";
             this.modMinTextBox1.ReadOnly = true;
-            this.modMinTextBox1.Size = new System.Drawing.Size(38, 20);
+            this.modMinTextBox1.Size = new System.Drawing.Size(38, 22);
             this.modMinTextBox1.TabIndex = 30;
             // 
             // modMaxTextBox1
             // 
             this.modMaxTextBox1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.modMaxTextBox1.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.modMaxTextBox1.Location = new System.Drawing.Point(131, 29);
             this.modMaxTextBox1.Name = "modMaxTextBox1";
             this.modMaxTextBox1.ReadOnly = true;
-            this.modMaxTextBox1.Size = new System.Drawing.Size(38, 20);
+            this.modMaxTextBox1.Size = new System.Drawing.Size(38, 22);
             this.modMaxTextBox1.TabIndex = 29;
             // 
             // affixPanel
@@ -324,6 +347,7 @@ namespace PathofStash
             this.affixPanel.AutoSize = true;
             this.affixPanel.Controls.Add(this.modPanel1);
             this.affixPanel.Controls.Add(this.addAffixButton);
+            this.affixPanel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.affixPanel.Location = new System.Drawing.Point(395, 39);
             this.affixPanel.Name = "affixPanel";
             this.affixPanel.Size = new System.Drawing.Size(373, 121);
@@ -343,59 +367,66 @@ namespace PathofStash
             // 
             // modComboBox1
             // 
+            this.modComboBox1.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.modComboBox1.FormattingEnabled = true;
             this.modComboBox1.Location = new System.Drawing.Point(87, 3);
             this.modComboBox1.Name = "modComboBox1";
-            this.modComboBox1.Size = new System.Drawing.Size(277, 21);
+            this.modComboBox1.Size = new System.Drawing.Size(277, 22);
             this.modComboBox1.TabIndex = 45;
             this.modComboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // evasionMinTextBox
             // 
             this.evasionMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.evasionMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.evasionMinTextBox.Location = new System.Drawing.Point(97, 192);
             this.evasionMinTextBox.Name = "evasionMinTextBox";
-            this.evasionMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.evasionMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.evasionMinTextBox.TabIndex = 38;
             // 
             // evasionMaxTextBox
             // 
             this.evasionMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.evasionMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.evasionMaxTextBox.Location = new System.Drawing.Point(141, 192);
             this.evasionMaxTextBox.Name = "evasionMaxTextBox";
-            this.evasionMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.evasionMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.evasionMaxTextBox.TabIndex = 37;
             // 
             // energyShieldMinTextBox
             // 
             this.energyShieldMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.energyShieldMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.energyShieldMinTextBox.Location = new System.Drawing.Point(97, 152);
             this.energyShieldMinTextBox.Name = "energyShieldMinTextBox";
-            this.energyShieldMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.energyShieldMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.energyShieldMinTextBox.TabIndex = 36;
             // 
             // energyShieldMaxTextBox
             // 
             this.energyShieldMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.energyShieldMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.energyShieldMaxTextBox.Location = new System.Drawing.Point(141, 152);
             this.energyShieldMaxTextBox.Name = "energyShieldMaxTextBox";
-            this.energyShieldMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.energyShieldMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.energyShieldMaxTextBox.TabIndex = 35;
             // 
             // armorMinTextBox
             // 
             this.armorMinTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.armorMinTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.armorMinTextBox.Location = new System.Drawing.Point(97, 112);
             this.armorMinTextBox.Name = "armorMinTextBox";
-            this.armorMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.armorMinTextBox.Size = new System.Drawing.Size(38, 22);
             this.armorMinTextBox.TabIndex = 34;
             // 
             // armorMaxTextBox
             // 
             this.armorMaxTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.armorMaxTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.armorMaxTextBox.Location = new System.Drawing.Point(141, 112);
             this.armorMaxTextBox.Name = "armorMaxTextBox";
-            this.armorMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.armorMaxTextBox.Size = new System.Drawing.Size(38, 22);
             this.armorMaxTextBox.TabIndex = 33;
             // 
             // panel3
@@ -405,6 +436,7 @@ namespace PathofStash
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.panel4);
+            this.panel3.Font = new System.Drawing.Font("Fontin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.panel3.Location = new System.Drawing.Point(21, 421);
             this.panel3.MaximumSize = new System.Drawing.Size(928, 450);
             this.panel3.Name = "panel3";
@@ -432,8 +464,8 @@ namespace PathofStash
             // 
             // whisperButton
             // 
-            this.whisperButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.whisperButton.Location = new System.Drawing.Point(724, 116);
+            this.whisperButton.Font = new System.Drawing.Font("Fontin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.whisperButton.Location = new System.Drawing.Point(781, 127);
             this.whisperButton.Name = "whisperButton";
             this.whisperButton.Size = new System.Drawing.Size(108, 44);
             this.whisperButton.TabIndex = 10;
@@ -443,95 +475,106 @@ namespace PathofStash
             // explicitModHeaderLabel
             // 
             this.explicitModHeaderLabel.AutoSize = true;
-            this.explicitModHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.explicitModHeaderLabel.Location = new System.Drawing.Point(397, 10);
+            this.explicitModHeaderLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.explicitModHeaderLabel.Location = new System.Drawing.Point(431, 10);
             this.explicitModHeaderLabel.Name = "explicitModHeaderLabel";
-            this.explicitModHeaderLabel.Size = new System.Drawing.Size(87, 16);
+            this.explicitModHeaderLabel.Size = new System.Drawing.Size(80, 14);
             this.explicitModHeaderLabel.TabIndex = 9;
             this.explicitModHeaderLabel.Text = "Explicit Mods";
             // 
             // priceLabel
             // 
             this.priceLabel.AutoSize = true;
-            this.priceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceLabel.Location = new System.Drawing.Point(752, 33);
+            this.priceLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.priceLabel.Location = new System.Drawing.Point(155, 127);
             this.priceLabel.Name = "priceLabel";
-            this.priceLabel.Size = new System.Drawing.Size(39, 16);
+            this.priceLabel.Size = new System.Drawing.Size(34, 14);
             this.priceLabel.TabIndex = 8;
             this.priceLabel.Text = "Price";
             // 
             // sellerLabel
             // 
             this.sellerLabel.AutoSize = true;
-            this.sellerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sellerLabel.Location = new System.Drawing.Point(752, 10);
+            this.sellerLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.sellerLabel.Location = new System.Drawing.Point(155, 104);
             this.sellerLabel.Name = "sellerLabel";
-            this.sellerLabel.Size = new System.Drawing.Size(43, 16);
+            this.sellerLabel.Size = new System.Drawing.Size(36, 14);
             this.sellerLabel.TabIndex = 7;
             this.sellerLabel.Text = "Seller";
             // 
             // modsLabel
             // 
             this.modsLabel.AutoSize = true;
-            this.modsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modsLabel.Location = new System.Drawing.Point(397, 33);
+            this.modsLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.modsLabel.Location = new System.Drawing.Point(398, 33);
             this.modsLabel.Name = "modsLabel";
-            this.modsLabel.Size = new System.Drawing.Size(80, 16);
+            this.modsLabel.Size = new System.Drawing.Size(75, 14);
             this.modsLabel.TabIndex = 6;
             this.modsLabel.Text = "Mod Anchor";
             // 
             // ilvlLabel
             // 
             this.ilvlLabel.AutoSize = true;
-            this.ilvlLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ilvlLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.ilvlLabel.Location = new System.Drawing.Point(155, 79);
             this.ilvlLabel.Name = "ilvlLabel";
-            this.ilvlLabel.Size = new System.Drawing.Size(24, 16);
+            this.ilvlLabel.Size = new System.Drawing.Size(23, 14);
             this.ilvlLabel.TabIndex = 5;
             this.ilvlLabel.Text = "Ilvl";
             // 
             // levelLabel
             // 
             this.levelLabel.AutoSize = true;
-            this.levelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.levelLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.levelLabel.Location = new System.Drawing.Point(155, 56);
             this.levelLabel.Name = "levelLabel";
-            this.levelLabel.Size = new System.Drawing.Size(41, 16);
+            this.levelLabel.Size = new System.Drawing.Size(34, 14);
             this.levelLabel.TabIndex = 4;
             this.levelLabel.Text = "Level";
             // 
             // baseLabel
             // 
             this.baseLabel.AutoSize = true;
-            this.baseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baseLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.baseLabel.Location = new System.Drawing.Point(155, 33);
             this.baseLabel.Name = "baseLabel";
-            this.baseLabel.Size = new System.Drawing.Size(40, 16);
+            this.baseLabel.Size = new System.Drawing.Size(31, 14);
             this.baseLabel.TabIndex = 3;
             this.baseLabel.Text = "Base";
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.nameLabel.Location = new System.Drawing.Point(155, 10);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(45, 16);
+            this.nameLabel.Size = new System.Drawing.Size(39, 14);
             this.nameLabel.TabIndex = 2;
             this.nameLabel.Text = "Name";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(149, 188);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label1.Location = new System.Drawing.Point(55, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(39, 14);
             this.label1.TabIndex = 1;
             this.label1.Text = "Name";
             // 
             // clearButton
             // 
-            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.Font = new System.Drawing.Font("Fontin", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.clearButton.Location = new System.Drawing.Point(811, 209);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(116, 36);
@@ -542,7 +585,7 @@ namespace PathofStash
             // 
             // stopButton
             // 
-            this.stopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.Font = new System.Drawing.Font("Fontin", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.stopButton.Location = new System.Drawing.Point(811, 263);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(116, 36);
@@ -554,36 +597,40 @@ namespace PathofStash
             // leagueComboBox
             // 
             this.leagueComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.leagueComboBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.leagueComboBox.FormattingEnabled = true;
             this.leagueComboBox.Location = new System.Drawing.Point(811, 44);
             this.leagueComboBox.Name = "leagueComboBox";
-            this.leagueComboBox.Size = new System.Drawing.Size(121, 21);
+            this.leagueComboBox.Size = new System.Drawing.Size(121, 22);
             this.leagueComboBox.TabIndex = 42;
             // 
             // corrComboBox
             // 
             this.corrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.corrComboBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.corrComboBox.FormattingEnabled = true;
             this.corrComboBox.Location = new System.Drawing.Point(811, 91);
             this.corrComboBox.Name = "corrComboBox";
-            this.corrComboBox.Size = new System.Drawing.Size(121, 21);
+            this.corrComboBox.Size = new System.Drawing.Size(121, 22);
             this.corrComboBox.TabIndex = 43;
             // 
             // nameTextBox
             // 
             this.nameTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.nameTextBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.nameTextBox.Location = new System.Drawing.Point(96, 39);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(100, 22);
             this.nameTextBox.TabIndex = 1;
             // 
             // baseComboBox
             // 
             this.baseComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.baseComboBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.baseComboBox.FormattingEnabled = true;
             this.baseComboBox.Location = new System.Drawing.Point(97, 75);
             this.baseComboBox.Name = "baseComboBox";
-            this.baseComboBox.Size = new System.Drawing.Size(99, 21);
+            this.baseComboBox.Size = new System.Drawing.Size(99, 22);
             this.baseComboBox.TabIndex = 44;
             // 
             // panel1
@@ -593,6 +640,7 @@ namespace PathofStash
             this.panel1.Controls.Add(this.enchantMaxTextBox);
             this.panel1.Controls.Add(this.enchantMinTextBox);
             this.panel1.Controls.Add(this.label14);
+            this.panel1.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.panel1.Location = new System.Drawing.Point(12, 240);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(367, 59);
@@ -600,46 +648,51 @@ namespace PathofStash
             // 
             // enchantComboBox
             // 
+            this.enchantComboBox.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.enchantComboBox.FormattingEnabled = true;
             this.enchantComboBox.Location = new System.Drawing.Point(84, 3);
             this.enchantComboBox.Name = "enchantComboBox";
-            this.enchantComboBox.Size = new System.Drawing.Size(277, 21);
+            this.enchantComboBox.Size = new System.Drawing.Size(277, 22);
             this.enchantComboBox.TabIndex = 45;
             this.enchantComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // enchantValueLabel
             // 
             this.enchantValueLabel.AutoSize = true;
+            this.enchantValueLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.enchantValueLabel.Location = new System.Drawing.Point(44, 32);
             this.enchantValueLabel.Name = "enchantValueLabel";
-            this.enchantValueLabel.Size = new System.Drawing.Size(34, 13);
+            this.enchantValueLabel.Size = new System.Drawing.Size(37, 14);
             this.enchantValueLabel.TabIndex = 31;
             this.enchantValueLabel.Text = "Value";
             // 
             // enchantMaxTextBox
             // 
             this.enchantMaxTextBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.enchantMaxTextBox.Font = new System.Drawing.Font("Fontin", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.enchantMaxTextBox.Location = new System.Drawing.Point(128, 29);
             this.enchantMaxTextBox.Name = "enchantMaxTextBox";
             this.enchantMaxTextBox.ReadOnly = true;
-            this.enchantMaxTextBox.Size = new System.Drawing.Size(38, 20);
+            this.enchantMaxTextBox.Size = new System.Drawing.Size(38, 21);
             this.enchantMaxTextBox.TabIndex = 29;
             // 
             // enchantMinTextBox
             // 
             this.enchantMinTextBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.enchantMinTextBox.Font = new System.Drawing.Font("Fontin", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.enchantMinTextBox.Location = new System.Drawing.Point(84, 29);
             this.enchantMinTextBox.Name = "enchantMinTextBox";
             this.enchantMinTextBox.ReadOnly = true;
-            this.enchantMinTextBox.Size = new System.Drawing.Size(38, 20);
+            this.enchantMinTextBox.Size = new System.Drawing.Size(38, 21);
             this.enchantMinTextBox.TabIndex = 30;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.label14.Location = new System.Drawing.Point(31, 6);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(47, 13);
+            this.label14.Size = new System.Drawing.Size(51, 14);
             this.label14.TabIndex = 28;
             this.label14.Text = "Enchant";
             // 
@@ -652,16 +705,6 @@ namespace PathofStash
             this.snipingPictureBox.TabIndex = 47;
             this.snipingPictureBox.TabStop = false;
             this.snipingPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.snipingPictureBox_MouseClick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(149, 188);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -716,10 +759,10 @@ namespace PathofStash
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snipingPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

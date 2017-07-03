@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Fontin-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="PathofStash_TemporaryKey.pfx" />
     <None Include="bin\Debug\Resources\alchemy_orb.png" />
