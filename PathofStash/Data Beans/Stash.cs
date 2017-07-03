@@ -54,7 +54,6 @@ namespace PathofStash
 
         public void SetItemsSeller() {
             foreach (Item item in items) {
-                Console.WriteLine(lastCharacterName);
                 item.seller = lastCharacterName;
             }
         }

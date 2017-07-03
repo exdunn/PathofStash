@@ -23,6 +23,10 @@ namespace PathofStash
         public static string[] LINKICONS = {
             "http://poe.trade/static/sockets/Socket_Link_Horizontal.png",
             "http://poe.trade/static/sockets/Socket_Link_Vertical.png" };
+        public static string[] CURRICONS = {
+            "Resources/alchemy_orb.png",
+            "Resources/chaos_orb.png",
+            "Resources/exalted_orb.png" };
     }
 
     class Program

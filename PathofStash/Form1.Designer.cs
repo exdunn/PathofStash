@@ -67,6 +67,7 @@ namespace PathofStash
             this.armorMaxTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.whisperButton = new System.Windows.Forms.Button();
             this.explicitModHeaderLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
             this.sellerLabel = new System.Windows.Forms.Label();
@@ -75,7 +76,6 @@ namespace PathofStash
             this.levelLabel = new System.Windows.Forms.Label();
             this.baseLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
@@ -89,13 +89,15 @@ namespace PathofStash
             this.enchantMaxTextBox = new System.Windows.Forms.TextBox();
             this.enchantMinTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.whisperButton = new System.Windows.Forms.Button();
+            this.snipingPictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.affixPanel.SuspendLayout();
             this.modPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.snipingPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // snipeButton
@@ -428,6 +430,16 @@ namespace PathofStash
             this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
             // 
+            // whisperButton
+            // 
+            this.whisperButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.whisperButton.Location = new System.Drawing.Point(724, 116);
+            this.whisperButton.Name = "whisperButton";
+            this.whisperButton.Size = new System.Drawing.Size(108, 44);
+            this.whisperButton.TabIndex = 10;
+            this.whisperButton.Text = "Whisper";
+            this.whisperButton.UseVisualStyleBackColor = true;
+            // 
             // explicitModHeaderLabel
             // 
             this.explicitModHeaderLabel.AutoSize = true;
@@ -507,16 +519,6 @@ namespace PathofStash
             this.nameLabel.Size = new System.Drawing.Size(45, 16);
             this.nameLabel.TabIndex = 2;
             this.nameLabel.Text = "Name";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(149, 188);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -641,15 +643,25 @@ namespace PathofStash
             this.label14.TabIndex = 28;
             this.label14.Text = "Enchant";
             // 
-            // whisperButton
+            // snipingPictureBox
             // 
-            this.whisperButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.whisperButton.Location = new System.Drawing.Point(724, 116);
-            this.whisperButton.Name = "whisperButton";
-            this.whisperButton.Size = new System.Drawing.Size(108, 44);
-            this.whisperButton.TabIndex = 10;
-            this.whisperButton.Text = "Whisper";
-            this.whisperButton.UseVisualStyleBackColor = true;
+            this.snipingPictureBox.InitialImage = global::PathofStash.Properties.Resources.alchemy_orb;
+            this.snipingPictureBox.Location = new System.Drawing.Point(21, 356);
+            this.snipingPictureBox.Name = "snipingPictureBox";
+            this.snipingPictureBox.Size = new System.Drawing.Size(65, 59);
+            this.snipingPictureBox.TabIndex = 47;
+            this.snipingPictureBox.TabStop = false;
+            this.snipingPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.snipingPictureBox_MouseClick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(149, 188);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -657,6 +669,7 @@ namespace PathofStash
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(970, 691);
+            this.Controls.Add(this.snipingPictureBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.baseComboBox);
             this.Controls.Add(this.corrComboBox);
@@ -703,9 +716,10 @@ namespace PathofStash
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.snipingPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -773,5 +787,6 @@ namespace PathofStash
         private Label label14;
         private Label explicitModHeaderLabel;
         private Button whisperButton;
+        private PictureBox snipingPictureBox;
     }
 }

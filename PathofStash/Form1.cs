@@ -22,9 +22,11 @@ namespace PathofStash {
         Font labelFont1;
         Font labelFont2;
         Sniper sniper;
+        System.Windows.Forms.Timer rotationTimer = new System.Windows.Forms.Timer();
         string[] bases;
         JsonMod[] explicitMods;
         JsonMod[] enchants;
+        List<Image> iconList = new List<Image>();
         List<QueryModifier> queryMods = new List<QueryModifier>();
         object snipeLock = new Object();
         List<Item> matches = new List<Item>();
@@ -34,6 +36,13 @@ namespace PathofStash {
             affixCount = 1;
             itemCount = 0;
             defaultSize = this.Size;
+            foreach (string item in Globals.CURRICONS) {
+                iconList.Add(Image.FromFile(item));
+            }
+            snipingPictureBox.Image = iconList[0];
+            snipingPictureBox.Size = snipingPictureBox.Image.Size;
+            rotationTimer.Interval = 150;
+            rotationTimer.Tick += rotationTimer_Tick;
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -348,6 +357,8 @@ namespace PathofStash {
                 return;
             }
 
+            rotationTimer.Start();
+
             // if form isn't empty then add a new query
             Query query = new Query();
             if (!string.IsNullOrEmpty(nameTextBox.Text)) {
@@ -465,6 +476,7 @@ namespace PathofStash {
 
         private void Stop_Btn_Click(object sender, EventArgs e) {
             lock (snipeLock) {
+                rotationTimer.Stop();
                 sniper.sniping = false;
                 Console.WriteLine("Stopping sniper...");
             }
@@ -565,6 +577,17 @@ namespace PathofStash {
 
         private void whisperButton_MouseClick(object sender, EventArgs e, Item item) {
             Clipboard.SetText("@" + item.seller + " Hi, I would like to buy " + item.name+ " listed for " + item.price + ".");
+        }
+
+        private void rotationTimer_Tick(object sender, EventArgs e) {
+            Image im = snipingPictureBox.Image;
+           im.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            snipingPictureBox.Image = im;
+        }
+
+        private void snipingPictureBox_MouseClick(object sender, MouseEventArgs e) {
+            int index = iconList.IndexOf(snipingPictureBox.Image);
+            snipingPictureBox.Image = iconList[(index + 1) % iconList.Count];
         }
     }
 }
