@@ -68,10 +68,9 @@ namespace PathofStash
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.whisperButton = new System.Windows.Forms.Button();
-            this.explicitModHeaderLabel = new System.Windows.Forms.Label();
+            this.explicitModLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
             this.sellerLabel = new System.Windows.Forms.Label();
-            this.modsLabel = new System.Windows.Forms.Label();
             this.ilvlLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
             this.baseLabel = new System.Windows.Forms.Label();
@@ -257,7 +256,7 @@ namespace PathofStash
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
-            this.label9.Location = new System.Drawing.Point(228, 155);
+            this.label9.Location = new System.Drawing.Point(221, 155);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 14);
             this.label9.TabIndex = 22;
@@ -448,10 +447,9 @@ namespace PathofStash
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.whisperButton);
-            this.panel4.Controls.Add(this.explicitModHeaderLabel);
+            this.panel4.Controls.Add(this.explicitModLabel);
             this.panel4.Controls.Add(this.priceLabel);
             this.panel4.Controls.Add(this.sellerLabel);
-            this.panel4.Controls.Add(this.modsLabel);
             this.panel4.Controls.Add(this.ilvlLabel);
             this.panel4.Controls.Add(this.levelLabel);
             this.panel4.Controls.Add(this.baseLabel);
@@ -472,15 +470,15 @@ namespace PathofStash
             this.whisperButton.Text = "Whisper";
             this.whisperButton.UseVisualStyleBackColor = true;
             // 
-            // explicitModHeaderLabel
+            // explicitModLabel
             // 
-            this.explicitModHeaderLabel.AutoSize = true;
-            this.explicitModHeaderLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
-            this.explicitModHeaderLabel.Location = new System.Drawing.Point(431, 10);
-            this.explicitModHeaderLabel.Name = "explicitModHeaderLabel";
-            this.explicitModHeaderLabel.Size = new System.Drawing.Size(80, 14);
-            this.explicitModHeaderLabel.TabIndex = 9;
-            this.explicitModHeaderLabel.Text = "Explicit Mods";
+            this.explicitModLabel.AutoSize = true;
+            this.explicitModLabel.Font = new System.Drawing.Font("Fontin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.explicitModLabel.Location = new System.Drawing.Point(431, 10);
+            this.explicitModLabel.Name = "explicitModLabel";
+            this.explicitModLabel.Size = new System.Drawing.Size(85, 14);
+            this.explicitModLabel.TabIndex = 9;
+            this.explicitModLabel.Text = "Explicit Mods";
             // 
             // priceLabel
             // 
@@ -501,16 +499,6 @@ namespace PathofStash
             this.sellerLabel.Size = new System.Drawing.Size(36, 14);
             this.sellerLabel.TabIndex = 7;
             this.sellerLabel.Text = "Seller";
-            // 
-            // modsLabel
-            // 
-            this.modsLabel.AutoSize = true;
-            this.modsLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
-            this.modsLabel.Location = new System.Drawing.Point(398, 33);
-            this.modsLabel.Name = "modsLabel";
-            this.modsLabel.Size = new System.Drawing.Size(75, 14);
-            this.modsLabel.TabIndex = 6;
-            this.modsLabel.Text = "Mod Anchor";
             // 
             // ilvlLabel
             // 
@@ -819,7 +807,6 @@ namespace PathofStash
         private Label baseLabel;
         private Label priceLabel;
         private Label sellerLabel;
-        private Label modsLabel;
         private Label ilvlLabel;
         private ComboBox modComboBox1;
         private Panel panel1;
@@ -828,7 +815,7 @@ namespace PathofStash
         private TextBox enchantMaxTextBox;
         private TextBox enchantMinTextBox;
         private Label label14;
-        private Label explicitModHeaderLabel;
+        private Label explicitModLabel;
         private Button whisperButton;
         private PictureBox snipingPictureBox;
     }

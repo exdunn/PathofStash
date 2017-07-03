@@ -48,7 +48,7 @@ namespace PathofStash {
         private void Form1_Load(object sender, EventArgs e) {
             panel4.Visible = false;
             sniper = new Sniper(this);
-            labelFont1 = new Font("Fontin", 10);
+            labelFont1 = new Font("Fontin", 10, FontStyle.Underline);
             labelFont2 = new Font("Fontin", 12);      
             bases = Utilities.DeserializeJson<string>("Resources/bases.json");
             explicitMods = Array.FindAll(
@@ -75,9 +75,7 @@ namespace PathofStash {
                     var newILvlLabel = new Label();
                     var newSellerLabel = new Label();
                     var newPriceLabel = new Label();
-                    var explicitModLabel = new Label();
                     var newWhisperButton = new Button();
-                    List<Label> explicitModLabels = new List<Label>();
 
                     // set size and text for panel elements
                     newNameLabel.AutoSize = true;
@@ -99,10 +97,6 @@ namespace PathofStash {
                     newSellerLabel.Text = "Seller: " + item.seller;
                     newSellerLabel.AutoSize = true;
                     newPriceLabel.Text = "Price: " + item.price;
-                    explicitModLabel.Text = "Explicit Mods";
-                    explicitModLabel.Font = labelFont1;
-                    explicitModLabel.MouseEnter += new EventHandler((sender, e) => explicitModLabel_MouseEnter(sender, e, item));
-                    explicitModLabel.MouseLeave += new EventHandler(explicitModLable_MouseLeave);
                     newPanel.BorderStyle = BorderStyle.FixedSingle;
                     newPanel.Size = panel4.Size;
                     newWhisperButton.Location = whisperButton.Location;
@@ -140,17 +134,41 @@ namespace PathofStash {
                     newLevelLabel.Location = levelLabel.Location;
                     newSellerLabel.Location = sellerLabel.Location;
                     newPriceLabel.Location = priceLabel.Location;
-                    explicitModLabel.Location = explicitModHeaderLabel.Location;
 
-                    // add explicit mods Labels
+                    // add mod labels
                     int i = 0;
+                    foreach (Modifier mod in item.implicitMods) {
+                        var newModLabel = new Label();
+                        newModLabel.AutoSize = true;
+                        newModLabel.Text = mod.ToString();
+                        newModLabel.Font = labelFont1;
+
+                        if (item.corrupted) {
+                            newModLabel.ForeColor = Color.FromArgb(255, 139, 0, 0);
+                        }
+
+                        newPanel.Controls.Add(newModLabel);
+                        newModLabel.Location = new Point(explicitModLabel.Location.X,
+                            10 + 20 * i++);
+                    }
+
+                    foreach (Modifier mod in item.enchantMods) {
+                        var newModLabel = new Label();
+                        newModLabel.AutoSize = true;
+                        newModLabel.Text = mod.ToString();
+                        newModLabel.Font = labelFont1;
+                        newPanel.Controls.Add(newModLabel);
+                        newModLabel.Location = new Point(explicitModLabel.Location.X,
+                            10 + 20 * i++);
+                    }
+
                     foreach (Modifier mod in item.explicitMods) {
                         var newModLabel = new Label();
                         newModLabel.AutoSize = true;
                         newModLabel.Text = mod.ToString();
                         newPanel.Controls.Add(newModLabel);
-                        newModLabel.Location = new Point(modsLabel.Location.X,
-                            modsLabel.Location.Y + 20 * i++);
+                        newModLabel.Location = new Point(explicitModLabel.Location.X,
+                            10 + 20 * i++);
                     }
 
                     // add new panel to item panel
@@ -598,10 +616,35 @@ namespace PathofStash {
             newPanel.Name = "modsPanel";
             newPanel.BorderStyle = BorderStyle.FixedSingle;
             newPanel.AutoSize = true;
-            newPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            newPanel.Location = modsLabel.Location;
+            newPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;         
             
             int i = 0;
+
+            foreach (Modifier mod in item.implicitMods) {
+                var newModLabel = new Label();
+                newModLabel.AutoSize = true;
+                newModLabel.Text = mod.ToString();
+                newModLabel.Font = labelFont1;
+
+                if (item.corrupted) {
+                    newModLabel.ForeColor = Color.FromArgb(255, 139, 0, 0);
+                }
+
+                newPanel.Controls.Add(newModLabel);
+                newModLabel.Location = new Point(0,
+                    10 + 20 * i++);
+            }
+
+            foreach (Modifier mod in item.enchantMods) {
+                var newModLabel = new Label();
+                newModLabel.AutoSize = true;
+                newModLabel.Text = mod.ToString();
+                newModLabel.Font = labelFont1;
+                newPanel.Controls.Add(newModLabel);
+                newModLabel.Location = new Point(0,
+                    10 + 20 * i++);
+            }
+
             foreach (Modifier mod in item.explicitMods) {
                 var newModLabel = new Label();
                 newModLabel.AutoSize = true;
@@ -611,6 +654,8 @@ namespace PathofStash {
                     10 + 20 * i++);
             }
 
+            newPanel.Location = new Point(explicitModLabel.Location.X - (newPanel.Size.Width - explicitModLabel.Size.Width) / 2,
+                explicitModLabel.Location.Y + 20);
             newPanel.Parent = label.Parent;
             newPanel.BringToFront();
         }
