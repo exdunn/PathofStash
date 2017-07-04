@@ -92,6 +92,7 @@ namespace PathofStash {
                     newPictureBox.BackColor = SystemColors.AppWorkspace;
                     newNameLabel.Text = item.name;
                     newBaseLabel.Text = item.typeLine;
+                    newBaseLabel.AutoSize = true;
                     newPriceLabel.AutoSize = true;
                     newLevelLabel.Text = "Level: " + item.level;
                     newILvlLabel.Text = "ilvl: " + item.iLvl;
@@ -145,8 +146,6 @@ namespace PathofStash {
                     newPanel.Controls.Add(newSellerLabel);
                     newPanel.Controls.Add(newPriceLabel);
                     newPanel.Controls.Add(explicitModLabel);
-
-                    
 
                     // add mod labels
                     int i = 0;
@@ -269,11 +268,11 @@ namespace PathofStash {
         private Color GetItemColor(int input) {
             switch (input) {
                 case 0:
-                    return Color.FromArgb(255, 200, 200, 200);
+                    return Color.FromArgb(255, 100, 100, 100);
                 case 1:
                     return Color.FromArgb(255, 136, 136, 255);
                 case 2:
-                    return Color.FromArgb(255, 255, 255, 119);
+                    return Color.FromArgb(255, 255, 215, 0);
                 case 3:
                     return Color.FromArgb(255, 175, 96, 37);
                 case 4:
@@ -288,7 +287,6 @@ namespace PathofStash {
                     return Color.FromArgb(255, 50, 230, 100);
                 default:
                     return Color.FromArgb(255, 200, 200, 200);
-
             }
         }
 
@@ -314,6 +312,8 @@ namespace PathofStash {
             affixPanel.Controls.Add(modPanel1);
             modComboBox1.SelectedIndex = -1;
             enchantComboBox.SelectedIndex = -1;
+            corrComboBox.SelectedIndex = -1;
+            baseComboBox.SelectedIndex = -1;
 
             // clear textboxes
             FormTraversal(this, x => {
