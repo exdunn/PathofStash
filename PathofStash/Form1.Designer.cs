@@ -67,6 +67,7 @@ namespace PathofStash
             this.armorMaxTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.corruptedLabel = new System.Windows.Forms.Label();
             this.whisperButton = new System.Windows.Forms.Button();
             this.explicitModLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
@@ -446,6 +447,7 @@ namespace PathofStash
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.corruptedLabel);
             this.panel4.Controls.Add(this.whisperButton);
             this.panel4.Controls.Add(this.explicitModLabel);
             this.panel4.Controls.Add(this.priceLabel);
@@ -459,6 +461,16 @@ namespace PathofStash
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(915, 188);
             this.panel4.TabIndex = 0;
+            // 
+            // corruptedLabel
+            // 
+            this.corruptedLabel.AutoSize = true;
+            this.corruptedLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
+            this.corruptedLabel.Location = new System.Drawing.Point(155, 33);
+            this.corruptedLabel.Name = "corruptedLabel";
+            this.corruptedLabel.Size = new System.Drawing.Size(63, 14);
+            this.corruptedLabel.TabIndex = 11;
+            this.corruptedLabel.Text = "Corrupted";
             // 
             // whisperButton
             // 
@@ -476,9 +488,8 @@ namespace PathofStash
             this.explicitModLabel.Font = new System.Drawing.Font("Fontin", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
             this.explicitModLabel.Location = new System.Drawing.Point(431, 10);
             this.explicitModLabel.Name = "explicitModLabel";
-            this.explicitModLabel.Size = new System.Drawing.Size(85, 14);
+            this.explicitModLabel.Size = new System.Drawing.Size(0, 14);
             this.explicitModLabel.TabIndex = 9;
-            this.explicitModLabel.Text = "Explicit Mods";
             // 
             // priceLabel
             // 
@@ -524,7 +535,7 @@ namespace PathofStash
             // 
             this.baseLabel.AutoSize = true;
             this.baseLabel.Font = new System.Drawing.Font("Fontin", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(255)));
-            this.baseLabel.Location = new System.Drawing.Point(155, 33);
+            this.baseLabel.Location = new System.Drawing.Point(221, 33);
             this.baseLabel.Name = "baseLabel";
             this.baseLabel.Size = new System.Drawing.Size(31, 14);
             this.baseLabel.TabIndex = 3;
@@ -818,5 +829,6 @@ namespace PathofStash
         private Label explicitModLabel;
         private Button whisperButton;
         private PictureBox snipingPictureBox;
+        private Label corruptedLabel;
     }
 }

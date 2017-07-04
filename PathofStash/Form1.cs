@@ -75,6 +75,7 @@ namespace PathofStash {
                     var newILvlLabel = new Label();
                     var newSellerLabel = new Label();
                     var newPriceLabel = new Label();
+                    var newCorruptedLabel = new Label();
                     var newWhisperButton = new Button();
 
                     // set size and text for panel elements
@@ -106,6 +107,25 @@ namespace PathofStash {
                     newWhisperButton.MouseClick += new MouseEventHandler((sender, e) => whisperButton_MouseClick(sender, e, item));
                     newWhisperButton.Parent = newPanel;
 
+                    // set location of new elements
+                    newPictureBox.Location = pictureBox1.Location;
+                    newNameLabel.Location = nameLabel.Location;
+                    newBaseLabel.Location = corruptedLabel.Location;
+                    newILvlLabel.Location = ilvlLabel.Location;
+                    newLevelLabel.Location = levelLabel.Location;
+                    newSellerLabel.Location = sellerLabel.Location;
+                    newPriceLabel.Location = priceLabel.Location;
+
+                    if (item.corrupted) {
+                        newBaseLabel.Location = baseLabel.Location;
+                        newCorruptedLabel.Text = "Corrupted";
+                        newCorruptedLabel.AutoSize = true;
+                        newCorruptedLabel.Location = corruptedLabel.Location;
+                        newCorruptedLabel.BackColor = Color.FromArgb(255, 139, 0, 0);
+                        newCorruptedLabel.ForeColor = Color.White;
+                        newCorruptedLabel.Parent = newPanel;
+                    }
+
                     // add socket PictureBox
                     PictureBox socketPictureBox = new PictureBox();
                     socketPictureBox.BackColor = Color.Transparent;
@@ -126,14 +146,7 @@ namespace PathofStash {
                     newPanel.Controls.Add(newPriceLabel);
                     newPanel.Controls.Add(explicitModLabel);
 
-                    // set location of new elements
-                    newPictureBox.Location = pictureBox1.Location;
-                    newNameLabel.Location = nameLabel.Location;
-                    newBaseLabel.Location = baseLabel.Location;
-                    newILvlLabel.Location = ilvlLabel.Location;
-                    newLevelLabel.Location = levelLabel.Location;
-                    newSellerLabel.Location = sellerLabel.Location;
-                    newPriceLabel.Location = priceLabel.Location;
+                    
 
                     // add mod labels
                     int i = 0;
@@ -142,11 +155,6 @@ namespace PathofStash {
                         newModLabel.AutoSize = true;
                         newModLabel.Text = mod.ToString();
                         newModLabel.Font = labelFont1;
-
-                        if (item.corrupted) {
-                            newModLabel.ForeColor = Color.FromArgb(255, 139, 0, 0);
-                        }
-
                         newPanel.Controls.Add(newModLabel);
                         newModLabel.Location = new Point(explicitModLabel.Location.X,
                             10 + 20 * i++);
@@ -370,6 +378,9 @@ namespace PathofStash {
             IsValidQuery(this, ref valid);
 
             if (!string.IsNullOrEmpty(baseComboBox.Text)) {
+                valid = true;
+            }
+            if(!string.IsNullOrEmpty(corrComboBox.Text)) {
                 valid = true;
             }
             if (!valid) {
