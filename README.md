@@ -2,6 +2,8 @@
 ### Introduction
 Tool that enhances trading in Path of Exile by live searching public stash tabs for the desired item.
 
+![screenshot](/PathofStash/screenshot.png?raw=true "PathofStash")
+
 ### Features
 Notifies the user with sound alerts when there is a successful match.
 
