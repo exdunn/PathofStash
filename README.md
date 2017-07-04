@@ -18,8 +18,9 @@ Search by:
   - type
   - explicit mods
   - enchants
+  - corrupted
+  - league
   - armor/energy shield/evasion
-  - enchants
   - sockets
   - links
   
