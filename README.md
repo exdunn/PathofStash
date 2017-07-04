@@ -1,4 +1,8 @@
 # PathofStash
+
+### Release
+[Here](https://github.com/exdunn/PathofStash/releases)
+
 ### Introduction
 Tool that enhances trading in Path of Exile by live searching public stash tabs for the desired item.
 
