@@ -36,7 +36,8 @@ namespace PathofStash {
             affixCount = 1;
             itemCount = 0;
             defaultSize = this.Size;
-            foreach (string item in Globals.CURRICONS) {
+            foreach (string item in Globals.CURRICONS)
+            {
                 iconList.Add(Image.FromFile(item));
             }
             snipingPictureBox.Image = iconList[0];

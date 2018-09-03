@@ -17,3 +17,22 @@ C:\Users\alexh\documents\visual studio 2017\Projects\PathOfStash\PathofStash\bin
 C:\Users\alexh\documents\visual studio 2017\Projects\PathOfStash\PathofStash\bin\Debug\PathofStash.application
 C:\Users\alexh\documents\visual studio 2017\Projects\PathOfStash\PathofStash\obj\Debug\PathofStash.exe.manifest
 C:\Users\alexh\documents\visual studio 2017\Projects\PathOfStash\PathofStash\obj\Debug\PathofStash.application
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\PathofStash.exe.config
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\PathofStash.exe.manifest
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\PathofStash.application
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\PathofStash.exe
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\PathofStash.pdb
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.dll
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\Newtonsoft.Json.dll
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\HtmlAgilityPack.xml
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\bin\Debug\Newtonsoft.Json.xml
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.Form1.resources
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.Properties.Resources.resources
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.csproj.GenerateResource.Cache
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.csproj.CoreCompileInputs.cache
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.exe.manifest
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.application
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.exe
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.pdb
+C:\Users\alex dunn\source\repos\PathofStash\PathofStash\obj\Debug\PathofStash.csprojResolveAssemblyReference.cache

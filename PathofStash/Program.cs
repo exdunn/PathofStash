@@ -13,7 +13,7 @@ namespace PathofStash
         public static string CURINDEXURL = "http://poe-rates.com/actions/getLastChangeId.php";
         public static string STASHAPIURL = "http://www.pathofexile.com/api/public-stash-tabs";
         public static string POETRADEURL = "http://poe.trade";
-        public static String[] LEAGUES = { "2 Week Mayhem (JRE092)", "Legacy", "Standard", "2 Week Mayhem HC (JRE091)", "Hardcore Legacy", "Hardcore" };
+        public static String[] LEAGUES = { "Delve", "Hardcore Delve", "Standard", "Hardcore" };
         public static bool TESTMODE = false;
         public static string[] SOCKICONS = {
             "http://poe.trade/static/sockets/dex.png",
@@ -25,8 +25,7 @@ namespace PathofStash
             "http://poe.trade/static/sockets/Socket_Link_Vertical.png" };
         public static string[] CURRICONS = {
             "Resources/alchemy_orb.png",
-            "Resources/chaos_orb.png",
-            "Resources/exalted_orb.png" };
+        };
     }
 
     class Program

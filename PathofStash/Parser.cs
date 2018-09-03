@@ -12,16 +12,18 @@ namespace PathofStash
     class Parser
     {
         public List<Stash> stashes { get; set; }
-        public string nextIndex;
 
         public Parser(string json)
         {
             stashes = new List<Stash>();
             Match match = Regex.Match(json, @"((\d+)-){4}\d+");
-            if(match.Success)
+
+            Console.Write("Response Length: " + json.Length);
+            if (json.Length > 0)
             {
-                nextIndex = match.ToString();
+                Console.WriteLine(json.Substring(0, 50));
             }
+
             Tokenize(json);
         }
 
